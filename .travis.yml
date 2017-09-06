@@ -13,7 +13,8 @@ mysql:
   encoding: utf8
 
 before_install:
-  - cd ./mcloud-blog
+  - cd mcloud-blog
+  - echo 'swich success'
 install:
   - mvn install -Dmaven.test.skip=true
 
