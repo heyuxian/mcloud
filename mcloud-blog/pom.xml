@@ -13,6 +13,7 @@
     <groupId>org.blackc</groupId>
     <artifactId>mcloud-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <relativePath>../mcloud-parent</relativePath>
   </parent>
 
   <properties>
