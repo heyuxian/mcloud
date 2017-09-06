@@ -1,0 +1,27 @@
+language: java
+
+services:
+  - mysql
+
+jdk:
+  - oraclejdk8
+
+mysql:
+  database: blackc
+  username: root
+  password :
+  encoding: utf8
+
+install:
+  - mvn install -Dmaven.test.skip=true
+
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
+
+script:
+  - mvn test -DactiveProfile=ci
+after_success:
+  - mvn clean test -DactiveProfile=ci jacoco:report coveralls:report
+notifications:
+  email:
+    - heyuxian.me@gmail.com
