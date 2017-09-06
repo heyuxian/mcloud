@@ -14,11 +14,11 @@ mysql:
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
-  - cd mcloud-blog
 
 install:
+  - cd ./mcloud-blog
   - mvn install -Dmaven.test.skip=true
-  
+
 script:
   - mvn test -DactiveProfile=ci
 after_success:
