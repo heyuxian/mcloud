@@ -12,13 +12,13 @@ mysql:
   password :
   encoding: utf8
 
-before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
-
-install:
+before_install:
   - cd ./mcloud-blog
+install:
   - mvn install -Dmaven.test.skip=true
 
+before_script:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
 script:
   - mvn test -DactiveProfile=ci
 after_success:
