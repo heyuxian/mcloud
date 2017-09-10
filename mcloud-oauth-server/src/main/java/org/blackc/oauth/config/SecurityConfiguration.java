@@ -23,8 +23,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/webjars/**", "/images/**", "/static/**", "/oauth/uncache_approvals",
-            "/oauth/cache_approvals");
+        web.ignoring().antMatchers("/webjars/**", "/images/**", "/static/**");
     }
 
     @Override
@@ -33,14 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().ignoringAntMatchers("/api/**")
             .and()
             .authorizeRequests()
-            .antMatchers("/login").permitAll()
+            .antMatchers("/login", "/me").permitAll()
             .anyRequest().authenticated()
             .and()
-            .formLogin()
-            .loginPage("/login").permitAll()
+            .formLogin().loginPage("/login").permitAll()
             .and()
-            .logout()
-            .permitAll();
+            .logout().permitAll();
         //@formatter:on
     }
 

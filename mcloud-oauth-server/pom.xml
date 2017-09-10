@@ -23,6 +23,7 @@
     <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
     <thymeleafspringsecurity4.version>3.0.2.RELEASE</thymeleafspringsecurity4.version>
     <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
+    <hibernate.version>5.2.10.Final</hibernate.version>
   </properties>
 
   <dependencies>
@@ -51,7 +52,6 @@
     <dependency>
       <groupId>org.springframework.security.oauth</groupId>
       <artifactId>spring-security-oauth2</artifactId>
-      <version>2.2.0.RELEASE</version>
     </dependency>
 
     <dependency>

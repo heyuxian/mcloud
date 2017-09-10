@@ -1,8 +1,9 @@
 server:
-  port: 80
+  port: 8043
+  context-path: /mcloud
 logging:
   path: D:\logs
-  level: error
+  level: debug
 spring:
   datasource:
     #TODO 根据每个项目自行设置
