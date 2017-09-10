@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8081
 logging:
   path: D:\logs\black-c
   level: error
@@ -11,9 +11,17 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     properties:
       hibernate:
         format_sql: true
     open-in-view: false
     show-sql: true
+mcloud:
+  client:
+    clientId: mcloud-blog
+    clientSecret: 123456
+    userAuthorizationUri: http://localhost:8043/mcloud/oauth/authorize
+    accessTokenUri: http://localhost:8043/mcloud/oauth/token
+  resource:
+        userInfoUri: http://localhost:8043/mcloud/me
