@@ -10,7 +10,7 @@
   <url>http://maven.apache.org</url>
 
   <parent>
-    <groupId>org.blackc</groupId>
+    <groupId>me.javaroad</groupId>
     <artifactId>mcloud-parent</artifactId>
     <version>1.0-SNAPSHOT</version>
     <relativePath>../mcloud-parent</relativePath>
@@ -26,13 +26,13 @@
   <dependencies>
 
     <dependency>
-      <groupId>org.blackc</groupId>
+      <groupId>me.javaroad</groupId>
       <artifactId>mcloud-common</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
-      <groupId>org.blackc</groupId>
+      <groupId>me.javaroad</groupId>
       <artifactId>mcloud-data</artifactId>
       <version>1.0-SNAPSHOT</version>
     </dependency>

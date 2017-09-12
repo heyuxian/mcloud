@@ -18,10 +18,7 @@ spring:
     open-in-view: false
     show-sql: true
 mcloud:
-  client:
+  oauth:
     clientId: mcloud-blog
     clientSecret: 123456
-    userAuthorizationUri: http://localhost:8043/mcloud/oauth/authorize
-    accessTokenUri: http://localhost:8043/mcloud/oauth/token
-  resource:
-        userInfoUri: http://localhost:8043/mcloud/me
+    checkTokenEndpointUrl: http://localhost:8043/mcloud/oauth/check_token
