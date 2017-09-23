@@ -19,8 +19,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 @EntityListeners(AuditingEntityListener.class)
 public class TemporalEntity extends BaseEntity {
     @CreatedDate
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
     @LastModifiedDate
     @Column(name = "modified_date")
     private LocalDateTime modifiedDate;

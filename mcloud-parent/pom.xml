@@ -26,7 +26,7 @@
     <module>../mcloud-common</module>
     <module>../mcloud-data</module>
     <module>../mcloud-blog</module>
-    <module>../mcloud-oauth-server</module>
+    <module>../mcloud-auth-server</module>
   </modules>
   <dependencies>
 
