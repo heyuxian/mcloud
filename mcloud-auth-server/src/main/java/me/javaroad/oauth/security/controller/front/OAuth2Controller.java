@@ -8,28 +8,18 @@ import org.springframework.security.oauth2.common.util.OAuth2Utils;
 import org.springframework.security.oauth2.provider.AuthorizationRequest;
 import org.springframework.security.oauth2.provider.ClientDetails;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
-import org.springframework.security.oauth2.provider.approval.Approval;
-import org.springframework.security.oauth2.provider.approval.Approval.ApprovalStatus;
-import org.springframework.security.oauth2.provider.approval.ApprovalStore;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
  * @author heyx
  */
-@Controller
-@SessionAttributes("authorizationRequest")
-@RequestMapping("oauth")
 public class OAuth2Controller {
 
     @Autowired
     private ClientDetailsService clientDetailsService;
 
-    @Autowired
-    private ApprovalStore approvalStore;
 
     @GetMapping("/confirm_access")
     public ModelAndView authorize(Map<String, Object> model, Principal principal) throws Exception {
@@ -41,12 +31,12 @@ public class OAuth2Controller {
         for (String scope : clientAuth.getScope()) {
             scopes.put(OAuth2Utils.SCOPE_PREFIX + scope, "false");
         }
-        for (Approval approval : approvalStore.getApprovals(principal.getName(), client.getClientId())) {
+        /*for (Approval approval : approvalStore.getApprovals(principal.getName(), client.getClientId())) {
             if (clientAuth.getScope().contains(approval.getScope())) {
                 scopes.put(OAuth2Utils.SCOPE_PREFIX + approval.getScope(),
                     approval.getStatus() == ApprovalStatus.APPROVED ? "true" : "false");
             }
-        }
+        }*/
         model.put("scopes", scopes);
         return new ModelAndView("oauth/confirm_access", model);
     }
