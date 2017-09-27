@@ -1,6 +1,7 @@
 package me.javaroad.uaa.controller;
 
 import java.util.Objects;
+import javax.servlet.http.HttpServletRequest;
 import me.javaroad.common.exception.InvalidParameterException;
 import me.javaroad.uaa.config.OAuthProvider;
 import me.javaroad.uaa.config.OAuthServerInfo;
@@ -13,7 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -33,22 +34,26 @@ public class LoginController {
     }
 
     @GetMapping("login")
-    public String login(String redirectUrl, String oauthProvider) {
+    public String login(String redirectUrl, @RequestParam(defaultValue = "mcloud") String oauthProvider, HttpServletRequest request) {
+        System.out.println(request.getParameter("redirectUrl"));
         OAuthServerInfo serverInfo = provider.getProvider().get(oauthProvider);
-        if(Objects.isNull(serverInfo)){
+        if (Objects.isNull(serverInfo)) {
             throw new InvalidParameterException("invalid oauthProvider");
         }
-        String authorizationUri = serverInfo.getAuthorizationUri(redirectUrl);
+        String authorizationUri = serverInfo.buildAuthorizationUrl(redirectUrl);
         return "redirect:" + authorizationUri;
     }
 
     @GetMapping("callback")
-    @ResponseBody
-    public OAuth2Response callback(String code, String state) {
-        OAuth2Response token =
-            token("http://localhost:8043/mcloud/oauth/token?grant_type=authorization_code&client_id=mcloud-blog"
-                + "&code=" + code);
-        return token;
+    public String callback(String code, String state, @RequestParam(defaultValue = "mcloud") String oauthProvider) {
+        OAuthServerInfo serverInfo = provider.getProvider().get(oauthProvider);
+        if (Objects.isNull(serverInfo)) {
+            throw new InvalidParameterException("invalid oauthProvider");
+        }
+        String accessTokenUrl = serverInfo.buildAccessTokenUrl(code);
+        OAuth2Response token = token(accessTokenUrl);
+
+        return "redirect:" + state + "#/login/success?token=" + token.getAccessToken();
     }
 
     private OAuth2Response token(String url) {
