@@ -6,7 +6,7 @@
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
 
-  <title>登录</title>
+  <title>注册</title>
 
   <link th:href="@{/webjars/bootstrap/4.0.0-alpha.6-1/css/bootstrap.css}" rel="stylesheet">
   <link th:href="@{/static/signin.css}" rel="stylesheet">
@@ -58,11 +58,11 @@
 
 <div class="container">
 
-  <form class="form-signin" th:action="@{/login}" method="post">
-    <h2 class="form-signin-heading">请登录</h2>
+  <form class="form-signin" th:action="@{/register}" method="post">
+    <h2 class="form-signin-heading">请注册</h2>
     <div th:if="${param.error}" class="alert alert-danger alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      用户名或密码错误!
+      用户名已存在!
     </div>
     <div th:if="${param.logout}" class="alert alert-warning alert-dismissible" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -72,7 +72,7 @@
     <input id="inputUsername" name="username" class="form-control" placeholder="账号" required="" autofocus="">
     <label for="inputPassword" class="sr-only">密码</label>
     <input type="password" id="inputPassword" name="password" class="form-control" placeholder="密码" required="">
-    <button class="btn btn-lg btn-primary btn-block">登录</button>
+    <button class="btn btn-lg btn-primary btn-block">注册</button>
   </form>
 
 </div> <!-- /container -->

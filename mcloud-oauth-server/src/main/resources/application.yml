@@ -1,6 +1,6 @@
 server:
   port: 8043
-  context-path: /mcloud
+  context-path: /uaa
 logging:
   level:
     org.springframework.security: DEBUG
