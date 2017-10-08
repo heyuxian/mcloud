@@ -1,0 +1,16 @@
+server:
+  port: 8443
+  context-path: /uia
+logging:
+  level:
+    org.springframework.security: DEBUG
+spring:
+  thymeleaf:
+    cache: false
+oauth2:
+  provider:
+    mcloud:
+      clientId: mcloud-blog
+      clientSecret: 123456
+      accessTokenUri: http://localhost:8043/uaa/oauth/token
+      userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize

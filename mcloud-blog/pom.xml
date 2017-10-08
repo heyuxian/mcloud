@@ -94,7 +94,6 @@
 
   </dependencies>
   <build>
-    <finalName>blog</finalName>
     <plugins>
 
       <plugin>

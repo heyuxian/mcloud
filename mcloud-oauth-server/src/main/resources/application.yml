@@ -11,6 +11,8 @@ spring:
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
+  mvc:
+      static-path-pattern: /static/**
   jpa:
     #TODO 正式环境需修改设置 update->none
     hibernate:
