@@ -1,0 +1,4 @@
+blog:
+  default:
+    page: 1
+    size: 10

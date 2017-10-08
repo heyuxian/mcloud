@@ -5,7 +5,8 @@ package me.javaroad.common.exception;
  */
 public class DataConflictException extends RuntimeException {
 
-    public DataConflictException(String message) {
-        super(message);
+    public DataConflictException(String message, Object... params) {
+        super(String.format(message, params));
     }
+
 }

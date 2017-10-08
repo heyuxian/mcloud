@@ -13,5 +13,4 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("${activeProfile:dev}")
 @RunWith(SpringRunner.class)
 public abstract class BaseSpringTest {
-
 }
