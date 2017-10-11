@@ -7,6 +7,8 @@ logging:
 spring:
   thymeleaf:
     cache: false
+  application:
+    name: uia
 oauth2:
   provider:
     mcloud:

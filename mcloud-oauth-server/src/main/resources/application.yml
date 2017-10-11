@@ -5,6 +5,8 @@ logging:
   level:
     org.springframework.security: DEBUG
 spring:
+  application:
+    name: oauth-server
   datasource:
     #TODO 根据每个项目自行设置
     url: jdbc:mysql://localhost/db_oauth

@@ -7,8 +7,8 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 /**
  * @author heyx
  */
-@SpringBootApplication
 @EnableEurekaClient
+@SpringBootApplication
 public class BlogServerApplication {
 
     public static void main(String[] args) {
