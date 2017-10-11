@@ -65,7 +65,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-访问地址: http://localhost:8043/uaa/swagger-ui.html
+访问地址: http://localhost:8043/uaa/swagger-ui.html [详细配置](mcloud-oauth-server/README.md)
 
 **启动认证中心:**
 
@@ -74,7 +74,7 @@ cd mcloud-uia
 mvn clean install
 mvn spring-boot:run
 ```
-访问地址: http://localhost:8443/uia/swagger-ui.html
+访问地址: http://localhost:8443/uia/swagger-ui.html [详细配置](mcloud-uia/README.md)
 
 **启动博客服务:**
 
@@ -83,7 +83,7 @@ cd mcloud-blog
 mvn clean install
 mvn spring-boot:run
 ```
-访问地址: http://localhost:8081/swagger-ui.html
+访问地址: http://localhost:8081/swagger-ui.html [详细配置](mcloud-blog/README.md)
 
 ## License
 
