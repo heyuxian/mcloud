@@ -8,8 +8,8 @@ MCloud 是基于Spring Cloud实现的简单微服务系统。提供了微服务�
 - mcloud-eureka 服务注册与发现中心
 - mcloud-oauth-server 基于Spring OAuth2实现的OAuth认证服务端
 - mcloud-uia 实现用户统一登录，通过简单的配置即可实现第三方登录
-- mcloud-apigw 基于Spring cloud zuul 实现的api网关
-- mcloud-config 统一配置中心
+- mcloud-apigw 基于Spring cloud zuul 实现的api网关 (暂未实现)
+- mcloud-config 统一配置中心 (暂未实现)
 
 其他模块：
 
@@ -18,19 +18,19 @@ MCloud 是基于Spring Cloud实现的简单微服务系统。提供了微服务�
 - mcloud-data 数据库操作相关
 - mcloud-blog 简单微服务架构的博客系统
 
-**环境依赖**
+## 环境依赖
 
 - JDK 1.8 以上
 
 - 如果使用Idea 进行开发，请安装 lombok插件
 
-- 数据库：因为使用的是hibernate进行开发，理论上是支持多种数据库，但目前脚本只提供了mysql的，如有需要，可以对`application.yml` 做如下修改以使用hibernate自动生成表:
+- 数据库：因为使用的是hibernate进行开发，理论上是支持多种数据库，但目前只提供了mysql脚本，如有需要，可以对`application.yml` 做如下修改，使hibernate自动生成对应表结构
 
   ```
   spring:
     jpa:
       hibernate:
-        # update 改为 create
+        # update 改为 create,生成表之后需改回 update
         ddl-auto: create
   ```
 
