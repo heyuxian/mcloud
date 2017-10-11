@@ -34,6 +34,16 @@
     </dependencies>
   </dependencyManagement>
 
+  <modules>
+    <module>../mcloud-common</module>
+    <module>../mcloud-data</module>
+    <module>../mcloud-web</module>
+    <module>../mcloud-uia</module>
+    <module>../mcloud-eureka</module>
+    <module>../mcloud-oauth-server</module>
+    <module>../mcloud-blog</module>
+  </modules>
+
   <dependencies>
 
     <dependency>
@@ -78,15 +88,18 @@
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
   <developers>
     <developer>
       <name>heyuxian</name>
       <email>heyuxian.me@gmail.com</email>
     </developer>
   </developers>
+
   <scm>
     <connection>scm:git:git@github.com:heyuxian/common.git</connection>
     <developerConnection>scm:git:git@github.com:heyuxian/common.git</developerConnection>
     <url>git@github.com:heyuxian/common.git</url>
   </scm>
+
 </project>

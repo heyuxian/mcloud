@@ -1,12 +1,10 @@
 package me.javaroad.oauth.service;
 
 import java.util.Set;
-import me.javaroad.oauth.controller.web.request.ResourceRequest;
+import me.javaroad.oauth.controller.api.request.ResourceRequest;
 import me.javaroad.oauth.entity.Resource;
 import me.javaroad.oauth.mapper.ResourceMapper;
 import me.javaroad.oauth.repository.ResourceRepository;
-import me.javaroad.oauth.dto.ResourceDto;
-import me.javaroad.oauth.mapper.OAuthMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

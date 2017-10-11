@@ -1,5 +1,6 @@
 package me.javaroad.uaa.controller.api;
 
+import io.swagger.annotations.ApiOperation;
 import java.util.Objects;
 import javax.validation.Valid;
 import me.javaroad.common.exception.InvalidParameterException;
@@ -29,6 +30,7 @@ public class LoginApi {
         this.provider = provider;
     }
 
+    @ApiOperation(value = "Login", httpMethod = "POST")
     @PostMapping("login")
     public TokenInfo login(@RequestBody @Valid LoginRequest loginRequest) {
         OAuthServerInfo serverInfo = provider.getProvider().get("mcloud");

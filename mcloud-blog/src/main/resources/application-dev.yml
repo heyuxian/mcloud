@@ -4,8 +4,10 @@ logging:
   level:
     org.springframework.security: DEBUG
 spring:
+  application:
+    name: blog
   datasource:
-    url: jdbc:mysql://localhost/blackc
+    url: jdbc:mysql://localhost/db_blog
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
@@ -33,3 +35,12 @@ security:
       id: openid
       serviceId: ${PREFIX:}resource
 debug: true
+eureka:
+  instance:
+    preferIpAddress: true
+    hostname: blog
+  client:
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:8761/eureka/

@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,6 +16,9 @@ import me.javaroad.data.entity.TemporalEntity;
 /**
  * @author heyx
  */
+@NamedEntityGraph(name = "all", attributeNodes = {
+    @NamedAttributeNode("authorities")
+})
 @Getter
 @Setter
 @Entity

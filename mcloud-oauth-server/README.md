@@ -1,44 +1,33 @@
-### 获取code
+# MCloud - OAuth2 认证中心
 
-#### URL: GET /oauth/authorize
+## 简介
 
-**请求参数：**
+mcloud-oauth-server 基于Spring OAuth2实现的OAuth认证服务端。
 
-- response_type=code
-- client_id=blog
-- state=customParam
-- redirect_uri=http://localhost/code
+## 快速使用
 
-**示例：**
+**执行脚本**
 
-http://localhost/oauth/authorize?response_type=code&client_id=tonr&state=customParam&redirect_uri=http://localhost/code
+运行项目根目录 `sql` 文件夹下的数据库脚本 `db_oauth.sql`
 
-### 获取token
+**修改数据库用户及密码**
 
-#### URL: POST /oauth/token
+修改 `application.yml` 中的数据库用户及密码
 
-**请求参数：**
-- 授权码模式
+**启动OAuth2认证服务**
+
 ```
-POST /oauth/token HTTP/1.1
-Host: localhost
-Content-Type: application/x-www-form-urlencoded
-Cookie:  JSESSIONID=47E2D86E8864D28497F36CEF2E739F8A; _gat=1; _ga=GA1.1.1886655617.1499869098; _gid=GA1.1.1791353267.1504336943
-Authorization: Basic Y2xpZW50OjEyMzQ1Ng==
-Cache-Control: no-cache
-Postman-Token: 6f482297-5a10-a0cf-9ce2-588f3a91aac1
+cd mcloud-oauth-server
+mvn clean install
+mvn spring-boot:run
+```
 
-grant_type=authorization_code&client_id=client&code=Nw5HWz&redirect_uri=http%3A%2F%2Flocalhost%2Fcode
-```
-- 客户端模式
-```
-POST /oauth/token HTTP/1.1
-Host: localhost
-Content-Type: application/x-www-form-urlencoded
-Cookie:  JSESSIONID=47E2D86E8864D28497F36CEF2E739F8A; _gat=1; _ga=GA1.1.1886655617.1499869098; _gid=GA1.1.1791353267.1504336943
-Authorization: Basic Y2xpZW50OjEyMzQ1Ng==
-Cache-Control: no-cache
-Postman-Token: 31ce251c-a3cc-bc3d-7378-8a2bf92a92d4
+**访问地址**
 
-grant_type=client_credentials
 ```
+http://localhost:8043/uaa/swagger-ui.html
+```
+
+![uaa](https://user-images.githubusercontent.com/30259465/31441550-16f2053e-aec6-11e7-9568-93cd35dbc1dd.png)
+
+> 注：访问OAuth2 认证服务的swagger文档需要通过认证，在弹出的登陆页面输入默认的用户名密码即可进入swagger文档.

@@ -1,7 +1,7 @@
 package me.javaroad.oauth.mapper;
 
-import me.javaroad.oauth.controller.web.request.ResourceRequest;
-import me.javaroad.oauth.controller.web.response.ResourceResponse;
+import me.javaroad.oauth.controller.api.request.ResourceRequest;
+import me.javaroad.oauth.controller.api.response.ResourceResponse;
 import me.javaroad.oauth.entity.Resource;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

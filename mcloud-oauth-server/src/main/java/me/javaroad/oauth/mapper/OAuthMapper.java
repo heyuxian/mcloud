@@ -1,6 +1,6 @@
 package me.javaroad.oauth.mapper;
 
-import me.javaroad.oauth.controller.web.request.ClientRequest;
+import me.javaroad.oauth.controller.api.request.ClientRequest;
 import me.javaroad.oauth.dto.ApprovalDto;
 import me.javaroad.oauth.dto.ResourceDto;
 import me.javaroad.oauth.dto.ScopeDto;
@@ -8,7 +8,7 @@ import me.javaroad.oauth.entity.Approval;
 import me.javaroad.oauth.entity.Authority;
 import me.javaroad.oauth.entity.Client;
 import me.javaroad.oauth.entity.Scope;
-import me.javaroad.oauth.controller.web.request.ApprovalRequest;
+import me.javaroad.oauth.controller.api.request.ApprovalRequest;
 import me.javaroad.oauth.dto.AuthorityDto;
 import me.javaroad.oauth.dto.ClientDto;
 import me.javaroad.oauth.entity.Resource;
