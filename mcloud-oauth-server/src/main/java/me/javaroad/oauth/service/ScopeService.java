@@ -1,10 +1,8 @@
 package me.javaroad.oauth.service;
 
 import java.util.Set;
-import me.javaroad.oauth.controller.web.request.ScopeRequest;
-import me.javaroad.oauth.dto.ScopeDto;
+import me.javaroad.oauth.controller.api.request.ScopeRequest;
 import me.javaroad.oauth.entity.Scope;
-import me.javaroad.oauth.mapper.OAuthMapper;
 import me.javaroad.oauth.mapper.ScopeMapper;
 import me.javaroad.oauth.repository.ScopeRepository;
 import org.springframework.beans.factory.annotation.Autowired;

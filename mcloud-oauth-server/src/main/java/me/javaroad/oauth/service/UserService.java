@@ -3,8 +3,8 @@ package me.javaroad.oauth.service;
 import java.util.Objects;
 import me.javaroad.common.exception.DataConflictException;
 import me.javaroad.common.exception.DataNotFoundException;
-import me.javaroad.oauth.controller.web.request.SearchUserRequest;
-import me.javaroad.oauth.controller.web.request.UserRequest;
+import me.javaroad.oauth.controller.api.request.SearchUserRequest;
+import me.javaroad.oauth.controller.api.request.UserRequest;
 import me.javaroad.oauth.entity.User;
 import me.javaroad.oauth.mapper.UserMapper;
 import me.javaroad.oauth.repository.UserRepository;
@@ -28,8 +28,7 @@ public class UserService {
 
     @Autowired
     public UserService(UserRepository userRepository,
-        UserMapper userMapper,
-        PasswordEncoder passwordEncoder) {
+        UserMapper userMapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.userMapper = userMapper;
         this.passwordEncoder = passwordEncoder;
@@ -54,7 +53,7 @@ public class UserService {
     }
 
     private User create(UserRequest userRequest) {
-        User user = getByUsername(userRequest);
+        User user = get(userRequest.getUsername());
         if (Objects.nonNull(user)) {
             throw new DataConflictException("User[username=%s] already exists", userRequest.getUsername());
         }
@@ -62,10 +61,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 
         return userRepository.save(user);
-    }
-
-    private User getByUsername(UserRequest userRequest) {
-        return userRepository.findByUsername(userRequest.getUsername());
     }
 
     public Page<User> getAll(SearchUserRequest searchUserRequest, Pageable pageable) {
@@ -76,8 +71,13 @@ public class UserService {
         return userRepository.findOne(id);
     }
 
+    public User get(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     @Transactional
     public void delete(Long userId) {
         userRepository.delete(userId);
     }
+
 }

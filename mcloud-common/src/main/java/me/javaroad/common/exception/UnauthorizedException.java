@@ -5,7 +5,7 @@ package me.javaroad.common.exception;
  */
 public class UnauthorizedException extends RuntimeException {
 
-    public UnauthorizedException(String msg) {
-        super(msg);
+    public UnauthorizedException(String message, Object... params) {
+        super(String.format(message, params));
     }
 }

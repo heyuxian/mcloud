@@ -1,7 +1,7 @@
 package me.javaroad.oauth.service;
 
 import java.util.Set;
-import me.javaroad.oauth.controller.web.request.ClientRequest;
+import me.javaroad.oauth.controller.api.request.ClientRequest;
 import me.javaroad.oauth.entity.Approval;
 import me.javaroad.oauth.entity.Authority;
 import me.javaroad.oauth.entity.Client;

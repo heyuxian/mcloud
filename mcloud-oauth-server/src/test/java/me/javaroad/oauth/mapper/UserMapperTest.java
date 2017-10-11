@@ -2,7 +2,7 @@ package me.javaroad.oauth.mapper;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import me.javaroad.oauth.controller.web.response.UserResponse;
+import me.javaroad.oauth.controller.api.response.UserResponse;
 import me.javaroad.oauth.entity.User;
 import org.junit.Test;
 

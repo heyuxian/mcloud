@@ -7,12 +7,10 @@ logging:
 spring:
   datasource:
     #TODO 根据每个项目自行设置
-    url: jdbc:mysql://localhost/auth_c
+    url: jdbc:mysql://localhost/db_oauth
     username: root
     password: root
     driver-class-name: com.mysql.jdbc.Driver
-  mvc:
-      static-path-pattern: /static/**
   jpa:
     #TODO 正式环境需修改设置 update->none
     hibernate:
@@ -24,3 +22,15 @@ spring:
     show-sql: true
   thymeleaf:
     cache: false
+security:
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAnU/x82VEqJn3pjx8LJi87UItHmDcgAgByl7TpmzIqXlsnEM6lt8DsznwX/3bqi9GxhXyW0IPRrC4g4lIZRqUlFC6W8x/azzmfbmIpyUv9kVNpuk52BlzULvHKxjbqjQTQFqxFeu0nFQK4B/gDu9Zj6xbb19Yc9b8jkguakNNjzDE+sGwja0WekGuBnqcS8pwTxkRG8lsUSaWsVjLXQVS5MCdZgGjv/abMqIwAPFXdrlbAMKp+epSuMGrGO7j8pLGBjOmoGSHzqZ90DtTIzu4HIgykTo0UqdT/RNoHPCMnhcf0FzqtMU7XQlIIJJ2x2TiUws1uYY0IdPZusKy2K1ntwIDAQAB
+          -----END PUBLIC KEY-----
+      id: openid
+      serviceId: ${PREFIX:}resource
+      # refer to: https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.5-Release-Notes#oauth-2-resource-filter
+      filter-order: 3

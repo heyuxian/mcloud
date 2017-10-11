@@ -18,12 +18,44 @@ MCloud 是基于Spring Cloud实现的简单微服务系统。提供了微服务�
 - mcloud-data 数据库操作相关
 - mcloud-blog 简单微服务架构的博客系统
 
+**环境依赖**
+
+- JDK 1.8 以上
+
+- 如果使用Idea 进行开发，请安装 lombok插件
+
+- 数据库：因为使用的是hibernate进行开发，理论上是支持多种数据库，但目前脚本只提供了mysql的，如有需要，可以对`application.yml` 做如下修改以使用hibernate自动生成表:
+
+  ```
+  spring:
+    jpa:
+      hibernate:
+        # update 改为 create
+        ddl-auto: create
+  ```
+
 ## 快速使用
+
+**下载项目**
 
 ```
 git clone https://github.com/heyuxian/mcloud.git
 cd 项目目录/mcloud
 ```
+
+**执行脚本**
+
+首先在数据库中执行以下两个脚本:
+
+```
+mcloud/sql/db_oauth.sql
+mcloud/sql/db_blog.sql
+```
+
+并修改对应配置文件中的数据库用户名及密码:
+
+- mcloud-blog: application-dev.yml
+- mcloud-oauth-server: application.yml
 
 **启动OAuth Server:**
 
@@ -33,7 +65,7 @@ mvn clean install
 mvn spring-boot:run
 ```
 
-访问地址: http://localhost:8043/uaa
+访问地址: http://localhost:8043/uaa/swagger-ui.html
 
 **启动认证中心:**
 
@@ -42,7 +74,7 @@ cd mcloud-uia
 mvn clean install
 mvn spring-boot:run
 ```
-访问地址: http://localhost:8443/uia
+访问地址: http://localhost:8443/uia/swagger-ui.html
 
 **启动博客服务:**
 
