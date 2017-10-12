@@ -1,4 +1,4 @@
-package me.javaroad.uaa.net;
+package me.javaroad.uaa.rest;
 
 import me.javaroad.common.exception.UnauthorizedException;
 import me.javaroad.uaa.controller.api.request.LoginRequest;

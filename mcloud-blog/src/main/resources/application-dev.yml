@@ -38,7 +38,7 @@ debug: true
 eureka:
   instance:
     preferIpAddress: true
-    hostname: blog
+    hostname: localhost
   client:
     registerWithEureka: true
     fetchRegistry: true
