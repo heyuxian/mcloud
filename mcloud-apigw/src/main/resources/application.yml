@@ -10,10 +10,13 @@ eureka:
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
 zuul:
+  sensitiveHeaders: Cookie,Set-Cookie
   routes:
     blog:
       path: /blog/**
       service-id: blog
+      stripPrefix: false
     uia:
       path: /uia/**
       service-id: uia
+      stripPrefix: false

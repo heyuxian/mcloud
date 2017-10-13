@@ -1,7 +1,6 @@
 package me.javaroad.oauth.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -23,8 +22,6 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${security.oauth2.resource.jwt.keyValue}")
-    private String signKey;
     @Autowired
     private JwtAccessTokenConverter jwtAccessTokenConverter;
 
