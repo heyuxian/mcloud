@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(API_VERSION + "/users/{username}/labels")
+@RequestMapping(API_VERSION + "/labels")
 public class LabelController {
 
 }

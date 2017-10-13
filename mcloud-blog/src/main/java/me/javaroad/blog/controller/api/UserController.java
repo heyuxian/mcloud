@@ -9,10 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping("users/me")
+@RequestMapping("users")
 public class UserController {
 
-    @GetMapping
+    @GetMapping("me")
     public Principal me(Principal principal) {
         return principal;
     }

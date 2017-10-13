@@ -1,10 +1,8 @@
 package me.javaroad.blog.service;
 
-import java.util.Objects;
-import me.javaroad.blog.repository.ArticleRepository;
 import me.javaroad.blog.dto.ArticleSearchRequest;
 import me.javaroad.blog.entity.Article;
-import me.javaroad.common.exception.DataNotFoundException;
+import me.javaroad.blog.repository.ArticleRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,15 +23,11 @@ public class ArticleService {
         this.articleRepository = articleRepository;
     }
 
-    public Article getArticle(String username, Long articleId) {
-        Article article = articleRepository.findByUserAndId(username, articleId);
-        if (Objects.isNull(article)) {
-            throw new DataNotFoundException("article[id=" + articleId + "] not found");
-        }
-        return article;
-    }
-
     public Page<Article> getArticlePage(ArticleSearchRequest searchRequest, Pageable pageable) {
         return articleRepository.findBySearchRequest(searchRequest, pageable);
+    }
+
+    public Article get(Long articleId) {
+        return articleRepository.findOne(articleId);
     }
 }

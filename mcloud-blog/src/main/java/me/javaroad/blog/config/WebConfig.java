@@ -27,6 +27,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     private Integer defaultPage;
     @Value("${blog.default.size:10}")
     private Integer defaultSize;
+
     public MethodValidationPostProcessor methodValidationPostProcessor() {
         return new MethodValidationPostProcessor();
     }
