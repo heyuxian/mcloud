@@ -91,7 +91,6 @@ mvn spring-boot:run
 
 **注：** 
 
-- 服务注册与发现(mcloud-eureka) 以及api网关(mcloud-apigw)和统一配置中心(mcloud-config) 三个模块暂未完善，但是不用启动以上三个服务系统也是可以运行的。这一块会在最近进行完善。
 - 整个系统是以前后端分离的方式进行开发的，所以后端服务暂时只能通过 swagger 文档的形式进行访问，至于前端页面，是在 CoreUI 上进行了二次开发，但是目前实现的功能较少，如需参考，请查看 [源码](https://github.com/heyuxian/mcloud-ui)
 
 ## 问题及建议
