@@ -20,7 +20,7 @@ MCloud 是基于Spring Cloud实现的简单微服务系统。提供了微服务�
 
 UI界面:
 
-- mcloud-ui 基于[CoreUI](https://github.com/mrholek/CoreUI-Vue) 实现的后台管理及前端展现页面 [地址](https://github.com/heyuxian/mcloud-ui)
+- mcloud-ui 基于[AdminLTE](https://github.com/heyuxian/AdminLTE) 实现的后台管理及前端展现页面 [地址](https://github.com/heyuxian/mcloud-ui)
 
 ## 环境依赖
 
