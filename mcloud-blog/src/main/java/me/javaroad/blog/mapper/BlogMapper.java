@@ -1,10 +1,9 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.dto.ArticlePageDto;
-import me.javaroad.blog.entity.Channel;
+import me.javaroad.blog.controller.api.request.ArticleRequest;
 import me.javaroad.blog.dto.ArticleDto;
+import me.javaroad.blog.dto.ArticlePageDto;
 import me.javaroad.blog.dto.CategoryDto;
-import me.javaroad.blog.dto.ChannelDto;
 import me.javaroad.blog.dto.LabelDto;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.entity.Category;
@@ -24,6 +23,8 @@ public interface BlogMapper {
 
     ArticleDto articleEntityToDto(Article article);
 
+    Article articleRequestToEntity(ArticleRequest articleRequest);
+
     Category categoryDtoToEntity(CategoryDto categoryDto);
 
     CategoryDto categoryEntityToDto(Category category);
@@ -31,10 +32,6 @@ public interface BlogMapper {
     Label labelDtoToEntity(LabelDto labelDto);
 
     LabelDto labelEntityToDto(Label label);
-
-    Channel channelDtoToEntity(ChannelDto channelDto);
-
-    ChannelDto channelEntityToDto(Channel channel);
 
     ArticlePageDto articleEntityToPageDto(Article article);
 }

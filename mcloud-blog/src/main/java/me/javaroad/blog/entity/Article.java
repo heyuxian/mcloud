@@ -39,8 +39,6 @@ public class Article extends TemporalEntity {
         joinColumns = {@JoinColumn(name = "article_id")},
         inverseJoinColumns = {@JoinColumn(name = "category_id")})
     private Set<Category> categories;
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Channel channel;
     @OneToMany(mappedBy = "article")
     private List<Comment> comments;
     @ManyToMany

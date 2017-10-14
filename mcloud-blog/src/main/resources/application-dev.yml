@@ -44,3 +44,7 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+info:
+  app:
+    name: MCloud-blog
+    desc: http://javaroad.me

@@ -34,3 +34,17 @@ mvn spring-boot:run
 ![uaa](https://user-images.githubusercontent.com/30259465/31441502-eed820b0-aec5-11e7-933c-2aa9f3d80e74.png)
 
 ![access_token](https://user-images.githubusercontent.com/30259465/31441536-0843a6b4-aec6-11e7-9af2-e89bc32f7fad.png)
+
+获取 `access_token` 之后，在其他服务swagger UI 对应位置填入 `access_token `，此处以博客服务为例。
+
+首先 ，启动 blog 服务，访问 `http://localhost:8081/blog/swagger-ui.html`
+
+点击右上角 `Authorize` 按钮，弹出以下界面:
+
+![Swagger UI](https://gitee.com/uploads/images/2017/1014/194854_560d472f_1483211.png "QQ截图20171014194457.png")
+
+**access_token 格式：**
+
+`Bearer access_token`
+
+`Bearer`与 `access_token` 之间有空格分隔, 最后点击 `Authorize` 按钮，此时即可访问相关博客API

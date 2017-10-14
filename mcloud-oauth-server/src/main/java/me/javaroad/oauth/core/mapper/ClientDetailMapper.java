@@ -63,7 +63,7 @@ public abstract class ClientDetailMapper {
             .collect(Collectors.toSet());
     }
 
-    Map<String, Object> mapDdditionalInformationToMap(String additionalInformation) {
+    Map<String, Object> mapAdditionalInformationToMap(String additionalInformation) {
         if (StringUtils.isNotBlank(additionalInformation)) {
             ObjectMapper mapper = new ObjectMapper();
             try {

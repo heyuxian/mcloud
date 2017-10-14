@@ -13,6 +13,10 @@ mcloud-blog 使用Spring cloud实现微服务架构的博客系统
 
 修改 `application-dev.yml` 中的数据库用户及密码
 
+**启动认证服务**
+
+refer: [统一认证服务](../mcloud-uia/README.md)
+
 **启动博客服务**
 
 ```

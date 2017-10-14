@@ -42,6 +42,7 @@
     <module>../mcloud-eureka</module>
     <module>../mcloud-oauth-server</module>
     <module>../mcloud-blog</module>
+    <module>../mcloud-config</module>
   </modules>
 
   <dependencies>

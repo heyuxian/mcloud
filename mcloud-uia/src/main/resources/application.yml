@@ -16,3 +16,7 @@ oauth2:
       clientSecret: 123456
       accessTokenUri: http://localhost:8043/uaa/oauth/token
       userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
+info:
+  app:
+    name: MCloud-blog
+    desc: http://javaroad.me
