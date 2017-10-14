@@ -36,3 +36,12 @@ security:
       serviceId: ${PREFIX:}resource
       # refer to: https://github.com/spring-projects/spring-boot/wiki/Spring-Boot-1.5-Release-Notes#oauth-2-resource-filter
       filter-order: 3
+
+info:
+  app:
+    name: MCloud-Oauth2 Server
+    desc: http://javaroad.me
+uaa:
+  url: http://localhost:8043/uaa
+  clientId: mcloud-blog
+  clientSecret: 123456

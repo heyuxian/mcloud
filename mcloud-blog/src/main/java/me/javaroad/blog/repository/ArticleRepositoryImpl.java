@@ -9,7 +9,6 @@ import me.javaroad.blog.entity.QArticle;
 import org.apache.commons.lang3.StringUtils;
 import me.javaroad.blog.dto.ArticleSearchRequest;
 import me.javaroad.blog.entity.QCategory;
-import me.javaroad.blog.entity.QChannel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
@@ -23,7 +22,6 @@ public class ArticleRepositoryImpl extends QueryDslRepositorySupport implements 
     private QArticle article = QArticle.article;
     private QCategory category = QCategory.category;
     private QLabel label = QLabel.label;
-    private QChannel channel = QChannel.channel;
 
     public ArticleRepositoryImpl() {
         super(Article.class);
