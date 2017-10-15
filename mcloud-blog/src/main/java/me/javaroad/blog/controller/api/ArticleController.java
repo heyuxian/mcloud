@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(API_VERSION + "/users/{username}/articles")
+@RequestMapping(API_VERSION + "/articles")
 public class ArticleController {
 
     private final BlogMapper mapper;
@@ -38,20 +38,20 @@ public class ArticleController {
 
     @ApiOperation(value = "根据ID获取Article", httpMethod = "GET")
     @GetMapping("{articleId}")
-    public ArticleDto getArticle(@PathVariable String username, @PathVariable Long articleId) {
-        Article article = articleService.getArticle(username, articleId);
+    public ArticleDto getArticle(@PathVariable Long articleId) {
+        Article article = articleService.get(articleId);
         return mapper.articleEntityToDto(article);
     }
 
-    @ApiOperation(value = "根据用户分页获取文章", httpMethod = "GET")
+    @ApiOperation(value = "分页获取文章", httpMethod = "GET")
     @ApiImplicitParams({
         @ApiImplicitParam(name = "page", paramType = "query", dataType = "int"),
         @ApiImplicitParam(name = "size", paramType = "query", dataType = "int")
     })
     @GetMapping
-    public Page<ArticlePageDto> getArticles(@PathVariable String username, @PageableDefault Pageable pageable) {
+    public Page<ArticlePageDto> getArticles(@PageableDefault Pageable pageable) {
         Page<Article> articlePage = articleService.getArticlePage(
-            ArticleSearchRequest.builder().username(username).build(),
+            ArticleSearchRequest.builder().build(),
             pageable);
         return articlePage.map(mapper::articleEntityToPageDto);
     }

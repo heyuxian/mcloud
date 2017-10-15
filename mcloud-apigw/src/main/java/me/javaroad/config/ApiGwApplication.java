@@ -1,20 +1,19 @@
-package me.javaroad.uaa;
+package me.javaroad.config;
 
-import me.javaroad.uaa.config.OAuthProvider;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * @author heyx
  */
 @EnableEurekaClient
+@EnableZuulProxy
 @SpringBootApplication
-@EnableConfigurationProperties(OAuthProvider.class)
-public class UIAApplication {
+public class ApiGwApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(UIAApplication.class, args);
+        SpringApplication.run(ApiGwApplication.class, args);
     }
 }

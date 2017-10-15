@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(API_VERSION + "/users/{username}/categories")
+@RequestMapping(API_VERSION + "/categories")
 public class CategoryController {
 
     private final CategoryService categoryService;
@@ -42,10 +42,10 @@ public class CategoryController {
         this.articleService = articleService;
     }
 
-    @ApiOperation(value = "获取用户所有分类", httpMethod = "GET")
+    @ApiOperation(value = "获取所有分类", httpMethod = "GET")
     @GetMapping
-    public List<CategoryDto> getCategories(@PathVariable String username) {
-        List<Category> categories = categoryService.getCategories(username);
+    public List<CategoryDto> getCategories() {
+        List<Category> categories = categoryService.getAll();
         return categories.stream().map(mapper::categoryEntityToDto).collect(Collectors.toList());
     }
 

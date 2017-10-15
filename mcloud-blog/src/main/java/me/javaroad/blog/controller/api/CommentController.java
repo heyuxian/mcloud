@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(ApiConstants.API_VERSION + "/users/{username}/articles/{articleId}/comments")
+@RequestMapping(ApiConstants.API_VERSION + "/articles/{articleId}/comments")
 public class CommentController {
 
 }

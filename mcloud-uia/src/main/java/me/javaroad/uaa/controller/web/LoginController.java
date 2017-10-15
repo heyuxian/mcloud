@@ -6,7 +6,7 @@ import me.javaroad.common.exception.InvalidParameterException;
 import me.javaroad.uaa.config.OAuthProvider;
 import me.javaroad.uaa.entity.OAuthServerInfo;
 import me.javaroad.uaa.entity.TokenInfo;
-import me.javaroad.uaa.net.OAuthApi;
+import me.javaroad.uaa.rest.OAuthApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
