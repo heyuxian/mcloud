@@ -1,5 +1,6 @@
 package me.javaroad.oauth.service;
 
+import java.util.List;
 import java.util.Set;
 import me.javaroad.oauth.controller.api.request.ApprovalRequest;
 import me.javaroad.oauth.dto.ApprovalDto;
@@ -44,5 +45,9 @@ public class ApprovalService {
 
     public Set<Approval> getApprovalByIds(Set<Long> autoApproveIds) {
         return approvalRepository.findByIdIn(autoApproveIds);
+    }
+
+    public List<Approval> getAll() {
+        return approvalRepository.findAll();
     }
 }
