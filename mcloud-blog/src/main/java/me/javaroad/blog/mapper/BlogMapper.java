@@ -1,10 +1,10 @@
 package me.javaroad.blog.mapper;
 
 import me.javaroad.blog.controller.api.request.ArticleRequest;
-import me.javaroad.blog.dto.ArticleDto;
-import me.javaroad.blog.dto.ArticlePageDto;
-import me.javaroad.blog.dto.CategoryDto;
-import me.javaroad.blog.dto.LabelDto;
+import me.javaroad.blog.controller.api.response.ArticleResponse;
+import me.javaroad.blog.controller.api.response.ArticlePageResponse;
+import me.javaroad.blog.controller.api.response.CategoryResponse;
+import me.javaroad.blog.controller.api.response.LabelResponse;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.entity.Category;
 import me.javaroad.blog.entity.Label;
@@ -19,19 +19,19 @@ public interface BlogMapper {
 
     BlogMapper INSTANCE = Mappers.getMapper(BlogMapper.class);
 
-    Article articleDtoToEntity(ArticleDto articleDto);
+    Article articleDtoToEntity(ArticleResponse articleResponse);
 
-    ArticleDto articleEntityToDto(Article article);
+    ArticleResponse articleEntityToDto(Article article);
 
     Article articleRequestToEntity(ArticleRequest articleRequest);
 
-    Category categoryDtoToEntity(CategoryDto categoryDto);
+    Category categoryDtoToEntity(CategoryResponse categoryResponse);
 
-    CategoryDto categoryEntityToDto(Category category);
+    CategoryResponse categoryEntityToDto(Category category);
 
-    Label labelDtoToEntity(LabelDto labelDto);
+    Label labelDtoToEntity(LabelResponse labelResponse);
 
-    LabelDto labelEntityToDto(Label label);
+    LabelResponse labelEntityToDto(Label label);
 
-    ArticlePageDto articleEntityToPageDto(Article article);
+    ArticlePageResponse articleEntityToPageDto(Article article);
 }

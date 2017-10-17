@@ -7,7 +7,7 @@ import me.javaroad.blog.entity.QLabel;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.entity.QArticle;
 import org.apache.commons.lang3.StringUtils;
-import me.javaroad.blog.dto.ArticleSearchRequest;
+import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
 import me.javaroad.blog.entity.QCategory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

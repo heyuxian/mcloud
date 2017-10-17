@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,12 +14,10 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class CategoryDto implements Comparable<CategoryDto> {
-    private Long id;
-    private String name;
+public class ArticleSearchRequest {
 
-    @Override
-    public int compareTo(CategoryDto o) {
-        return 0;
-    }
+    private String username;
+    private Long categoryId;
+    private Long labelId;
+
 }

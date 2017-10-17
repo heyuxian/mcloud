@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,10 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArticleSearchRequest {
-
-    private String username;
-    private Long categoryId;
-    private Long labelId;
-
+public class LabelResponse {
+    private Long id;
+    private String name;
 }

@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.response;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -19,17 +19,17 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArticlePageDto {
+public class ArticlePageResponse {
     private Long id;
     private String title;
     private String summary;
     private Integer sort;
 
     @Default
-    private Set<CategoryDto> categories = new LinkedHashSet<>();
+    private Set<CategoryResponse> categories = new LinkedHashSet<>();
     @Default
-    private Set<LabelDto> labels = new HashSet<>();
-    private ChannelDto channel;
+    private Set<LabelResponse> labels = new HashSet<>();
+    private ChannelResponse channel;
 
     private Date createDate;
     private Date modifiedDate;

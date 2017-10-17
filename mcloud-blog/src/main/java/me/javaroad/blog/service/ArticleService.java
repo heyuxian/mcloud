@@ -1,7 +1,7 @@
 package me.javaroad.blog.service;
 
 import me.javaroad.blog.controller.api.request.ArticleRequest;
-import me.javaroad.blog.dto.ArticleSearchRequest;
+import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.mapper.BlogMapper;
 import me.javaroad.blog.repository.ArticleRepository;

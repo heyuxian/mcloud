@@ -5,11 +5,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import me.javaroad.blog.dto.CategoryDto;
-import me.javaroad.blog.dto.LabelDto;
+import me.javaroad.blog.controller.api.response.CategoryResponse;
+import me.javaroad.blog.controller.api.response.LabelResponse;
 import org.apache.commons.lang3.RandomStringUtils;
-import me.javaroad.blog.dto.ArticleDto;
-import me.javaroad.blog.dto.ChannelDto;
+import me.javaroad.blog.controller.api.response.ArticleResponse;
+import me.javaroad.blog.controller.api.response.ChannelResponse;
 
 /**
  * @author heyx
@@ -18,8 +18,8 @@ public class MockData {
 
     private static final Random RANDOM_NUM = new Random(System.currentTimeMillis());
 
-    public static ArticleDto makeArticleDto() {
-        return ArticleDto.builder()
+    public static ArticleResponse makeArticleDto() {
+        return ArticleResponse.builder()
             .id(RANDOM_NUM.nextLong())
             .title(randomString(10))
             .content(randomString(100))
@@ -32,38 +32,38 @@ public class MockData {
             .build();
     }
 
-    private static Set<LabelDto> makeLabelDtos() {
-        Set<LabelDto> labelDtos = new LinkedHashSet<>();
+    private static Set<LabelResponse> makeLabelDtos() {
+        Set<LabelResponse> labelResponses = new LinkedHashSet<>();
         for (int i = 0; i < RANDOM_NUM.nextInt(10); i++) {
-            labelDtos.add(makeLabelDto());
+            labelResponses.add(makeLabelDto());
         }
-        return labelDtos;
+        return labelResponses;
     }
 
-    private static LabelDto makeLabelDto() {
-        return LabelDto.builder()
+    private static LabelResponse makeLabelDto() {
+        return LabelResponse.builder()
             .id(RANDOM_NUM.nextLong())
             .name(randomString(10))
             .build();
     }
 
-    private static SortedSet<CategoryDto> makeCategoryDtos() {
-        SortedSet<CategoryDto> categoryDtos = new TreeSet<>();
+    private static SortedSet<CategoryResponse> makeCategoryDtos() {
+        SortedSet<CategoryResponse> categoryResponses = new TreeSet<>();
         for (int i = 0; i < RANDOM_NUM.nextInt(10); i++) {
-            categoryDtos.add(makeCategoryDto());
+            categoryResponses.add(makeCategoryDto());
         }
-        return categoryDtos;
+        return categoryResponses;
     }
 
-    private static CategoryDto makeCategoryDto() {
-        return CategoryDto.builder()
+    private static CategoryResponse makeCategoryDto() {
+        return CategoryResponse.builder()
             .id(RANDOM_NUM.nextLong())
             .name(randomString(10))
             .build();
     }
 
-    private static ChannelDto makeChannel() {
-        return ChannelDto.builder()
+    private static ChannelResponse makeChannel() {
+        return ChannelResponse.builder()
             .id(RANDOM_NUM.nextLong())
             .name(randomString(10))
             .description(randomString(50))

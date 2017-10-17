@@ -1,5 +1,6 @@
 package me.javaroad.blog.mapper;
 
+import me.javaroad.blog.controller.api.response.UserResponse;
 import me.javaroad.blog.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -7,8 +8,8 @@ import org.mapstruct.factory.Mappers;
 /**
  * @author heyx
  */
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
     UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
-    User user(User user);
+    UserResponse mapEntityToResponse(User user);
 }

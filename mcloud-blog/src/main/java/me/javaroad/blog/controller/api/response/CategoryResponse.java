@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +14,12 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LabelDto {
+public class CategoryResponse implements Comparable<CategoryResponse> {
     private Long id;
     private String name;
-    private Boolean global;
+
+    @Override
+    public int compareTo(CategoryResponse o) {
+        return 0;
+    }
 }

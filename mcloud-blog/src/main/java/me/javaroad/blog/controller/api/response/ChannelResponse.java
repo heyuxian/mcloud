@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,7 +14,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ChannelDto {
+public class ChannelResponse {
     private Long id;
     private String name;
     private String description;

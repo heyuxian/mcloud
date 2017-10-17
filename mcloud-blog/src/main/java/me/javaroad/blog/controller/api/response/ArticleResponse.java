@@ -1,4 +1,4 @@
-package me.javaroad.blog.dto;
+package me.javaroad.blog.controller.api.response;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ArticleDto {
+public class ArticleResponse {
     private Long id;
     @NotBlank
     @Size(max = 100)
@@ -45,12 +45,12 @@ public class ArticleDto {
 
     @NotEmpty
     @Default
-    private Set<CategoryDto> categories = new LinkedHashSet<>();
+    private Set<CategoryResponse> categories = new LinkedHashSet<>();
     @NotEmpty
     @Default
-    private Set<LabelDto> labels = new HashSet<>();
+    private Set<LabelResponse> labels = new HashSet<>();
     @NotNull
-    private ChannelDto channel;
+    private ChannelResponse channel;
 
     private Date createDate;
     private Date modifiedDate;

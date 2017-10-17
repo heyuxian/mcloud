@@ -21,6 +21,4 @@ public class Label extends TemporalEntity {
     private String name;
     @ManyToMany(mappedBy = "labels")
     private Set<Article> articles = new TreeSet<>();
-    //是否是全局标签,global=false代表是用户自定义标签
-    private Boolean global;
 }

@@ -7,10 +7,10 @@ import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
 import java.util.stream.Collectors;
+import me.javaroad.blog.controller.api.response.ArticlePageResponse;
 import me.javaroad.blog.service.CategoryService;
-import me.javaroad.blog.dto.ArticlePageDto;
-import me.javaroad.blog.dto.ArticleSearchRequest;
-import me.javaroad.blog.dto.CategoryDto;
+import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
+import me.javaroad.blog.controller.api.response.CategoryResponse;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.entity.Category;
 import me.javaroad.blog.mapper.BlogMapper;
@@ -44,7 +44,7 @@ public class CategoryController {
 
     @ApiOperation(value = "获取所有分类", httpMethod = "GET")
     @GetMapping
-    public List<CategoryDto> getCategories() {
+    public List<CategoryResponse> getCategories() {
         List<Category> categories = categoryService.getAll();
         return categories.stream().map(mapper::categoryEntityToDto).collect(Collectors.toList());
     }
@@ -54,8 +54,9 @@ public class CategoryController {
         @ApiImplicitParam(name = "page", paramType = "query", dataType = "int"),
         @ApiImplicitParam(name = "size", paramType = "query", dataType = "int")
     })
+
     @GetMapping("{categoryId}/articles")
-    public Page<ArticlePageDto> getCategoryArticles(@PathVariable String username,
+    public Page<ArticlePageResponse> getCategoryArticles(@PathVariable String username,
         @PathVariable Long categoryId, @PageableDefault Pageable pageable) {
 
         Page<Article> articles = articleService.getArticlePage(

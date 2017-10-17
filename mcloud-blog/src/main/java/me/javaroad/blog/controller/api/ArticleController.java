@@ -5,12 +5,14 @@ import static me.javaroad.blog.controller.ApiConstants.API_VERSION;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import me.javaroad.blog.dto.ArticlePageDto;
-import me.javaroad.blog.mapper.BlogMapper;
-import me.javaroad.blog.service.ArticleService;
-import me.javaroad.blog.dto.ArticleDto;
-import me.javaroad.blog.dto.ArticleSearchRequest;
+import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
+import me.javaroad.blog.controller.api.response.ArticlePageResponse;
+import me.javaroad.blog.controller.api.response.ArticleResponse;
+import me.javaroad.blog.controller.api.response.CommentResponse;
 import me.javaroad.blog.entity.Article;
+import me.javaroad.blog.mapper.ArticleMapper;
+import me.javaroad.blog.mapper.CommentMapper;
+import me.javaroad.blog.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -27,20 +29,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(API_VERSION + "/articles")
 public class ArticleController {
 
-    private final BlogMapper mapper;
     private final ArticleService articleService;
+    private final ArticleMapper articleMapper;
+    private final CommentMapper commentMapper;
 
     @Autowired
-    public ArticleController(ArticleService articleService, BlogMapper mapper) {
+    public ArticleController(ArticleService articleService, ArticleMapper articleMapper,
+        CommentMapper commentMapper) {
         this.articleService = articleService;
-        this.mapper = mapper;
+        this.articleMapper = articleMapper;
+        this.commentMapper = commentMapper;
     }
 
     @ApiOperation(value = "根据ID获取Article", httpMethod = "GET")
     @GetMapping("{articleId}")
-    public ArticleDto getArticle(@PathVariable Long articleId) {
+    public ArticleResponse getArticle(@PathVariable Long articleId) {
         Article article = articleService.get(articleId);
-        return mapper.articleEntityToDto(article);
+        return articleMapper.mapEntityToResponse(article);
     }
 
     @ApiOperation(value = "分页获取文章", httpMethod = "GET")
@@ -49,11 +54,21 @@ public class ArticleController {
         @ApiImplicitParam(name = "size", paramType = "query", dataType = "int")
     })
     @GetMapping
-    public Page<ArticlePageDto> getArticles(@PageableDefault Pageable pageable) {
+    public Page<ArticlePageResponse> getArticles(@PageableDefault Pageable pageable) {
         Page<Article> articlePage = articleService.getArticlePage(
             ArticleSearchRequest.builder().build(),
             pageable);
-        return articlePage.map(mapper::articleEntityToPageDto);
+        return articlePage.map(articleMapper::mapEntityToPageResponse);
+    }
+
+    @ApiOperation(value = "分页获取文章评论", httpMethod = "GET")
+    @ApiImplicitParams({
+        @ApiImplicitParam(name = "page", paramType = "query", dataType = "int"),
+        @ApiImplicitParam(name = "size", paramType = "query", dataType = "int")
+    })
+    @GetMapping("{articleId}/comments")
+    public Page<CommentResponse> getArticleComments(@PathVariable Long articleId, @PageableDefault Pageable pageable) {
+        return null;
     }
 
 }
