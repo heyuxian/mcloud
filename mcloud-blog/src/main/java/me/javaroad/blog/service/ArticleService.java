@@ -1,10 +1,12 @@
 package me.javaroad.blog.service;
 
+import java.util.Objects;
 import me.javaroad.blog.controller.api.request.ArticleRequest;
 import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.mapper.BlogMapper;
 import me.javaroad.blog.repository.ArticleRepository;
+import me.javaroad.common.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -39,5 +41,14 @@ public class ArticleService {
     public Article create(ArticleRequest articleRequest) {
         Article article = blogMapper.articleRequestToEntity(articleRequest);
         return articleRepository.save(article);
+    }
+
+    @Transactional
+    public void delete(Long articleId) {
+        Article article = articleRepository.findOne(articleId);
+        if(Objects.isNull(article)) {
+            throw new DataNotFoundException("article[id=%s] not found", articleId);
+        }
+        articleRepository.delete(article);
     }
 }

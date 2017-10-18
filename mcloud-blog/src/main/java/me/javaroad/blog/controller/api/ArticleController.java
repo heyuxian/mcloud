@@ -10,9 +10,11 @@ import me.javaroad.blog.controller.api.response.ArticlePageResponse;
 import me.javaroad.blog.controller.api.response.ArticleResponse;
 import me.javaroad.blog.controller.api.response.CommentResponse;
 import me.javaroad.blog.entity.Article;
+import me.javaroad.blog.entity.Comment;
 import me.javaroad.blog.mapper.ArticleMapper;
 import me.javaroad.blog.mapper.CommentMapper;
 import me.javaroad.blog.service.ArticleService;
+import me.javaroad.blog.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,13 +34,15 @@ public class ArticleController {
     private final ArticleService articleService;
     private final ArticleMapper articleMapper;
     private final CommentMapper commentMapper;
+    private final CommentService commentService;
 
     @Autowired
     public ArticleController(ArticleService articleService, ArticleMapper articleMapper,
-        CommentMapper commentMapper) {
+        CommentMapper commentMapper, CommentService commentService) {
         this.articleService = articleService;
         this.articleMapper = articleMapper;
         this.commentMapper = commentMapper;
+        this.commentService = commentService;
     }
 
     @ApiOperation(value = "根据ID获取Article", httpMethod = "GET")
@@ -68,7 +72,8 @@ public class ArticleController {
     })
     @GetMapping("{articleId}/comments")
     public Page<CommentResponse> getArticleComments(@PathVariable Long articleId, @PageableDefault Pageable pageable) {
-        return null;
+        Page<Comment> commentPage = commentService.getCommentPage(articleId, pageable);
+        return commentPage.map(commentMapper::mapEntityToResponse);
     }
 
 }

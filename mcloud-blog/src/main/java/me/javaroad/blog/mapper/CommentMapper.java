@@ -17,4 +17,5 @@ public interface CommentMapper {
     Comment mapRequestToEntity(CommentRequest commentRequest);
 
     CommentResponse mapEntityToResponse(Comment comment);
+
 }
