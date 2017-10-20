@@ -98,8 +98,8 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git@github.com:heyuxian/common.git</connection>
-    <developerConnection>scm:git:git@github.com:heyuxian/common.git</developerConnection>
+    <connection>scm:git:git@github.com:heyuxian/mcloud-parent.git</connection>
+    <developerConnection>scm:git:git@github.com:heyuxian/mcloud-parent.git</developerConnection>
     <url>git@github.com:heyuxian/common.git</url>
   </scm>
 
