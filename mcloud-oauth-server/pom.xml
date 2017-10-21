@@ -13,8 +13,7 @@
   <parent>
     <groupId>me.javaroad</groupId>
     <artifactId>mcloud-parent</artifactId>
-    <version>1.0-SNAPSHOT</version>
-    <relativePath>../mcloud-parent</relativePath>
+    <version>1.0.1.RELEASE</version>
   </parent>
 
   <properties>
@@ -30,19 +29,19 @@
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-common</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.1.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-data</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.1.RELEASE</version>
     </dependency>
 
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-web</artifactId>
-      <version>1.0-SNAPSHOT</version>
+      <version>1.0.0.RELEASE</version>
     </dependency>
 
     <dependency>
