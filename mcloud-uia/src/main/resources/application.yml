@@ -1,9 +1,6 @@
 server:
   port: 8443
   context-path: /uia
-logging:
-  level:
-    org.springframework.security: DEBUG
 spring:
   thymeleaf:
     cache: false
@@ -18,5 +15,5 @@ oauth2:
       userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
 info:
   app:
-    name: MCloud-blog
+    name: MCloud-uia
     desc: http://javaroad.me
