@@ -14,7 +14,7 @@ mysql:
   password :
   encoding: utf8
 install:
-  - cd ../mcloud-blog
+  - cd ./mcloud-blog
   - mvn install -Dmaven.test.skip=true
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
