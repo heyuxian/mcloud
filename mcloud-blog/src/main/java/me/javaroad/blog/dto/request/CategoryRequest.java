@@ -1,4 +1,4 @@
-package me.javaroad.blog.controller.api.request;
+package me.javaroad.blog.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -8,6 +8,6 @@ import lombok.Setter;
  */
 @Getter
 @Setter
-public class CommentRequest {
+public class CategoryRequest {
 
 }

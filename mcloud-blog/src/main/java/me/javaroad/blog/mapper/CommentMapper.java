@@ -1,7 +1,7 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.controller.api.request.CommentRequest;
-import me.javaroad.blog.controller.api.response.CommentResponse;
+import me.javaroad.blog.dto.request.CommentRequest;
+import me.javaroad.blog.dto.response.CommentResponse;
 import me.javaroad.blog.entity.Comment;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

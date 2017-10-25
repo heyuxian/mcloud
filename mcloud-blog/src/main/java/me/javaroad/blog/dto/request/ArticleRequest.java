@@ -1,4 +1,4 @@
-package me.javaroad.blog.controller.api.request;
+package me.javaroad.blog.dto.request;
 
 import java.util.HashSet;
 import java.util.LinkedHashSet;

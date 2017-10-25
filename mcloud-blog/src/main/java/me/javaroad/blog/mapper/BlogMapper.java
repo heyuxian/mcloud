@@ -1,10 +1,10 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.controller.api.request.ArticleRequest;
-import me.javaroad.blog.controller.api.response.ArticleResponse;
-import me.javaroad.blog.controller.api.response.ArticlePageResponse;
-import me.javaroad.blog.controller.api.response.CategoryResponse;
-import me.javaroad.blog.controller.api.response.LabelResponse;
+import me.javaroad.blog.dto.request.ArticleRequest;
+import me.javaroad.blog.dto.response.ArticleResponse;
+import me.javaroad.blog.dto.response.ArticlePageResponse;
+import me.javaroad.blog.dto.response.CategoryResponse;
+import me.javaroad.blog.dto.response.LabelResponse;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.entity.Category;
 import me.javaroad.blog.entity.Label;

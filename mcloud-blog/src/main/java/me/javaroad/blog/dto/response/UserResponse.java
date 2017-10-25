@@ -1,4 +1,4 @@
-package me.javaroad.blog.controller.api.response;
+package me.javaroad.blog.dto.response;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,5 +9,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class UserResponse {
-
+    private Long id;
+    private String username;
 }

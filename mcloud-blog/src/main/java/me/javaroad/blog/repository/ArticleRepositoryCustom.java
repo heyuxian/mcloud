@@ -1,6 +1,6 @@
 package me.javaroad.blog.repository;
 
-import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
+import me.javaroad.blog.dto.request.ArticleSearchRequest;
 import me.javaroad.blog.entity.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

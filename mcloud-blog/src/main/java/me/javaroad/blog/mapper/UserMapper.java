@@ -1,6 +1,6 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.controller.api.response.UserResponse;
+import me.javaroad.blog.dto.response.UserResponse;
 import me.javaroad.blog.entity.User;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

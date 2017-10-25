@@ -1,7 +1,7 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.controller.api.request.LabelRequest;
-import me.javaroad.blog.controller.api.response.LabelResponse;
+import me.javaroad.blog.dto.request.LabelRequest;
+import me.javaroad.blog.dto.response.LabelResponse;
 import me.javaroad.blog.entity.Label;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

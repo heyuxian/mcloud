@@ -2,7 +2,7 @@ package me.javaroad.blog.mapper;
 
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import me.javaroad.blog.controller.api.response.ArticleResponse;
+import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.mapper.data.MockData;
 import me.javaroad.blog.entity.Article;
 import org.junit.Test;

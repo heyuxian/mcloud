@@ -1,8 +1,8 @@
 package me.javaroad.blog.mapper;
 
-import me.javaroad.blog.controller.api.request.ArticleRequest;
-import me.javaroad.blog.controller.api.response.ArticlePageResponse;
-import me.javaroad.blog.controller.api.response.ArticleResponse;
+import me.javaroad.blog.dto.request.ArticleRequest;
+import me.javaroad.blog.dto.response.ArticlePageResponse;
+import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.entity.Article;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;

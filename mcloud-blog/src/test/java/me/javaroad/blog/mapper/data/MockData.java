@@ -5,11 +5,11 @@ import java.util.Random;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
-import me.javaroad.blog.controller.api.response.CategoryResponse;
-import me.javaroad.blog.controller.api.response.LabelResponse;
+import me.javaroad.blog.dto.response.CategoryResponse;
+import me.javaroad.blog.dto.response.LabelResponse;
 import org.apache.commons.lang3.RandomStringUtils;
-import me.javaroad.blog.controller.api.response.ArticleResponse;
-import me.javaroad.blog.controller.api.response.ChannelResponse;
+import me.javaroad.blog.dto.response.ArticleResponse;
+import me.javaroad.blog.dto.response.ChannelResponse;
 
 /**
  * @author heyx

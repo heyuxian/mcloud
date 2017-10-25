@@ -1,8 +1,8 @@
 package me.javaroad.blog.service;
 
 import java.util.Objects;
-import me.javaroad.blog.controller.api.request.ArticleRequest;
-import me.javaroad.blog.controller.api.request.ArticleSearchRequest;
+import me.javaroad.blog.dto.request.ArticleRequest;
+import me.javaroad.blog.dto.request.ArticleSearchRequest;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.mapper.BlogMapper;
 import me.javaroad.blog.repository.ArticleRepository;
@@ -50,5 +50,9 @@ public class ArticleService {
             throw new DataNotFoundException("article[id=%s] not found", articleId);
         }
         articleRepository.delete(article);
+    }
+
+    Article getArticle(Long articleId) {
+        return articleRepository.findOne(articleId);
     }
 }
