@@ -3,8 +3,9 @@ package me.javaroad.blog.service;
 import java.util.Objects;
 import me.javaroad.blog.dto.request.ArticleRequest;
 import me.javaroad.blog.dto.request.ArticleSearchRequest;
+import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.entity.Article;
-import me.javaroad.blog.mapper.BlogMapper;
+import me.javaroad.blog.mapper.ArticleMapper;
 import me.javaroad.blog.repository.ArticleRepository;
 import me.javaroad.common.exception.DataNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +22,12 @@ import org.springframework.transaction.annotation.Transactional;
 public class ArticleService {
 
     private final ArticleRepository articleRepository;
-    private final BlogMapper blogMapper;
+    private final ArticleMapper articleMapper;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository, BlogMapper blogMapper) {
+    public ArticleService(ArticleRepository articleRepository, ArticleMapper articleMapper) {
         this.articleRepository = articleRepository;
-        this.blogMapper = blogMapper;
+        this.articleMapper = articleMapper;
     }
 
     public Page<Article> getArticlePage(ArticleSearchRequest searchRequest, Pageable pageable) {
@@ -38,9 +39,10 @@ public class ArticleService {
     }
 
     @Transactional
-    public Article create(ArticleRequest articleRequest) {
-        Article article = blogMapper.articleRequestToEntity(articleRequest);
-        return articleRepository.save(article);
+    public ArticleResponse create(ArticleRequest articleRequest) {
+        Article article = articleMapper.mapRequestToEntity(articleRequest);
+        article = articleRepository.save(article);
+        return articleMapper.mapEntityToResponse(article);
     }
 
     @Transactional
