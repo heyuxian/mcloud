@@ -1,6 +1,6 @@
 package me.javaroad.blog.controller.api;
 
-import static me.javaroad.blog.controller.ApiConstants.API_VERSION;
+import static me.javaroad.blog.controller.ApiConstants.API_PREFIX;
 
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(API_VERSION + "/users")
+@RequestMapping(API_PREFIX + "/users")
 public class UserController {
 
     private final ArticleService articleService;

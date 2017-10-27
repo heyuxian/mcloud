@@ -1,6 +1,6 @@
 package me.javaroad.blog.controller.api;
 
-import static me.javaroad.blog.controller.ApiConstants.API_VERSION;
+import static me.javaroad.blog.controller.ApiConstants.API_PREFIX;
 
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author heyx
  */
 @RestController
-@RequestMapping(API_VERSION + "/articles")
+@RequestMapping(API_PREFIX + "/articles")
 public class ArticleController {
 
     private final ArticleService articleService;

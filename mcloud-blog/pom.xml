@@ -102,6 +102,18 @@
         </dependencies>
       </plugin>
 
+      <plugin>
+        <groupId>org.flywaydb</groupId>
+        <artifactId>flyway-maven-plugin</artifactId>
+        <version>4.2.0</version>
+        <configuration>
+          <user>root</user>
+          <password>root</password>
+          <driver>com.mysql.jdbc.Driver</driver>
+          <url>jdbc:mysql://localhost:3306/flyway</url>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 </project>
