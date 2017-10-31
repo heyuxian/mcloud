@@ -2,26 +2,22 @@ package me.javaroad.blog.controller.api;
 
 import static me.javaroad.blog.controller.ApiConstants.API_PREFIX;
 
-import io.swagger.annotations.ApiImplicitParam;
-import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import java.util.List;
-import java.util.stream.Collectors;
-import me.javaroad.blog.dto.response.ArticlePageResponse;
-import me.javaroad.blog.service.CategoryService;
-import me.javaroad.blog.dto.request.ArticleSearchRequest;
+import javax.validation.Valid;
+import me.javaroad.blog.dto.request.CategoryRequest;
 import me.javaroad.blog.dto.response.CategoryResponse;
-import me.javaroad.blog.entity.Article;
-import me.javaroad.blog.entity.Category;
-import me.javaroad.blog.mapper.BlogMapper;
-import me.javaroad.blog.service.ArticleService;
+import me.javaroad.blog.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -32,37 +28,43 @@ import org.springframework.web.bind.annotation.RestController;
 public class CategoryController {
 
     private final CategoryService categoryService;
-    private final ArticleService articleService;
-    private final BlogMapper mapper;
 
     @Autowired
-    public CategoryController(CategoryService categoryService, BlogMapper mapper, ArticleService articleService) {
+    public CategoryController(CategoryService categoryService) {
         this.categoryService = categoryService;
-        this.mapper = mapper;
-        this.articleService = articleService;
     }
 
-    @ApiOperation(value = "获取所有分类", httpMethod = "GET")
+    @ApiOperation(value = "Get all categories", httpMethod = "GET")
     @GetMapping
     public List<CategoryResponse> getCategories() {
-        List<Category> categories = categoryService.getAll();
-        return categories.stream().map(mapper::categoryEntityToDto).collect(Collectors.toList());
+        return categoryService.getAll();
     }
 
-    @ApiOperation(value = "获取分类下面的所有文章", httpMethod = "GET")
-    @ApiImplicitParams({
-        @ApiImplicitParam(name = "page", paramType = "query", dataType = "int"),
-        @ApiImplicitParam(name = "size", paramType = "query", dataType = "int")
-    })
+    @ApiOperation(value = "Get category by ID", httpMethod = "GET")
+    @GetMapping("{categoryId}")
+    public CategoryResponse getCategory(@PathVariable Long categoryId) {
+        return categoryService.getResponse(categoryId);
+    }
 
-    @GetMapping("{categoryId}/articles")
-    public Page<ArticlePageResponse> getCategoryArticles(@PathVariable String username,
-        @PathVariable Long categoryId, @PageableDefault Pageable pageable) {
+    @ApiOperation(value = "Create category", httpMethod = "POST")
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public CategoryResponse createCategory(@RequestBody @Valid CategoryRequest categoryRequest) {
+        return categoryService.create(categoryRequest);
+    }
 
-        Page<Article> articles = articleService.getArticlePage(
-            ArticleSearchRequest.builder().username(username).categoryId(categoryId).build(),
-            pageable);
-        return articles.map(mapper::articleEntityToPageDto);
+    @ApiOperation(value = "Modify category", httpMethod = "PUT")
+    @PutMapping("{categoryId}")
+    public CategoryResponse modifyCategory(@PathVariable Long categoryId,
+        @RequestBody @Valid CategoryRequest categoryRequest) {
+        return categoryService.modify(categoryId, categoryRequest);
+    }
+
+    @ApiOperation(value = "Delete category", httpMethod = "DELETE")
+    @DeleteMapping("{categoryId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteCategory(@PathVariable Long categoryId) {
+        categoryService.delete(categoryId);
     }
 
 }
