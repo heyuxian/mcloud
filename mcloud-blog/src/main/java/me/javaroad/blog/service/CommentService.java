@@ -34,14 +34,16 @@ public class CommentService {
         this.articleService = articleService;
     }
 
-    public Page<Comment> getCommentPage(Long articleId, Pageable pageable) {
-        return commentRepository.findByArticleId(articleId, pageable);
+    public Page<CommentResponse> getCommentPage(Long articleId, Pageable pageable) {
+        Page<Comment> commentPage = commentRepository.findByArticleId(articleId, pageable);
+        return commentPage.map(commentMapper::mapEntityToResponse);
     }
 
+    @Transactional
     public CommentResponse create(Long articleId, Long userId, CommentRequest commentRequest) {
         Comment comment = commentMapper.mapRequestToEntity(commentRequest);
-        User user = userService.getUser(userId);
-        Article article = articleService.getArticle(articleId);
+        User user = userService.getNotNullEntity(userId);
+        Article article = articleService.getNotNullEntity(articleId);
         comment.setAuthor(user);
         comment.setArticle(article);
         comment = commentRepository.save(comment);

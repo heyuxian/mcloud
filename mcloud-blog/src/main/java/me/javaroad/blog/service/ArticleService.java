@@ -3,6 +3,7 @@ package me.javaroad.blog.service;
 import java.util.Objects;
 import me.javaroad.blog.dto.request.ArticleRequest;
 import me.javaroad.blog.dto.request.ArticleSearchRequest;
+import me.javaroad.blog.dto.response.ArticlePageResponse;
 import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.entity.Article;
 import me.javaroad.blog.mapper.ArticleMapper;
@@ -30,12 +31,26 @@ public class ArticleService {
         this.articleMapper = articleMapper;
     }
 
-    public Page<Article> getArticlePage(ArticleSearchRequest searchRequest, Pageable pageable) {
-        return articleRepository.findBySearchRequest(searchRequest, pageable);
+    public Page<ArticlePageResponse> getArticlePage(ArticleSearchRequest searchRequest, Pageable pageable) {
+        Page<Article> articlePage = articleRepository.findBySearchRequest(searchRequest, pageable);
+        return articlePage.map(articleMapper::mapEntityToPageResponse);
     }
 
-    public Article get(Long articleId) {
+    public ArticleResponse getResponse(Long articleId) {
+        Article article = getNotNullEntity(articleId);
+        return articleMapper.mapEntityToResponse(article);
+    }
+
+    Article getEntity(Long articleId) {
         return articleRepository.findOne(articleId);
+    }
+
+    Article getNotNullEntity(Long articleId) {
+        Article article = getEntity(articleId);
+        if(Objects.isNull(article)) {
+            throw new DataNotFoundException("article[id=%s] not found", articleId);
+        }
+        return article;
     }
 
     @Transactional
@@ -54,7 +69,4 @@ public class ArticleService {
         articleRepository.delete(article);
     }
 
-    Article getArticle(Long articleId) {
-        return articleRepository.findOne(articleId);
-    }
 }

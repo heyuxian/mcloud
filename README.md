@@ -105,6 +105,10 @@ mvn spring-boot:run
 ```
 访问地址: http://localhost:8081/swagger-ui.html 
 
+## 代码生成器
+
+目前项目已经支持 `Intellij plugin` 的方式进行基础代码的生成，具体请看 [Code Generator](https://github.com/heyuxian/code-generator).
+
 ## 问题及建议
 
 若是对于本项目有任何问题或建议,可以在github上提Issue,如果是码云，可以直接发表评论,提Issue或是直接给我发私信.同时,如果你愿意参与开发,欢迎提PR.

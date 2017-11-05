@@ -34,8 +34,8 @@ public class CurrentUserArgumentResolver implements HandlerMethodArgumentResolve
     public Object resolveArgument(MethodParameter parameter, ModelAndViewContainer mavContainer,
         NativeWebRequest webRequest, WebDataBinderFactory binderFactory) throws Exception {
         String username = (String) SecurityContextHolder.getContext().getAuthentication() .getPrincipal();
-        // TODO get User Info from OAuth2 Server
-        UserResponse userResponse = userService.get(username);
+        // TODO getResponse User Info from OAuth2 Server
+        UserResponse userResponse = userService.getResponse(username);
         if(Objects.isNull(userResponse)) {
             throw new UnauthorizedException("unauthorized");
         }

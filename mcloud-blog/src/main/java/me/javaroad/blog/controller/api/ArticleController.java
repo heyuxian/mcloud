@@ -5,18 +5,14 @@ import static me.javaroad.blog.controller.ApiConstants.API_PREFIX;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import java.security.Principal;
 import javax.validation.Valid;
+import me.javaroad.blog.config.CurrentUser;
 import me.javaroad.blog.dto.request.ArticleSearchRequest;
 import me.javaroad.blog.dto.request.CommentRequest;
 import me.javaroad.blog.dto.response.ArticlePageResponse;
 import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.dto.response.CommentResponse;
-import me.javaroad.blog.dto.response.UserResponse;
-import me.javaroad.blog.entity.Article;
-import me.javaroad.blog.entity.Comment;
-import me.javaroad.blog.mapper.ArticleMapper;
-import me.javaroad.blog.mapper.CommentMapper;
+import me.javaroad.blog.entity.User;
 import me.javaroad.blog.service.ArticleService;
 import me.javaroad.blog.service.CommentService;
 import me.javaroad.blog.service.UserService;
@@ -41,17 +37,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class ArticleController {
 
     private final ArticleService articleService;
-    private final ArticleMapper articleMapper;
-    private final CommentMapper commentMapper;
     private final CommentService commentService;
     private final UserService userService;
 
     @Autowired
-    public ArticleController(ArticleService articleService, ArticleMapper articleMapper,
-        CommentMapper commentMapper, CommentService commentService, UserService userService) {
+    public ArticleController(ArticleService articleService,
+        CommentService commentService, UserService userService) {
         this.articleService = articleService;
-        this.articleMapper = articleMapper;
-        this.commentMapper = commentMapper;
         this.commentService = commentService;
         this.userService = userService;
     }
@@ -59,8 +51,7 @@ public class ArticleController {
     @ApiOperation(value = "根据ID获取Article", httpMethod = "GET")
     @GetMapping("{articleId}")
     public ArticleResponse getArticle(@PathVariable Long articleId) {
-        Article article = articleService.get(articleId);
-        return articleMapper.mapEntityToResponse(article);
+        return articleService.getResponse(articleId);
     }
 
     @ApiOperation(value = "分页获取文章", httpMethod = "GET")
@@ -70,10 +61,9 @@ public class ArticleController {
     })
     @GetMapping
     public Page<ArticlePageResponse> getArticles(@PageableDefault Pageable pageable) {
-        Page<Article> articlePage = articleService.getArticlePage(
+        return articleService.getArticlePage(
             ArticleSearchRequest.builder().build(),
             pageable);
-        return articlePage.map(articleMapper::mapEntityToPageResponse);
     }
 
     @ApiOperation(value = "分页获取文章评论", httpMethod = "GET")
@@ -83,18 +73,16 @@ public class ArticleController {
     })
     @GetMapping("{articleId}/comments")
     public Page<CommentResponse> getArticleComments(@PathVariable Long articleId, @PageableDefault Pageable pageable) {
-        Page<Comment> commentPage = commentService.getCommentPage(articleId, pageable);
-        return commentPage.map(commentMapper::mapEntityToResponse);
+        return commentService.getCommentPage(articleId, pageable);
     }
 
     @ApiOperation(value = "发表评论", httpMethod = "POST")
     @PostMapping("{articleId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void createArticleComment(@PathVariable Long articleId,
-        @Valid @RequestBody CommentRequest commentRequest, Principal principal) {
+        @Valid @RequestBody CommentRequest commentRequest, @CurrentUser User user) {
 
-        UserResponse userResponse = userService.get(principal.getName());
-        commentService.create(articleId, userResponse.getId(), commentRequest);
+        commentService.create(articleId, user.getId(), commentRequest);
     }
 
 }
