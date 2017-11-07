@@ -12,9 +12,9 @@ import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 @EnableEurekaClient
 @SpringBootApplication
 @EnableConfigurationProperties(OAuthProvider.class)
-public class UIAApplication {
+public class UIAServer {
 
     public static void main(String[] args) {
-        SpringApplication.run(UIAApplication.class, args);
+        SpringApplication.run(UIAServer.class, args);
     }
 }
