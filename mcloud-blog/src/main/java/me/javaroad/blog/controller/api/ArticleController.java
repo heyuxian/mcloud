@@ -12,10 +12,9 @@ import me.javaroad.blog.dto.request.CommentRequest;
 import me.javaroad.blog.dto.response.ArticlePageResponse;
 import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.dto.response.CommentResponse;
-import me.javaroad.blog.entity.User;
+import me.javaroad.blog.dto.response.UserResponse;
 import me.javaroad.blog.service.ArticleService;
 import me.javaroad.blog.service.CommentService;
-import me.javaroad.blog.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -38,14 +37,11 @@ public class ArticleController {
 
     private final ArticleService articleService;
     private final CommentService commentService;
-    private final UserService userService;
 
     @Autowired
-    public ArticleController(ArticleService articleService,
-        CommentService commentService, UserService userService) {
+    public ArticleController(ArticleService articleService, CommentService commentService) {
         this.articleService = articleService;
         this.commentService = commentService;
-        this.userService = userService;
     }
 
     @ApiOperation(value = "根据ID获取Article", httpMethod = "GET")
@@ -80,7 +76,7 @@ public class ArticleController {
     @PostMapping("{articleId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void createArticleComment(@PathVariable Long articleId,
-        @Valid @RequestBody CommentRequest commentRequest, @CurrentUser User user) {
+        @Valid @RequestBody CommentRequest commentRequest, @CurrentUser UserResponse user) {
 
         commentService.create(articleId, user.getId(), commentRequest);
     }

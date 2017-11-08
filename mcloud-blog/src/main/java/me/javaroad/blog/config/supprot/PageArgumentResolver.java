@@ -1,4 +1,4 @@
-package me.javaroad.blog.config;
+package me.javaroad.blog.config.supprot;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Value;

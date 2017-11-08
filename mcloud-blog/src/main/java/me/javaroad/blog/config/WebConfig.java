@@ -1,6 +1,8 @@
 package me.javaroad.blog.config;
 
 import java.util.List;
+import me.javaroad.blog.config.supprot.CurrentUserArgumentResolver;
+import me.javaroad.blog.config.supprot.PageArgumentResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

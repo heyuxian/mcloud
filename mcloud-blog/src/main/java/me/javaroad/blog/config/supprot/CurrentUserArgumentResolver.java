@@ -1,6 +1,7 @@
-package me.javaroad.blog.config;
+package me.javaroad.blog.config.supprot;
 
 import java.util.Objects;
+import me.javaroad.blog.config.CurrentUser;
 import me.javaroad.blog.dto.response.UserResponse;
 import me.javaroad.blog.service.UserService;
 import me.javaroad.common.exception.UnauthorizedException;
