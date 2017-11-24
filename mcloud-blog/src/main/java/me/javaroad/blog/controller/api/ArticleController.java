@@ -6,15 +6,14 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import javax.validation.Valid;
-import me.javaroad.blog.config.CurrentUser;
 import me.javaroad.blog.dto.request.ArticleSearchRequest;
 import me.javaroad.blog.dto.request.CommentRequest;
 import me.javaroad.blog.dto.response.ArticlePageResponse;
 import me.javaroad.blog.dto.response.ArticleResponse;
 import me.javaroad.blog.dto.response.CommentResponse;
-import me.javaroad.blog.dto.response.UserResponse;
 import me.javaroad.blog.service.ArticleService;
 import me.javaroad.blog.service.CommentService;
+import me.javaroad.web.bind.annotation.CurrentUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -76,9 +75,9 @@ public class ArticleController {
     @PostMapping("{articleId}/comments")
     @ResponseStatus(HttpStatus.CREATED)
     public void createArticleComment(@PathVariable Long articleId,
-        @Valid @RequestBody CommentRequest commentRequest, @CurrentUser UserResponse user) {
+        @Valid @RequestBody CommentRequest commentRequest, @CurrentUser String username) {
 
-        commentService.create(articleId, user.getId(), commentRequest);
+        //commentService.create(articleId, username, commentRequest);
     }
 
 }

@@ -22,11 +22,6 @@ spring:
     show-sql: true
 security:
   oauth2:
-    client:
-      accessTokenUri: http://localhost:8043/uaa/oauth/token
-      userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
-      clientId: mcloud-blog
-      clientSecret: 123456
     resource:
       jwt:
         keyValue: |
@@ -44,7 +39,6 @@ eureka:
     fetchRegistry: true
     serviceUrl:
       defaultZone: http://${eureka.instance.hostname}:8761/eureka/
-info:
-  app:
-    name: MCloud-blog
-    desc: http://javaroad.me
+swagger:
+  title: MCloud-blog
+  description: http://javaroad.me
