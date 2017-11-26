@@ -1,11 +1,11 @@
 server:
   port: 80
 logging:
-  path: D:\logs\black-c
+  path: D:\logs\mcloud-blog
   level: error
 spring:
   datasource:
-    url: jdbc:mysql://localhost/blackc
+    url: jdbc:mysql://localhost/db_blog
     username: root
     password:
     driver-class-name: com.mysql.jdbc.Driver
@@ -18,11 +18,6 @@ spring:
     open-in-view: false
 security:
   oauth2:
-    client:
-      accessTokenUri: http://localhost:8043/uaa/oauth/token
-      userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
-      clientId: mcloud-blog
-      clientSecret: 123456
     resource:
       id: blog
       jwt:

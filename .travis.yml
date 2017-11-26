@@ -9,7 +9,7 @@ services:
 jdk:
   - oraclejdk8
 mysql:
-  database: blackc
+  database: db_blog
   username: root
   password :
   encoding: utf8
@@ -17,7 +17,7 @@ install:
   - cd ./mcloud-blog
   - mvn install -Dmaven.test.skip=true
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog;'
 script:
   - mvn test -DactiveProfile=ci
 notifications:
