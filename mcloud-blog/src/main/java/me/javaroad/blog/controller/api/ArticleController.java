@@ -76,8 +76,7 @@ public class ArticleController {
     @ResponseStatus(HttpStatus.CREATED)
     public void createArticleComment(@PathVariable Long articleId,
         @Valid @RequestBody CommentRequest commentRequest, @CurrentUser String username) {
-
-        //commentService.create(articleId, username, commentRequest);
+        commentService.create(articleId, username, commentRequest);
     }
 
 }

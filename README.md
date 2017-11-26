@@ -25,10 +25,9 @@ UI界面:
 ## 环境依赖
 
 - **JDK** 1.8 以上
-
 - **IDE** 请安装对应IDE的**lombok**插件
-
 - **数据库** 使用flywaydb进行数据库脚本的版本管理，需执行flywaydb的相关maven命令
+- **代码生成器** [Code Generator](https://github.com/heyuxian/code-generator)
 
 
 ## 快速使用

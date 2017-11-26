@@ -40,9 +40,9 @@ public class CommentService {
     }
 
     @Transactional
-    public CommentResponse create(Long articleId, Long userId, CommentRequest commentRequest) {
+    public CommentResponse create(Long articleId, String username, CommentRequest commentRequest) {
         Comment comment = commentMapper.mapRequestToEntity(commentRequest);
-        User user = userService.getNotNullEntity(userId);
+        User user = userService.getEntity(username);
         Article article = articleService.getNotNullEntity(articleId);
         comment.setAuthor(user);
         comment.setArticle(article);
