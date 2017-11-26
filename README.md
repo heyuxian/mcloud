@@ -1,22 +1,25 @@
-# MCloud - 微服务开发实践
+# MCloud - 微服务基础设施
 [![Build Status](https://www.travis-ci.org/heyuxian/mcloud.svg?branch=master)](https://www.travis-ci.org/heyuxian/mcloud)
 
 ## 项目简介
 
-MCloud 是基于Spring Cloud实现的简单微服务系统。提供了微服务开发中常用的模块：
+MCloud 是基于Spring Cloud，提供了项目中常用的基础设施：
 
-- mcloud-eureka 服务注册与发现中心
-- [mcloud-oauth-server](https://github.com/heyuxian/mcloud-oauth2-server) 基于Spring OAuth2实现的OAuth认证服务端
-- mcloud-uia 实现用户统一登录，通过简单的配置即可实现第三方登录
-- mcloud-apigw 基于Spring cloud zuul 实现的api网关 
-- mcloud-config 统一配置中心 (暂未实现)
-- mcloud-blog 使用前后端分离的方式开发的Java博客，前端UI地址: [mcloud-ui](https://github.com/heyuxian/mcloud-ui)
+- **mcloud-eureka** 服务注册与发现中心
+- [**mcloud-oauth-server**](https://github.com/heyuxian/mcloud-oauth2-server) 基于Spring OAuth2实现的OAuth2认证服务端
+- **mcloud-uia** API 统一登录中心
+- **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 
+- **mcloud-config** 统一配置中心
+- **mcloud-file-storage** 文件存储中心
+- **mcloud-logs** 日志收集与分析中心
+- **mcloud-blog** Demo Project
 
 其他模块：
 
 - [mcloud-parent](https://github.com/heyuxian/mcloud-parent) maven 公用依赖
 - [mcloud-common](https://github.com/heyuxian/mcloud-common) 项目公用工具类
-- [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据库操作相关
+- [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据存储相关
+- [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件
 
 UI界面:
 
@@ -27,7 +30,6 @@ UI界面:
 - **JDK** 1.8 以上
 - **IDE** 请安装对应IDE的**lombok**插件
 - **数据库** 使用flywaydb进行数据库脚本的版本管理，需执行flywaydb的相关maven命令
-- **代码生成器** [Code Generator](https://github.com/heyuxian/code-generator)
 
 
 ## 快速使用
