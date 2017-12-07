@@ -3,27 +3,29 @@
 
 ## 项目简介
 
-MCloud 是基于Spring Cloud，提供了项目中常用的基础设施：
+MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施：
 
-- **mcloud-eureka** 服务注册与发现中心
-- [**mcloud-oauth-server**](https://github.com/heyuxian/mcloud-oauth2-server) 基于Spring OAuth2实现的OAuth2认证服务端
-- **mcloud-uia** API 统一登录中心
-- **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 
-- **mcloud-config** 统一配置中心
-- **mcloud-file-storage** 文件存储中心
-- **mcloud-logs** 日志收集与分析中心
+- **mcloud-eureka** 服务注册与发现中心。
+- [**mcloud-oauth-server**](https://github.com/heyuxian/mcloud-oauth2-server) 基于Spring OAuth2实现的OAuth2认证服务端，其它服务需要依赖此服务进行认证。
+- **mcloud-uia** API 统一登录中心。
+- **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 。
+- **mcloud-config** 统一配置中心。
+- **mcloud-file-storage** 文件存储中心。
+- **mcloud-logs** 基于 `Kafka` 以及 `ElasticSearch` 实现服务的日志分析。
 - **mcloud-blog** Demo Project
 
 其他模块：
 
-- [mcloud-parent](https://github.com/heyuxian/mcloud-parent) maven 公用依赖
-- [mcloud-common](https://github.com/heyuxian/mcloud-common) 项目公用工具类
-- [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据存储相关
-- [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件
+- [mcloud-parent](https://github.com/heyuxian/mcloud-parent) maven 公用依赖。
+- [mcloud-common](https://github.com/heyuxian/mcloud-common) 项目公用工具类。
+- [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据存储相关。
+- [mcloud-web](https://github.com/heyuxian/mcloud-web) web相关依赖及公共类。
+- [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件。
 
 UI界面:
 
-- [mcloud-ui](https://github.com/heyuxian/mcloud-ui) 基于[CoPilot](https://github.com/misterGF/CoPilot) ，使用 vue+node所开发的博客前端系统
+- 基于 [AdminBSBMaterialDesign](https://github.com/gurayyarar/AdminBSBMaterialDesign) ，使用 `thymeleaf` 实现的后台管理界面。
+- [mcloud-blog-ui](https://github.com/heyuxian/mcloud-blog-ui) 基于[CoPilot](https://github.com/misterGF/CoPilot) ，使用 `node` + `vue`实现的博客前端。 
 
 ## 环境依赖
 
@@ -41,7 +43,7 @@ git clone https://github.com/heyuxian/mcloud.git
 cd 项目目录/mcloud
 ```
 
-**初始化数据库**
+**创建数据库**
 
 使用mysql客户端或其它你喜欢的工具创建数据库(默认数据库名称为db_blog):
 
@@ -49,7 +51,7 @@ cd 项目目录/mcloud
 CREATE DATABASE IF NOT EXISTS db_blog DEFAULT CHARSET utf8 COLLATE utf8_general_ci;  
 ```
 
-修改flywaydb 插件参数：
+**使用 flywaydb 初始化数据库**
 
 - mcloud-blog/pom.xml
 
@@ -106,13 +108,9 @@ mvn spring-boot:run
 ```
 访问地址: http://localhost:8081/swagger-ui.html 
 
-## 代码生成器
-
-目前项目已经支持 `Intellij plugin` 的方式进行基础代码的生成，具体请看 [Code Generator](https://github.com/heyuxian/code-generator).
-
 ## 问题及建议
 
-若是对于本项目有任何问题或建议,可以在github上提Issue,如果是码云，可以直接发表评论,提Issue或是直接给我发私信.同时,如果你愿意参与开发,欢迎提PR.
+若是对于本项目有任何问题或建议,请提[Issue](https://github.com/heyuxian/mcloud/issues/new)。同时,如果你愿意参与开发,欢迎提PR.
 
 ## License
 
