@@ -1,6 +1,6 @@
 # MCloud - 微服务基础设施
 [![Build Status](https://www.travis-ci.org/heyuxian/mcloud.svg?branch=master)](https://www.travis-ci.org/heyuxian/mcloud)
-
+[![Coverage Status](https://coveralls.io/repos/github/heyuxian/mcloud/badge.svg?branch=master)](https://coveralls.io/github/heyuxian/mcloud?branch=master)
 ## 项目简介
 
 MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施：
