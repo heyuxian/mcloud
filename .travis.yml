@@ -20,6 +20,8 @@ before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog;'
 script:
   - mvn test -DactiveProfile=ci
+after_success:
+  - mvn test -DactiveProfile=ci jacoco:report coveralls:report
 notifications:
   email:
     - heyuxian.me@gmail.com
