@@ -5,7 +5,7 @@
   <parent>
     <groupId>me.javaroad</groupId>
     <artifactId>mcloud-parent</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.4.RELEASE</version>
   </parent>
 
   <artifactId>mcloud-blog</artifactId>
@@ -15,22 +15,18 @@
   <name>mcloud-blog</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-  </properties>
   <dependencies>
 
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-common</artifactId>
-      <version>1.0.1.RELEASE</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-data</artifactId>
-      <version>1.0.1.RELEASE</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -54,13 +50,13 @@
       <artifactId>mapstruct-jdk8</artifactId>
       <version>${org.mapstruct.version}</version>
     </dependency>
-
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-processor</artifactId>
       <version>${org.mapstruct.version}</version>
       <scope>provided</scope>
     </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
@@ -72,9 +68,14 @@
     <plugins>
 
       <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <plugin>
         <groupId>com.mysema.maven</groupId>
         <artifactId>apt-maven-plugin</artifactId>
-        <version>1.1.3</version>
+        <version>${apt-maven-plugin.version}</version>
         <executions>
           <execution>
             <goals>
@@ -98,7 +99,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>4.2.0</version>
+        <version>${flyway-maven-plugin.version}</version>
         <configuration>
           <user>root</user>
           <password>root</password>

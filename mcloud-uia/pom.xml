@@ -13,16 +13,12 @@
   <parent>
     <groupId>me.javaroad</groupId>
     <artifactId>mcloud-parent</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.4.RELEASE</version>
   </parent>
 
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
     <thymeleaf.version>3.0.6.RELEASE</thymeleaf.version>
     <thymeleafspringsecurity4.version>3.0.2.RELEASE</thymeleafspringsecurity4.version>
-    <org.mapstruct.version>1.1.0.Final</org.mapstruct.version>
-    <hibernate.version>5.2.10.Final</hibernate.version>
   </properties>
 
   <dependencies>
@@ -30,7 +26,7 @@
     <dependency>
       <groupId>me.javaroad</groupId>
       <artifactId>mcloud-common</artifactId>
-      <version>1.0.1.RELEASE</version>
+      <version>1.0.2-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -100,12 +96,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
       </plugin>
-
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
-      </plugin>
     </plugins>
   </build>
+
 </project>

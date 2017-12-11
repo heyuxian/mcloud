@@ -13,13 +13,8 @@
   <parent>
     <groupId>me.javaroad</groupId>
     <artifactId>mcloud-parent</artifactId>
-    <version>1.0.3.RELEASE</version>
+    <version>1.0.2.RELEASE</version>
   </parent>
-
-  <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <java.version>1.8</java.version>
-  </properties>
 
   <dependencies>
 
