@@ -10,6 +10,7 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **mcloud-uia** API 统一登录中心。
 - **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 。
 - **mcloud-config** 统一配置中心。
+- **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
 - **mcloud-file-storage** 文件存储中心。
 - **mcloud-logs** 基于 `Kafka` 以及 `ElasticSearch` 实现服务的日志分析。
 - **mcloud-blog** Demo Project
