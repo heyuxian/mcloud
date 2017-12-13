@@ -1,15 +1,15 @@
 server:
   port: 8761
+# 禁用 livereload,否则在同一台机器上启动多个服务时会有端口占用问题
+#spring:
+#  devtools:
+#    livereload:
+#      enabled: false
 eureka:
   instance:
-    hostname: discovery
+    app-name: mcloud-eureka
+    leaseRenewalIntervalInSeconds: 10
   client:
-    registerWithEureka: false
-    fetchRegistry: false
+    registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
-# 禁用 livereload,否则在同一台机器上启动多个服务时会有端口占用问题
-spring:
-  devtools:
-    livereload:
-      enabled: false
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/

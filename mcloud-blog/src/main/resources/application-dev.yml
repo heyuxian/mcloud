@@ -4,9 +4,8 @@ server:
 logging:
   level:
     org.springframework.security: DEBUG
+
 spring:
-  application:
-    name: blog
   datasource:
     url: jdbc:mysql://localhost/db_blog
     username: root
@@ -20,6 +19,7 @@ spring:
         format_sql: true
     open-in-view: false
     show-sql: true
+
 security:
   oauth2:
     resource:
@@ -30,15 +30,28 @@ security:
           -----END PUBLIC KEY-----
       id: blog
       serviceId: ${PREFIX:}resource
+
 eureka:
   instance:
     preferIpAddress: true
-    hostname: localhost
+    leaseRenewalIntervalInSeconds: 10
+    appname: mcloud-blog
+    statusPageUrlPath: ${server.context-path}${management.context-path}/info
+    healthCheckUrlPath: ${server.context-path}${management.context-path}/health
+    metadata-map:
+      management:
+        context-path: ${server.context-path}${management.context-path}
   client:
+    registryFetchIntervalSeconds: 5
     registerWithEureka: true
     fetchRegistry: true
     serviceUrl:
-      defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+      defaultZone: http://localhost:8761/eureka/
+management:
+  context-path: /monitoring
+  security:
+    enabled: false
+
 swagger:
   title: MCloud-blog
   description: http://javaroad.me

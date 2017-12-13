@@ -4,15 +4,33 @@ server:
 spring:
   thymeleaf:
     cache: false
-  application:
-    name: uia
 oauth2:
   provider:
     mcloud:
-      clientId: mcloud-blog
+      clientId: mcloud-user
       clientSecret: 123456
       accessTokenUri: http://localhost:8043/uaa/oauth/token
       userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 10
+    appname: mcloud-uia
+    statusPageUrlPath: ${server.context-path}${management.context-path}/info
+    healthCheckUrlPath: ${server.context-path}${management.context-path}/health
+    metadata-map:
+      management:
+        context-path: ${server.context-path}${management.context-path}
+  client:
+    registryFetchIntervalSeconds: 5
+    registerWithEureka: true
+    fetchRegistry: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+management:
+  context-path: /monitoring
+  security:
+    enabled: false
+
 info:
   app:
     name: MCloud-uia
