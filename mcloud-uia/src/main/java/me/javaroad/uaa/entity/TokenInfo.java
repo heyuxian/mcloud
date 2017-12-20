@@ -16,10 +16,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class TokenInfo {
+
     @JsonProperty("access_token")
     private String accessToken;
-    @JsonProperty("refresh_token")
-    private String refresh_token;
+    @JsonProperty("refreshToken")
+    private String refreshToken;
     @JsonProperty("expires_in")
     private Long expiresIn;
     private String scope;

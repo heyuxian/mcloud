@@ -21,16 +21,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class LoginController {
 
     private final OAuthProvider provider;
-    private final OAuthApi oAuthApi;
+    private final OAuthApi oauthapi;
 
     @Autowired
-    public LoginController(OAuthProvider provider, OAuthApi oAuthApi) {
+    public LoginController(OAuthProvider provider, OAuthApi oauthapi) {
         this.provider = provider;
-        this.oAuthApi = oAuthApi;
+        this.oauthapi = oauthapi;
     }
 
     @GetMapping("login")
-    public String login(String redirectUrl, @RequestParam(defaultValue = "mcloud") String oauthProvider, HttpServletRequest request) {
+    public String login(String redirectUrl, @RequestParam(defaultValue = "mcloud") String oauthProvider,
+        HttpServletRequest request) {
         OAuthServerInfo serverInfo = provider.getProvider().get(oauthProvider);
         if (Objects.isNull(serverInfo)) {
             throw new InvalidParameterException("invalid oauthProvider");
@@ -45,7 +46,7 @@ public class LoginController {
         if (Objects.isNull(serverInfo)) {
             throw new InvalidParameterException("invalid oauthProvider");
         }
-        TokenInfo token = oAuthApi.token(serverInfo, code);
+        TokenInfo token = oauthapi.token(serverInfo, code);
 
         return "redirect:" + state + "#/login/success?token=" + token.getAccessToken();
     }

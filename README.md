@@ -12,7 +12,8 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **mcloud-config** 统一配置中心。
 - **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
 - **mcloud-file-storage** 文件存储中心。
-- **mcloud-logs** 基于 `Kafka` 以及 `ElasticSearch` 实现服务的日志分析。
+- **mcloud-search** 基于 `ElasticSearch` 全文检索服务
+- **mcloud-logs** 基于`logstash`  `Kafka` 以及 `ElasticSearch` 实现的日志服务。
 - **mcloud-blog** Demo Project
 
 其他模块：
@@ -32,86 +33,22 @@ UI界面:
 
 - **JDK** 1.8 以上
 - **IDE** 请安装对应IDE的**lombok**插件
-- **数据库** 使用flywaydb进行数据库脚本的版本管理，需执行flywaydb的相关maven命令
+- **数据库** Mysql 5.5 及以上
+- **缓存** Redis
+- **消息中间件** Kafka, RabbitMQ （暂未实现）
+- **全文检索** ElasticSearch （暂未实现）
+- **其他** Zookeeper （暂未实现）
 
 
-## 快速使用
+## 系统结构
 
-**下载项目**
+![1](https://user-images.githubusercontent.com/30259465/34211439-0d4f035c-e5d4-11e7-8c46-ba5c7ffd65d0.png)
 
-```
-git clone https://github.com/heyuxian/mcloud.git
-cd 项目目录/mcloud
-```
 
-**创建数据库**
-
-使用mysql客户端或其它你喜欢的工具创建数据库(默认数据库名称为db_blog):
-
-```shell
-CREATE DATABASE IF NOT EXISTS db_blog DEFAULT CHARSET utf8 COLLATE utf8_general_ci;  
-```
-
-**使用 flywaydb 初始化数据库**
-
-- mcloud-blog/pom.xml
-
-```xml
-<plugin>
-  <groupId>org.flywaydb</groupId>
-  <artifactId>flyway-maven-plugin</artifactId>
-  <version>4.2.0</version>
-  <configuration>
-    <user>root</user>
-    <password>root</password>
-    <driver>com.mysql.jdbc.Driver</driver>
-    <url>jdbc:mysql://localhost:3306/db_blog</url>
-  </configuration>
-</plugin>
-```
-
-修改Spring 配置文件中的数据库用户名及密码:
-
-- mcloud-blog: application-dev.yml
-
-执行flywaydb相关命令初始化数据库：
-
-```shell
-mvn flyway:clean flyway:migrate
-```
-
-**启动OAuth Server:**   [详细配置](https://github.com/heyuxian/mcloud-oauth2-server)
-
-```
-git clone https://github.com/heyuxian/mcloud-oauth2-server
-mvn clean install
-mvn flyway:clean flyway:migrate
-mvn spring-boot:run
-```
-
-访问地址: http://localhost:8043/uaa/swagger-ui.html
-
-**启动认证中心:**  [详细配置](mcloud-uia/README.md)
-
-```
-cd mcloud-uia
-mvn clean install
-mvn spring-boot:run
-```
-访问地址: http://localhost:8443/uia/swagger-ui.html 
-
-**启动博客服务:** [详细配置](mcloud-blog/README.md)
-
-```
-cd mcloud-blog
-mvn clean install
-mvn spring-boot:run
-```
-访问地址: http://localhost:8081/swagger-ui.html 
 
 ## 问题及建议
 
-若是对于本项目有任何问题或建议,请提[Issue](https://github.com/heyuxian/mcloud/issues/new)。同时,如果你愿意参与开发,欢迎提PR.
+若是对于本项目有任何问题或建议,请提[Issue](https://github.com/heyuxian/mcloud/issues/new 。
 
 ## License
 

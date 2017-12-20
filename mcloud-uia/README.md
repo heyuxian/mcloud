@@ -26,7 +26,7 @@ mvn spring-boot:run
 
 **预置用户**
 
-- 用户名：user
+- 用户名：mcloud-user
 - 密码：123456
 
 通过swagger调用登录接口即可获取 access_token 供其他服务使用.
