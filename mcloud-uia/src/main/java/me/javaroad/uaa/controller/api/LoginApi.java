@@ -21,12 +21,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class LoginApi {
 
-    private final OAuthApi oAuthApi;
+    private final OAuthApi oauthapi;
     private final OAuthProvider provider;
 
     @Autowired
-    public LoginApi(OAuthApi oAuthApi, OAuthProvider provider) {
-        this.oAuthApi = oAuthApi;
+    public LoginApi(OAuthApi oauthapi, OAuthProvider provider) {
+        this.oauthapi = oauthapi;
         this.provider = provider;
     }
 
@@ -37,7 +37,7 @@ public class LoginApi {
         if (Objects.isNull(serverInfo)) {
             throw new InvalidParameterException("invalid oauthProvider");
         }
-        return oAuthApi.token(serverInfo, loginRequest);
+        return oauthapi.token(serverInfo, loginRequest);
     }
 
     @PostMapping("register")

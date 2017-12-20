@@ -35,6 +35,10 @@ public class UserService {
         return userRepository.findOne(userId);
     }
 
+    User getEntity(String username) {
+        return userRepository.findByUsername(username);
+    }
+
     User getNotNullEntity(Long userId) {
         User user = getEntity(userId);
         if (Objects.isNull(user)) {
@@ -43,7 +47,4 @@ public class UserService {
         return user;
     }
 
-    User getEntity(String username) {
-        return userRepository.findByUsername(username);
-    }
 }

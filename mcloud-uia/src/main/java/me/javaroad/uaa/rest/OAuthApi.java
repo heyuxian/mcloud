@@ -40,7 +40,7 @@ public class OAuthApi {
     private TokenInfo getTokenInfo(OAuthServerInfo serverInfo, String accessTokenUrl) {
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add("Authorization", serverInfo.buildBasicAuthString());
-        try{
+        try {
             ResponseEntity<TokenInfo> responseEntity = restTemplate
                 .exchange(accessTokenUrl,
                     HttpMethod.POST,
