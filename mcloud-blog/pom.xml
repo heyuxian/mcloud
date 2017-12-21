@@ -111,7 +111,7 @@
           <user>root</user>
           <password>root</password>
           <driver>com.mysql.jdbc.Driver</driver>
-          <url>jdbc:mysql://localhost:3306/flyway</url>
+          <url>jdbc:mysql://localhost:3306/db_blog</url>
         </configuration>
       </plugin>
 
