@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Appenders>
+    <Console name="Console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    </Console>
+    <Kafka name="Kafka" topic="mcloud-log">
+      <PatternLayout pattern="%date %message"/>
+      <Property name="bootstrap.servers">localhost:9092</Property>
+    </Kafka>
+    <Async name="AsyncKafka">
+      <AppenderRef ref="Kafka"/>
+    </Async>
+  </Appenders>
+  <Loggers>
+    <Root level="DEBUG">
+      <AppenderRef ref="Console"/>
+      <AppenderRef ref="AsyncKafka"/>
+    </Root>
+    <Logger name="org.apache.kafka" level="INFO" />
+  </Loggers>
+</Configuration>
