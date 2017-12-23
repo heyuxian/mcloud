@@ -8,11 +8,14 @@
       <PatternLayout pattern="%date %message"/>
       <Property name="bootstrap.servers">localhost:9092</Property>
     </Kafka>
+    <Async name="AsyncKafka">
+      <AppenderRef ref="Kafka"/>
+    </Async>
   </Appenders>
   <Loggers>
-    <Root level="debug">
+    <Root level="DEBUG">
       <AppenderRef ref="Console"/>
-      <AppenderRef ref="Kafka"/>
+      <AppenderRef ref="AsyncKafka"/>
     </Root>
     <Logger name="org.apache.kafka" level="INFO" />
   </Loggers>

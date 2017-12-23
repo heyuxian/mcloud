@@ -5,6 +5,8 @@ cache:
   - $HOME/.m2
 services:
   - mysql
+  - zookeeper
+  - kafka
 
 jdk:
   - oraclejdk8
