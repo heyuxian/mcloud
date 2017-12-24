@@ -1,10 +1,10 @@
 package me.javaroad.blog.config;
 
 import me.javaroad.data.config.JpaAuditingConfig;
-import me.javaroad.web.config.DefaultResourceServerConfig;
-import me.javaroad.web.config.DefaultSwaggerConfig;
-import me.javaroad.web.config.DefaultWebConfig;
-import me.javaroad.web.exception.DefaultExceptionHandler;
+import me.javaroad.web.config.SimpleResourceServerConfig;
+import me.javaroad.web.config.SimpleSwaggerConfig;
+import me.javaroad.web.config.SimpleWebConfig;
+import me.javaroad.web.exception.AuthcExceptionHandler;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -13,10 +13,10 @@ import org.springframework.context.annotation.Import;
  */
 @Import({
     JpaAuditingConfig.class,
-    DefaultExceptionHandler.class,
-    DefaultWebConfig.class,
-    DefaultResourceServerConfig.class,
-    DefaultSwaggerConfig.class
+    AuthcExceptionHandler.class,
+    SimpleWebConfig.class,
+    SimpleResourceServerConfig.class,
+    SimpleSwaggerConfig.class
 })
 @Configuration
 public class AppConfig {
