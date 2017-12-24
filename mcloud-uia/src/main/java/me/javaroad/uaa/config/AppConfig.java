@@ -1,7 +1,6 @@
 package me.javaroad.uaa.config;
 
-import me.javaroad.web.config.Swagger2Config;
-import me.javaroad.web.exception.DefaultExceptionHandler;
+import me.javaroad.web.config.SimpleSwaggerConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
@@ -9,8 +8,7 @@ import org.springframework.context.annotation.Import;
  * @author heyx
  */
 @Import({
-    Swagger2Config.class,
-    DefaultExceptionHandler.class
+    SimpleSwaggerConfig.class
 })
 @Configuration
 public class AppConfig {
