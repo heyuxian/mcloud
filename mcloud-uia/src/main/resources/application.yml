@@ -7,7 +7,7 @@ spring:
 oauth2:
   provider:
     mcloud:
-      clientId: mcloud-user
+      clientId: mcloud-blog
       clientSecret: 123456
       accessTokenUri: http://localhost:8043/uaa/oauth/token
       userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
@@ -29,6 +29,10 @@ eureka:
 management:
   context-path: /monitoring
   security:
+    enabled: false
+
+security:
+  basic:
     enabled: false
 
 info:
