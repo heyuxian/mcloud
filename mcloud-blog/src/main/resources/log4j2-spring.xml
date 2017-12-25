@@ -1,22 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+
+  <Properties>
+    <Property name="pattern" value="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+  </Properties>
+
   <Appenders>
     <Console name="Console" target="SYSTEM_OUT">
-      <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+      <PatternLayout pattern="${pattern}"/>
     </Console>
-    <Kafka name="Kafka" topic="mcloud-log">
-      <PatternLayout pattern="%date %message"/>
-      <Property name="bootstrap.servers">localhost:9092</Property>
-    </Kafka>
-    <Async name="AsyncKafka">
-      <AppenderRef ref="Kafka"/>
+
+    <RollingFile name="RollingFile" fileName="D:/logs/blog.log"
+      filePattern="D:/logs/$${date:yyyy-MM}/blog-%d{MM-dd-yyyy}-%i.log.gz">
+      <PatternLayout pattern="${pattern}"/>
+      <Policies>
+        <TimeBasedTriggeringPolicy />
+        <SizeBasedTriggeringPolicy size="250 MB"/>
+      </Policies>
+    </RollingFile>
+    <Async name="AsyncRollingFile">
+      <AppenderRef ref="RollingFile"/>
     </Async>
+
   </Appenders>
   <Loggers>
     <Root level="DEBUG">
       <AppenderRef ref="Console"/>
-      <AppenderRef ref="AsyncKafka"/>
+      <AppenderRef ref="AsyncRollingFile"/>
     </Root>
-    <Logger name="org.apache.kafka" level="INFO" />
   </Loggers>
+
 </Configuration>
