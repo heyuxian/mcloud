@@ -2,7 +2,9 @@
 <Configuration status="WARN">
 
   <Properties>
-    <Property name="pattern" value="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+    <Property name="appName" value="mcloud-blog"/>
+    <Property name="baseLogDir" value="D:/logs"/>
+    <Property name="pattern" value="%d{HH:mm:ss.SSS} [%t] %-5level %c{1.} - %msg%n"/>
   </Properties>
 
   <Appenders>
@@ -10,11 +12,11 @@
       <PatternLayout pattern="${pattern}"/>
     </Console>
 
-    <RollingFile name="RollingFile" fileName="D:/logs/blog.log"
-      filePattern="D:/logs/$${date:yyyy-MM}/blog-%d{MM-dd-yyyy}-%i.log.gz">
+    <RollingFile name="RollingFile" fileName="${baseLogDir}/${appName}.log"
+      filePattern="${baseLogDir}/$${date:yyyy-MM}/${appName}-%d{yyyy-MM-dd}-%i.log.gz">
       <PatternLayout pattern="${pattern}"/>
       <Policies>
-        <TimeBasedTriggeringPolicy />
+        <TimeBasedTriggeringPolicy/>
         <SizeBasedTriggeringPolicy size="250 MB"/>
       </Policies>
     </RollingFile>
