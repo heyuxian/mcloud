@@ -19,7 +19,7 @@ install:
   - cd ./mcloud-blog
   - mvn clean install -Dmaven.test.skip=true
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog_test;'
 script:
   - mvn test -DactiveProfile=ci
 after_success:
