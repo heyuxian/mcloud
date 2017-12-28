@@ -15,6 +15,11 @@
   <name>mcloud-blog</name>
   <url>http://maven.apache.org</url>
 
+  <properties>
+    <!--TODO move this properties to parent when the next release-->
+    <flyway.version>4.2.0</flyway.version>
+  </properties>
+
   <dependencies>
 
     <dependency>
@@ -60,6 +65,13 @@
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-autoconfigure</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>org.flywaydb.flyway-test-extensions</groupId>
+      <artifactId>flyway-spring-test</artifactId>
+      <version>${flyway.version}</version>
+      <scope>test</scope>
     </dependency>
 
   </dependencies>

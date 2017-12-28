@@ -7,7 +7,7 @@ jdk:
   - oraclejdk8
 
 mysql:
-  database: blackc
+  database: db_blog_test
   username: root
   password :
   encoding: utf8
@@ -16,7 +16,7 @@ install:
   - mvn install -Dmaven.test.skip=true
 
 before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS blackc;'
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog_test;'
 
 script:
   - mvn test -DactiveProfile=ci
