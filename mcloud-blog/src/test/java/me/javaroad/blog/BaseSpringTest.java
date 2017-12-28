@@ -10,7 +10,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  * @author heyx
  */
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
-@ActiveProfiles("${activeProfile:dev}")
+@ActiveProfiles("${activeProfile:test}")
 @RunWith(SpringRunner.class)
 public abstract class BaseSpringTest {
 }
