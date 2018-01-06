@@ -10,9 +10,9 @@
   <url>http://maven.apache.org</url>
 
   <parent>
-    <groupId>me.javaroad</groupId>
+    <groupId>me.javaroad.mcloud</groupId>
     <artifactId>mcloud-parent</artifactId>
-    <version>1.0.4.RELEASE</version>
+    <version>1.0.0-SNAPSHOT</version>
   </parent>
 
   <dependencies>
