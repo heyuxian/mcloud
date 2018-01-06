@@ -2,12 +2,6 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>me.javaroad</groupId>
-    <artifactId>mcloud-parent</artifactId>
-    <version>1.0.4.RELEASE</version>
-  </parent>
-
   <artifactId>mcloud-blog</artifactId>
   <version>1.0.0-SNAPSHOT</version>
   <packaging>jar</packaging>
@@ -15,29 +9,30 @@
   <name>mcloud-blog</name>
   <url>http://maven.apache.org</url>
 
-  <properties>
-    <!--TODO move this properties to parent when the next release-->
-    <flyway.version>4.2.0</flyway.version>
-  </properties>
+  <parent>
+    <groupId>me.javaroad.mcloud</groupId>
+    <artifactId>mcloud-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
 
   <dependencies>
 
     <dependency>
       <groupId>me.javaroad</groupId>
-      <artifactId>mcloud-common</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <artifactId>javaroad-common</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
       <groupId>me.javaroad</groupId>
-      <artifactId>mcloud-data</artifactId>
-      <version>1.0.2-SNAPSHOT</version>
+      <artifactId>javaroad-data</artifactId>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
-      <groupId>me.javaroad</groupId>
+      <groupId>me.javaroad.mcloud</groupId>
       <artifactId>mcloud-web</artifactId>
-      <version>1.0.1-SNAPSHOT</version>
+      <version>1.0-SNAPSHOT</version>
     </dependency>
 
     <dependency>
@@ -52,14 +47,11 @@
 
     <dependency>
       <groupId>org.mapstruct</groupId>
-      <artifactId>mapstruct-jdk8</artifactId>
-      <version>${org.mapstruct.version}</version>
+      <artifactId>mapstruct</artifactId>
     </dependency>
     <dependency>
       <groupId>org.mapstruct</groupId>
       <artifactId>mapstruct-processor</artifactId>
-      <version>${org.mapstruct.version}</version>
-      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -67,6 +59,13 @@
       <artifactId>spring-boot-autoconfigure</artifactId>
     </dependency>
 
+    <!--test-->
+    <dependency>
+      <groupId>me.javaroad</groupId>
+      <artifactId>javaroad-test</artifactId>
+      <version>1.0-SNAPSHOT</version>
+      <scope>test</scope>
+    </dependency>
     <dependency>
       <groupId>org.flywaydb.flyway-test-extensions</groupId>
       <artifactId>flyway-spring-test</artifactId>
@@ -94,7 +93,7 @@
       <plugin>
         <groupId>com.mysema.maven</groupId>
         <artifactId>apt-maven-plugin</artifactId>
-        <version>${apt-maven-plugin.version}</version>
+        <version>${apt-maven.version}</version>
         <executions>
           <execution>
             <goals>
@@ -118,7 +117,7 @@
       <plugin>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-maven-plugin</artifactId>
-        <version>${flyway-maven-plugin.version}</version>
+        <version>${flyway.version}</version>
         <configuration>
           <user>root</user>
           <password>root</password>
