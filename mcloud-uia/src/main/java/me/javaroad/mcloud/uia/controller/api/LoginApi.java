@@ -1,50 +1,45 @@
 package me.javaroad.mcloud.uia.controller.api;
 
 import io.swagger.annotations.ApiOperation;
-import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.validation.Valid;
-import me.javaroad.common.exception.InvalidParameterException;
-import me.javaroad.mcloud.uia.config.OAuthProvider;
-import me.javaroad.mcloud.uia.entity.TokenInfo;
-import me.javaroad.mcloud.uia.controller.api.request.LoginRequest;
-import me.javaroad.mcloud.uia.controller.api.request.RegisterRequest;
-import me.javaroad.mcloud.uia.entity.OAuthServerInfo;
-import me.javaroad.mcloud.uia.rest.OAuthApi;
+import me.javaroad.mcloud.uia.dto.request.LoginRequest;
+import me.javaroad.mcloud.uia.dto.response.LoginResponse;
+import me.javaroad.mcloud.uia.entity.AccessToken;
+import me.javaroad.mcloud.uia.rest.OAuth2HttpRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
  * @author heyx
  */
 @RestController
+@RequestMapping("api/login")
 public class LoginApi {
 
-    private final OAuthApi oauthapi;
-    private final OAuthProvider provider;
-
     @Autowired
-    public LoginApi(OAuthApi oauthapi, OAuthProvider provider) {
-        this.oauthapi = oauthapi;
-        this.provider = provider;
-    }
+    private OAuth2HttpRequest oauth2HttpRequest;
+    @Autowired
+    private TokenStore tokenStore;
 
-    @ApiOperation(value = "Login", httpMethod = "POST")
-    @PostMapping("login")
-    public TokenInfo login(@RequestBody @Valid LoginRequest loginRequest) {
-        OAuthServerInfo serverInfo = provider.getProvider().get("mcloud");
-        if (Objects.isNull(serverInfo)) {
-            throw new InvalidParameterException("invalid oauthProvider");
-        }
-        return oauthapi.token(serverInfo, loginRequest);
-    }
+    @ApiOperation(value = "login", httpMethod = "POST")
+    @PostMapping
+    public LoginResponse login(@RequestBody @Valid LoginRequest loginRequest) {
+        AccessToken accessToken = oauth2HttpRequest.token(loginRequest.getUsername(), loginRequest.getPassword());
+        Authentication authentication = tokenStore.readAuthentication(accessToken.getAccessToken());
 
-    @PostMapping("register")
-    public void register(@RequestBody @Valid RegisterRequest loginRequest) {
-        OAuthServerInfo serverInfo = provider.getProvider().get("mcloud");
-        if (Objects.isNull(serverInfo)) {
-            throw new InvalidParameterException("invalid oauthProvider");
-        }
+        return LoginResponse.builder()
+            .accessToken(accessToken.getAccessToken())
+            .authority(
+                authentication.getAuthorities().stream()
+                    .map(GrantedAuthority::getAuthority)
+                    .collect(Collectors.toList()))
+            .build();
     }
 }

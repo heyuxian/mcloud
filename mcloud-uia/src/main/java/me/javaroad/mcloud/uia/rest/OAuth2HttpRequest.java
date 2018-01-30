@@ -1,9 +1,9 @@
 package me.javaroad.mcloud.uia.rest;
 
+import lombok.RequiredArgsConstructor;
 import me.javaroad.common.exception.UnauthorizedException;
-import me.javaroad.mcloud.uia.controller.api.request.LoginRequest;
-import me.javaroad.mcloud.uia.entity.OAuthServerInfo;
-import me.javaroad.mcloud.uia.entity.TokenInfo;
+import me.javaroad.mcloud.uia.config.OAuth2Property;
+import me.javaroad.mcloud.uia.entity.AccessToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -18,34 +18,22 @@ import org.springframework.web.client.RestTemplate;
  * @author heyx
  */
 @Component
-public class OAuthApi {
+@RequiredArgsConstructor(onConstructor = @__(@Autowired))
+public class OAuth2HttpRequest {
 
     private final RestTemplate restTemplate;
+    private final OAuth2Property oauth2Property;
 
-    @Autowired
-    public OAuthApi(RestTemplate restTemplate) {
-        this.restTemplate = restTemplate;
-    }
-
-    public TokenInfo token(OAuthServerInfo serverInfo, LoginRequest loginRequest) {
-        String accessTokenUrl = serverInfo.buildAccessTokenUrl(loginRequest.getUsername(), loginRequest.getPassword());
-        return getTokenInfo(serverInfo, accessTokenUrl);
-    }
-
-    public TokenInfo token(OAuthServerInfo serverInfo, String code) {
-        String accessTokenUrl = serverInfo.buildAccessTokenUrl(code);
-        return getTokenInfo(serverInfo, accessTokenUrl);
-    }
-
-    private TokenInfo getTokenInfo(OAuthServerInfo serverInfo, String accessTokenUrl) {
+    public AccessToken token(String username, String password) {
+        String accessTokenUrl = oauth2Property.buildAccessTokenUrl(username, password);
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", serverInfo.buildBasicAuthString());
+        httpHeaders.add("Authorization", oauth2Property.buildBasicAuthString());
         try {
-            ResponseEntity<TokenInfo> responseEntity = restTemplate
+            ResponseEntity<AccessToken> responseEntity = restTemplate
                 .exchange(accessTokenUrl,
                     HttpMethod.POST,
                     new HttpEntity<>(httpHeaders),
-                    TokenInfo.class);
+                    AccessToken.class);
             if (responseEntity.getStatusCode().equals(HttpStatus.OK)) {
                 return responseEntity.getBody();
             }

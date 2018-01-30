@@ -1,54 +1,40 @@
 package me.javaroad.mcloud.uia.controller.web;
 
-import java.util.Objects;
-import javax.servlet.http.HttpServletRequest;
-import me.javaroad.common.exception.InvalidParameterException;
-import me.javaroad.mcloud.uia.config.OAuthProvider;
-import me.javaroad.mcloud.uia.entity.OAuthServerInfo;
-import me.javaroad.mcloud.uia.entity.TokenInfo;
-import me.javaroad.mcloud.uia.rest.OAuthApi;
+import me.javaroad.mcloud.uia.config.OAuth2Property;
+import me.javaroad.mcloud.uia.entity.State;
+import me.javaroad.mcloud.uia.util.StateUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * @author heyx
  */
 @Controller
-@RequestMapping("oauth")
 public class LoginController {
 
-    private final OAuthProvider provider;
-    private final OAuthApi oauthapi;
-
     @Autowired
-    public LoginController(OAuthProvider provider, OAuthApi oauthapi) {
-        this.provider = provider;
-        this.oauthapi = oauthapi;
+    private OAuth2Property oauth2Property;
+
+    @GetMapping("oauth2/login")
+    public String login(String redirectUri) {
+        State state = State.builder()
+            .redirectUri(redirectUri)
+            .nonce(RandomStringUtils.randomAlphabetic(16))
+            .build();
+
+        String stateStr = StateUtils.encode(state);
+        String authUrl = oauth2Property.buildAuthUrl(stateStr);
+        return "redirect:" + authUrl;
     }
 
-    @GetMapping("login")
-    public String login(String redirectUrl, @RequestParam(defaultValue = "mcloud") String oauthProvider,
-        HttpServletRequest request) {
-        OAuthServerInfo serverInfo = provider.getProvider().get(oauthProvider);
-        if (Objects.isNull(serverInfo)) {
-            throw new InvalidParameterException("invalid oauthProvider");
-        }
-        String authorizationUri = serverInfo.buildAuthorizationUrl(redirectUrl);
-        return "redirect:" + authorizationUri;
-    }
-
-    @GetMapping("callback")
-    public String callback(String code, String state, @RequestParam(defaultValue = "mcloud") String oauthProvider) {
-        OAuthServerInfo serverInfo = provider.getProvider().get(oauthProvider);
-        if (Objects.isNull(serverInfo)) {
-            throw new InvalidParameterException("invalid oauthProvider");
-        }
-        TokenInfo token = oauthapi.token(serverInfo, code);
-
-        return "redirect:" + state + "#/login/success?token=" + token.getAccessToken();
+    @GetMapping("oauth2/callback")
+    public String callback(String code, String state) {
+        State decode = StateUtils.decode(state);
+        Assert.notNull(decode, "invalid state");
+        return "redirect:" + decode.getRedirectUri() + "?code=" + code;
     }
 
 }
