@@ -12,8 +12,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApiConfig {
 
     @Bean
-    public RestTemplate restTemplate() {
-        RestTemplate restTemplate = new RestTemplateBuilder().build();
-        return restTemplate;
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
     }
 }

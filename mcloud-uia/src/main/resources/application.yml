@@ -4,13 +4,25 @@ server:
 spring:
   thymeleaf:
     cache: false
-oauth2:
-  provider:
-    mcloud:
+mcloud:
+  oauth2:
+    client:
       clientId: mcloud-blog
       clientSecret: 123456
-      accessTokenUri: http://localhost:8043/uaa/oauth/token
-      userAuthorizationUri: http://localhost:8043/uaa/oauth/authorize
+      callback-uri: http://localhost:8443/uia/oauth2/callback
+    server:
+      accessTokenUri: http://mcloud-oauth-server:8043/uaa/oauth/token
+      userAuthorizationUri: http://mcloud-oauth-server:8043/uaa/oauth/authorize
+
+security:
+  basic:
+    enabled: false
+  oauth2:
+    resource:
+      id: uia
+      jwt:
+        key-uri: http://mcloud-oauth-server:8043/uaa/oauth/token_key
+
 eureka:
   instance:
     leaseRenewalIntervalInSeconds: 10
@@ -29,10 +41,6 @@ eureka:
 management:
   context-path: /monitoring
   security:
-    enabled: false
-
-security:
-  basic:
     enabled: false
 
 info:

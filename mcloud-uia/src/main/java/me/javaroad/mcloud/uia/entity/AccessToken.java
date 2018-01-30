@@ -15,7 +15,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class TokenInfo {
+public class AccessToken {
 
     @JsonProperty("access_token")
     private String accessToken;

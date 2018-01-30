@@ -1,4 +1,4 @@
-package me.javaroad.mcloud.uia.controller.api.request;
+package me.javaroad.mcloud.uia.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +9,7 @@ import org.hibernate.validator.constraints.NotBlank;
  */
 @Getter
 @Setter
-public class RegisterRequest {
+public class LoginRequest {
     @NotBlank
     private String username;
     @NotBlank
