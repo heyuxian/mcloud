@@ -34,7 +34,6 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **缓存** Redis
 - **消息中间件** Kafka, RabbitMQ （暂未实现）
 - **全文检索** ElasticSearch （暂未实现）
-- **其他** Zookeeper （暂未实现）
 
 
 > **注：** 因为项目拆分为很多独立的模块，且模块大多为 `snapshot` 版本，如果直接运行 `mvn clean install` 会出现找不到依赖的情况，此时可在本地 maven pom 文件中，添加 `snapshot` 的 `repository`
