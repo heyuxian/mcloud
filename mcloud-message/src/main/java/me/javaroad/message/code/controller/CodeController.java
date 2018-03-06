@@ -19,6 +19,7 @@ public class CodeController {
 
     @PostMapping
     public void sendCode(@RequestBody SendCodeRequest sendCodeRequest) {
+
         throw new MessageException(MessageError.INVALID_CODE);
     }
 }
