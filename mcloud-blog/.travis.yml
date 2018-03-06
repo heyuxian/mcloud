@@ -13,15 +13,15 @@ mysql:
   encoding: utf8
 
 install:
-  - mvn install -Dmaven.test.skip=true
+  - mvn install -Dmaven.test.skip=true -s ./.m2/settings.xml
 
 before_script:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog_test;'
 
 script:
-  - mvn test -DactiveProfile=ci
+  - mvn test -DactiveProfile=ci -s ./.m2/settings.xml
 after_success:
-  - mvn clean test -DactiveProfile=ci jacoco:report coveralls:report
+  - mvn clean test -DactiveProfile=ci jacoco:report coveralls:report -s ./.m2/settings.xml
 notifications:
   email:
     - heyuxian.me@gmail.com
