@@ -15,7 +15,7 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
 - **mcloud-file-storage** 文件存储中心。
 - **mcloud-search** 基于 `ElasticSearch` 全文检索服务
-- **mcloud-logs** 基于`logstash`  `Kafka` 以及 `ElasticSearch` 实现的日志服务。
+- **mcloud-logs** 基于`logstash`  `Kibana` 以及 `ElasticSearch` 实现的日志服务。
 - **mcloud-blog** Demo Project
 
 其他模块：
@@ -25,11 +25,6 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据存储相关。
 - [mcloud-web](https://github.com/heyuxian/mcloud-web) web相关依赖及公共类。
 - [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件。
-
-UI界面:
-
-- 基于 [AdminBSBMaterialDesign](https://github.com/gurayyarar/AdminBSBMaterialDesign) ，使用 `thymeleaf` 实现的后台管理界面。
-- [mcloud-blog-ui](https://github.com/heyuxian/mcloud-blog-ui) 基于[CoPilot](https://github.com/misterGF/CoPilot) ，使用 `node` + `vue`实现的博客前端。 
 
 ## 环境依赖
 
@@ -42,7 +37,21 @@ UI界面:
 - **其他** Zookeeper （暂未实现）
 
 
-## 系统结构
+> **注：** 因为项目拆分为很多独立的模块，且模块大多为 `snapshot` 版本，如果直接运行 `mvn clean install` 会出现找不到依赖的情况，此时可在本地 maven pom 文件中，添加 `snapshot` 的 `repository`
+
+```xml
+<repositories>
+  <repository>
+      <snapshots />
+      <id>sonatype snapshots</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+  </repository>
+</repositories>
+```
+
+
+
+系统结构
 
 ![1](https://user-images.githubusercontent.com/30259465/34211439-0d4f035c-e5d4-11e7-8c46-ba5c7ffd65d0.png)
 
