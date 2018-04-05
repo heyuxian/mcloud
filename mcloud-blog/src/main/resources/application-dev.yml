@@ -21,13 +21,26 @@ spring:
         format_sql: true
     open-in-view: false
     show-sql: true
+  messages:
+    basename: i18n/messages
 
 security:
-  oauth2:
-    resource:
-      id: blog
-      jwt:
-        key-uri: http://mcloud-oauth-server:8043/uaa/oauth/token_key
+    basic:
+        enabled: false
+    oauth2:
+        client:
+            access-token-uri: http://localhost:9080/auth/realms/mcloud/protocol/openid-connect/token
+            user-authorization-uri: http://localhost:9080/auth/realms/mcloud/protocol/openid-connect/auth
+            client-id: mcloud-blog
+            client-secret: mcloud-blog
+            client-authentication-scheme: form
+            scope: openid profile email
+        resource:
+            user-info-uri: http://localhost:9080/auth/realms/mcloud/protocol/openid-connect/userinfo
+            token-info-uri: http://localhost:9080/auth/realms/mcloud/protocol/openid-connect/token/introspect
+            prefer-token-info: false
+            jwt:
+                key-uri: http://localhost:9080/auth/realms/mcloud
 
 management:
   context-path: /monitoring
