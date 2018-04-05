@@ -115,10 +115,10 @@ public class OAuth2SecurityConfiguration extends ResourceServerConfigurerAdapter
     }
 
     private String getKeyFromAuthorizationServer() {
-        return Optional.ofNullable(
+        return Optional.ofNullable(resourceServerProperties.getJwt().getKeyUri()).map(uri ->
             new RestTemplate()
                 .exchange(
-                    resourceServerProperties.getJwt().getKeyUri(),
+                    uri,
                     HttpMethod.GET,
                     new HttpEntity<Void>(new HttpHeaders()),
                     Map.class
