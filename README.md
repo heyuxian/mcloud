@@ -31,10 +31,6 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **JDK** 1.8 以上
 - **IDE** 请安装对应IDE的**lombok**插件
 - **数据库** Mysql 5.5 及以上
-- **缓存** Redis
-- **消息中间件** Kafka, RabbitMQ （暂未实现）
-- **全文检索** ElasticSearch （暂未实现）
-- **其他** Zookeeper （暂未实现）
 
 
 ## Quick Start
