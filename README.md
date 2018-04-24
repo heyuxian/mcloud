@@ -1,30 +1,30 @@
 # MCloud - 微服务基础设施
 [![Build Status](https://www.travis-ci.org/heyuxian/mcloud.svg?branch=master)](https://www.travis-ci.org/heyuxian/mcloud)
-[![Coverage Status](https://coveralls.io/repos/github/heyuxian/mcloud/badge.svg?branch=master)](https://coveralls.io/github/heyuxian/mcloud?branch=master)
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Coverage Status](https://coveralls.io/repos/github/heyuxian/mcloud/badge.svg?branch=master)](https://coveralls.io/github/heyuxian/mcloud?branch=master)[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 ## 项目简介
 
 MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施：
 
-- **mcloud-eureka** 服务注册与发现中心。
-- [**mcloud-oauth-server**](https://github.com/heyuxian/mcloud-oauth2-server) **已废弃** 使用 [keycloak](http://www.keycloak.org/) 代替， 运行本项目前请先安装 [keycloak](http://www.keycloak.org/)，并导入初始数据： `data/realm-export.json` ，默认用户名密码为： `mcloud-user/123456` 和 `mcloud-admin/123456`
-- **mcloud-uia** (**deprecated**) API 统一登录中心。
+- **mcloud-registry** 服务注册与发现中心。
+- [keycloak](http://www.keycloak.org/) 用户认证和管理
 - **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 。
 - **mcloud-config** 统一配置中心。
 - **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
-- **mcloud-file-storage** 文件存储中心。
-- **mcloud-search** 基于 `ElasticSearch` 全文检索服务
 - **mcloud-logs** 基于`logstash`  `Kibana` 以及 `ElasticSearch` 实现的日志服务。
-- **mcloud-blog** Demo Project
+- **mcloud-demo** Demo Project
 
 其他模块：
-
-- [mcloud-parent](https://github.com/heyuxian/mcloud-parent) maven 公用依赖。
-- [mcloud-common](https://github.com/heyuxian/mcloud-common) 项目公用工具类。
-- [mcloud-data](https://github.com/heyuxian/mcloud-data) 数据存储相关。
-- [mcloud-web](https://github.com/heyuxian/mcloud-web) web相关依赖及公共类。
 - [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件。
+
+
+## Dependencies
+
+- Spring Boot 2.0.0.RELEASE
+- Spring Cloud Finchley.M7
+- Gradle 4.6
+- ......
+
 
 ## 环境依赖
 
@@ -34,26 +34,97 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **缓存** Redis
 - **消息中间件** Kafka, RabbitMQ （暂未实现）
 - **全文检索** ElasticSearch （暂未实现）
+- **其他** Zookeeper （暂未实现）
 
 
-> **注：** 因为项目拆分为很多独立的模块，且模块大多为 `snapshot` 版本，如果直接运行 `mvn clean install` 会出现找不到依赖的情况，此时可在本地 maven pom 文件中，添加 `snapshot` 的 `repository`
+## Quick Start
 
-```xml
-<repositories>
-  <repository>
-      <snapshots />
-      <id>sonatype snapshots</id>
-      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-  </repository>
-</repositories>
+**修改 hosts**
+```
+127.0.0.1	mcloud-registry.example.com
+127.0.0.1	mcloud-demo.example.com
+127.0.0.1	mcloud-config.example.com
+127.0.0.1	mcloud-apigw.example.com
 ```
 
+**安装 keycloak**
 
+下载 [keycloak](https://www.keycloak.org/archive/downloads-3.4.3.html) 并解压到本地文件夹，在 keycloak bin 目录下运行以下命令启动 keycloak:
 
-系统结构
+ **Windows**
+```
+standalone.bat -Djboss.http.port=8443
+```
+**Linux/MacOs**
+```
+./standalone.sh -Djboss.http.port=8443
+```
 
-![1](https://user-images.githubusercontent.com/30259465/34211439-0d4f035c-e5d4-11e7-8c46-ba5c7ffd65d0.png)
+启动后登陆到 keycloak 并导入 `data` 目录下的 `mcloud-realm.json` 和 `mcloud-users-0.json`，默认用户为：
 
+- 管理员：mcloud-admin/123456
+- 普通用户：mcloud-user/123456
+
+**克隆项目到本地**
+
+```
+git clone https://github.com/heyuxian/mcloud.git
+```
+
+**构建并运行**
+
+**Windows**
+
+```shell
+cd mcloud
+#执行构建
+gradlew.bat build
+# 分别在三个不同的终端运行以下命令
+gradlew.bat bootRun -b ./mcloud-registry/mcloud-registry.gradle
+gradlew.bat bootRun -b ./mcloud-apigw/mcloud-apigw.gradle
+gradlew.bat bootRun -b ./mcloud-demo/mcloud-demo.gradle
+```
+
+**Linux/MacOs**
+
+```sh
+cd mcloud
+#执行构建
+./gradlew build
+# 分别在三个不同的终端运行以下命令
+./gradlew bootRun -b ./mcloud-registry/mcloud-registry.gradle
+./gradlew bootRun -b ./mcloud-apigw/mcloud-apigw.gradle
+./gradlew bootRun -b ./mcloud-demo/mcloud-demo.gradle
+```
+
+各个服务运行之后，首先通过 apigw 进行登陆：
+
+```shell
+curl --request POST \
+  --url http://mcloud-apigw.example.com/auth/login \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{"username": "mcloud-user","password": "123456"}'
+```
+
+如果一切正常，将获取 AccessToken：
+
+```shell
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1500    0  1452  100    48  11616    384 --:--:-- --:--:-- --:--:-- 11616{"access_token":"${access_token}","expires_in":36000,"refresh_expires_in":1800,"token_type":"bearer","id_token":null,"not-before-policy":0,"session_state":"8c808f01-86fd-45fd-bb69-d3edf7218be8"}
+```
+
+此时，使用上面获取的 AccessToken ，即可访问受保护的 api ：`http://mcloud-apigw.example.com/demo/info`
+
+```shell
+curl --request GET \
+  --url http://mcloud-apigw.example.com/demo/info \
+  --header 'authorization: Bearer ${access_token}' \
+  --header 'cache-control: no-cache' \
+  --header 'content-type: application/json' \
+  --data '{\n	"grant_type":"password"\n}'
+```
 
 
 ## 问题及建议

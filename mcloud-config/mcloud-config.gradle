@@ -1,0 +1,9 @@
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+dependencies {
+    compile 'org.springframework.cloud:spring-cloud-config-server'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}

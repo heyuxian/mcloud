@@ -1,0 +1,13 @@
+rootProject.name = 'mcloud'
+include "mcloud-common"
+include 'mcloud-data'
+include 'mcloud-registry'
+include 'mcloud-config'
+include 'mcloud-apigw'
+include 'mcloud-web'
+include 'mcloud-demo'
+
+rootProject.children.each {project ->
+    project.buildFileName = "${project.name}.gradle"
+}
+

@@ -1,11 +1,5 @@
+.gradle/
+build/
+out/
 .idea/
 target/
-*.iml
-update/
-logs/
-mcloud-parent/
-mcloud-common/
-mcloud-data/
-mcloud-web/
-mcloud-oauth-server/
-mcloud-file-storage/

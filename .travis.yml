@@ -1,29 +1,21 @@
 language: java
-
-cache:
-  directories:
-  - $HOME/.m2
-services:
-  - mysql
-  - zookeeper
-  - kafka
-
 jdk:
   - oraclejdk8
-mysql:
-  database: db_blog
-  username: root
-  password :
-  encoding: utf8
+
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+
 install:
-  - cd ./mcloud-blog
-  - mvn clean install -Dmaven.test.skip=true -s ./.m2/settings.xml
-before_script:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS db_blog_test;'
+  - ./gradlew assemble
 script:
-  - mvn test -DactiveProfile=ci -s ./.m2/settings.xml
+  - ./gradlew check
 after_success:
-  - mvn test -DactiveProfile=ci jacoco:report coveralls:report -s ./.m2/settings.xml
+  - ./gradlew check jacocoTestReport
 notifications:
   email:
     - heyuxian.me@gmail.com
