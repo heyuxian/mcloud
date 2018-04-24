@@ -1,0 +1,16 @@
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+dependencies {
+    compile 'org.springframework.cloud:spring-cloud-starter-config'
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+
+    compile project(':mcloud-web')
+    compile project(':mcloud-common')
+
+    compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
+
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+}
