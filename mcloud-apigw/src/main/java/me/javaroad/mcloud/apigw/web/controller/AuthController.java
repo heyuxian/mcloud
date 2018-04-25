@@ -1,7 +1,7 @@
 package me.javaroad.mcloud.apigw.web.controller;
 
 import me.javaroad.mcloud.apigw.dto.AuthDto;
-import me.javaroad.mcloud.apigw.rest.AuthApi;
+import me.javaroad.mcloud.apigw.rest.AuthManager;
 import me.javaroad.mcloud.apigw.web.request.LoginRequest;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,14 +15,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("auth")
 public class AuthController {
 
-    private final AuthApi authApi;
+    private final AuthManager authManager;
 
-    public AuthController(AuthApi authApi) {
-        this.authApi = authApi;
+    public AuthController(AuthManager authManager) {
+        this.authManager = authManager;
     }
 
     @PostMapping("login")
     public AuthDto login(@RequestBody LoginRequest loginRequest) {
-        return authApi.login(loginRequest);
+        return authManager.login(loginRequest);
     }
 }

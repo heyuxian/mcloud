@@ -17,16 +17,15 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-zuul:
-  routes:
-    users:
-      sensitiveHeaders: Cookie,Set-Cookie
-      path: /demo/**
-      serviceId: "mcloud-demo"
-      stripPrefix: false
 oauth2:
   keycloak:
     client:
       client-id: mcloud-demo
       client-secret: 123456
       access-token-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token
+zuul:
+  routes:
+    mcloud-demo:
+      sensitiveHeaders: Cookie,Set-Cookie
+      path: /demo/**
+      stripPrefix: false
