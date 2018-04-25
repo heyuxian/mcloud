@@ -18,13 +18,13 @@ import org.springframework.web.client.RestTemplate;
  * @author heyx
  */
 @Component
-public class AuthApi {
+public class AuthManager {
 
     private final RestTemplate restTemplate;
 
     private final KeycloakConfig keycloakConfig;
 
-    public AuthApi(RestTemplateBuilder restTemplateBuilder,
+    public AuthManager(RestTemplateBuilder restTemplateBuilder,
         KeycloakConfig keycloakConfig) {
         this.restTemplate = restTemplateBuilder.build();
         this.keycloakConfig = keycloakConfig;

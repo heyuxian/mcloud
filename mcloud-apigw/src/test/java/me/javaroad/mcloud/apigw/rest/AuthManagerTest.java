@@ -1,9 +1,6 @@
 package me.javaroad.mcloud.apigw.rest;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import me.javaroad.mcloud.apigw.BaseSpringTest;
-import me.javaroad.mcloud.apigw.dto.AuthDto;
 import me.javaroad.mcloud.apigw.web.request.LoginRequest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * @author heyx
  */
-public class AuthApiTest extends BaseSpringTest {
+public class AuthManagerTest extends BaseSpringTest {
 
     @Autowired
-    private AuthApi authApi;
+    private AuthManager authManager;
 
     @Test
     public void login() throws Exception {
@@ -22,7 +19,7 @@ public class AuthApiTest extends BaseSpringTest {
         loginRequest.setUsername("mcloud-user");
         loginRequest.setPassword("123456");
         //todo
-        //AuthDto authDto = authApi.login(loginRequest);
+        //AuthDto authDto = authManager.login(loginRequest);
         //assertThat(authDto).isNotNull();
     }
 
