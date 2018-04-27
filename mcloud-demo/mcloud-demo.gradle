@@ -11,6 +11,7 @@ dependencies {
     compile project(':mcloud-common')
 
     compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
+    compileOnly('org.projectlombok:lombok')
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

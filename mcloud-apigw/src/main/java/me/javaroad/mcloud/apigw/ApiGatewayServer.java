@@ -1,6 +1,6 @@
 package me.javaroad.mcloud.apigw;
 
-import me.javaroad.mcloud.apigw.config.KeycloakConfig;
+import me.javaroad.mcloud.apigw.config.KeycloakProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -13,7 +13,7 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 @EnableEurekaClient
 @EnableZuulProxy
 @SpringBootApplication
-@EnableConfigurationProperties(KeycloakConfig.class)
+@EnableConfigurationProperties(KeycloakProperties.class)
 public class ApiGatewayServer {
 
     public static void main(String[] args) {

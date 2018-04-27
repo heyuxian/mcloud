@@ -1,6 +1,6 @@
 package me.javaroad.mcloud.apigw.rest;
 
-import me.javaroad.mcloud.apigw.config.KeycloakConfig;
+import me.javaroad.mcloud.apigw.config.KeycloakProperties;
 import me.javaroad.mcloud.apigw.dto.AuthDto;
 import me.javaroad.mcloud.apigw.web.request.LoginRequest;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -22,12 +22,12 @@ public class AuthManager {
 
     private final RestTemplate restTemplate;
 
-    private final KeycloakConfig keycloakConfig;
+    private final KeycloakProperties keycloakProperties;
 
     public AuthManager(RestTemplateBuilder restTemplateBuilder,
-        KeycloakConfig keycloakConfig) {
+        KeycloakProperties keycloakProperties) {
         this.restTemplate = restTemplateBuilder.build();
-        this.keycloakConfig = keycloakConfig;
+        this.keycloakProperties = keycloakProperties;
     }
 
     public AuthDto login(LoginRequest loginRequest) {
@@ -35,13 +35,13 @@ public class AuthManager {
         headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
         MultiValueMap<String, String> params= new LinkedMultiValueMap<>();
         params.add("grant_type", "password");
-        params.add("client_id", keycloakConfig.getClient().getClientId());
-        params.add("client_secret", keycloakConfig.getClient().getClientSecret());
+        params.add("client_id", keycloakProperties.getClient().getClientId());
+        params.add("client_secret", keycloakProperties.getClient().getClientSecret());
         params.add("username", loginRequest.getUsername());
         params.add("password", loginRequest.getPassword());
         HttpEntity<MultiValueMap<String, String>> requestEntity = new HttpEntity<>(params, headers);
         ResponseEntity<AuthDto> responseEntity = restTemplate.exchange(
-            keycloakConfig.getClient().getAccessTokenUri(),
+            keycloakProperties.getClient().getAccessTokenUri(),
             HttpMethod.POST, requestEntity, AuthDto.class);
         return responseEntity.getBody();
     }
