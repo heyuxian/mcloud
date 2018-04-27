@@ -125,6 +125,10 @@ curl --request GET \
 
 API 也可通过 Swagger 进行调用，地址为: `http://mcloud-apigw.example.com/swagger-ui.html`
 
+![image](https://user-images.githubusercontent.com/30259465/39365862-f2d5f954-4a64-11e8-8acd-7eff6dd7847b.png)
+
+
+
 ## 问题及建议
 
 若是对于本项目有任何问题或建议,请提 [Issue](https://github.com/heyuxian/mcloud/issues/new) 。

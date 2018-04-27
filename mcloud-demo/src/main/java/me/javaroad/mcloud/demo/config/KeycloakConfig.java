@@ -1,4 +1,4 @@
-package me.javaroad.mcloud.apigw.config;
+package me.javaroad.mcloud.demo.config;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,6 +18,7 @@ public class KeycloakConfig {
     @Setter
     public static class Client {
 
+        private String userAuthorizationUri;
         private String accessTokenUri;
         private String clientId;
         private String clientSecret;

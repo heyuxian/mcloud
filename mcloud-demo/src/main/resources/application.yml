@@ -31,7 +31,13 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-
+oauth2:
+  keycloak:
+    client:
+      client-id: mcloud-demo
+      client-secret: 123456
+      user-authorization-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/auth
+      access-token-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token
 swagger:
   title: MCloud Demo
   description: http://javaroad.me
