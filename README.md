@@ -14,6 +14,7 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
 - **mcloud-logs** 基于`logstash`  `Kibana` 以及 `ElasticSearch` 实现的日志服务。
 - **mcloud-demo** Demo Project
+- **mcloud-console** 基于 ant-design-pro 搭建的系统控制台
 
 其他模块：
 - [Code Generator](https://github.com/heyuxian/code-generator) 用于 Intellij-IDEA 的代码生成器插件。
