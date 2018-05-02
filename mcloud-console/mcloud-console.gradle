@@ -1,0 +1,7 @@
+plugins {
+  id 'com.moowork.node' version '1.2.0'
+}
+task npmStart(type: NpmTask) {
+  group = 'node'
+  args = ['run', 'start']
+}
