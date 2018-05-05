@@ -2,6 +2,9 @@ package me.javaroad.mcloud.apigw.config;
 
 import java.util.ArrayList;
 import java.util.List;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.netflix.zuul.filters.Route;
 import org.springframework.cloud.netflix.zuul.filters.RouteLocator;
@@ -45,5 +48,26 @@ public class GatewaySwaggerResourcesProvider implements SwaggerResourcesProvider
         swaggerResource.setLocation(location);
         swaggerResource.setSwaggerVersion("2.0");
         return swaggerResource;
+    }
+
+    /**
+     * @author heyx
+     */
+    @ConfigurationProperties(prefix = "oauth2.keycloak")
+    public static class KeycloakProperties {
+
+        @Getter
+        @Setter
+        private Client client;
+
+        @Getter
+        @Setter
+        public static class Client {
+
+            private String userAuthorizationUri;
+            private String accessTokenUri;
+            private String clientId;
+            private String clientSecret;
+        }
     }
 }
