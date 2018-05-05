@@ -1,6 +1,6 @@
 package me.javaroad.mcloud.apigw;
 
-import me.javaroad.mcloud.apigw.config.KeycloakProperties;
+import me.javaroad.mcloud.apigw.config.GatewaySwaggerResourcesProvider.KeycloakProperties;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

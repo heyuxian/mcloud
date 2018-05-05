@@ -1,6 +1,6 @@
 package me.javaroad.mcloud.apigw.rest;
 
-import me.javaroad.mcloud.apigw.config.KeycloakProperties;
+import me.javaroad.mcloud.apigw.config.GatewaySwaggerResourcesProvider.KeycloakProperties;
 import me.javaroad.mcloud.apigw.dto.AuthDto;
 import me.javaroad.mcloud.apigw.web.request.LoginRequest;
 import org.springframework.boot.web.client.RestTemplateBuilder;

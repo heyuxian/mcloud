@@ -19,4 +19,11 @@ export default {
   disableDynamicImport: true,
   publicPath: '/',
   hash: true,
+  proxy: {
+    '/registry/': {
+      target: 'http://localhost/registry/',
+      changeOrigin: true,
+      pathRewrite: { '^/registry/': '' },
+    },
+  },
 };

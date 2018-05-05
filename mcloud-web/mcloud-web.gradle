@@ -26,5 +26,6 @@ dependencies {
 
     compile project(':mcloud-common')
 
+    compileOnly('org.projectlombok:lombok')
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

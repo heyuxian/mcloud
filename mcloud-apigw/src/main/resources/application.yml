@@ -39,3 +39,7 @@ zuul:
       sensitiveHeaders: Cookie,Set-Cookie
       path: /demo/**
       stripPrefix: false
+    mcloud-registry:
+      sensitiveHeaders: Cookie,Set-Cookie
+      path: /registry/**
+      stripPrefix: true
