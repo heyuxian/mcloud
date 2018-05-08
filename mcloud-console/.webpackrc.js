@@ -20,6 +20,11 @@ export default {
   publicPath: '/',
   hash: true,
   proxy: {
+    '/auth/': {
+      target: 'http://localhost/auth/',
+      changeOrigin: true,
+      pathRewrite: { '^/auth/': '' },
+    },
     '/registry/': {
       target: 'http://localhost/registry/',
       changeOrigin: true,

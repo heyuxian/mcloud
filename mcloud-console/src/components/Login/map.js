@@ -8,7 +8,7 @@ const map = {
     props: {
       size: 'large',
       prefix: <Icon type="user" className={styles.prefixIcon} />,
-      placeholder: 'admin',
+      placeholder: '请输入用户名',
     },
     rules: [
       {
@@ -23,7 +23,7 @@ const map = {
       size: 'large',
       prefix: <Icon type="lock" className={styles.prefixIcon} />,
       type: 'password',
-      placeholder: '888888',
+      placeholder: '请输入密码',
     },
     rules: [
       {

@@ -72,21 +72,10 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/dashboard/analysis': {
-      component: dynamicWrapper(app, ['chart'], () => import('../routes/Dashboard/Analysis')),
-    },
     '/dashboard/monitoring': {
       component: dynamicWrapper(app, ['monitoring'], () =>
         import('../routes/Dashboard/Monitoring')
       ),
-    },
-    '/dashboard/workplace': {
-      component: dynamicWrapper(app, ['project', 'activities', 'chart'], () =>
-        import('../routes/Dashboard/Workplace')
-      ),
-      // hideInBreadcrumb: true,
-      // name: '工作台',
-      // authority: 'admin',
     },
     '/result/success': {
       component: dynamicWrapper(app, [], () => import('../routes/Result/Success')),

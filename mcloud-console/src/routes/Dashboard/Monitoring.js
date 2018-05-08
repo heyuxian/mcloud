@@ -1,9 +1,6 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
-import { Row, Col, Card, List, Divider, Tag, Icon } from 'antd';
-import DescriptionList from 'components/DescriptionList';
-
-const { Description } = DescriptionList;
+import { Row, Col, Card, List, Tag, Icon } from 'antd';
 
 @connect(({ monitoring, loading }) => ({
   monitoring,
@@ -19,49 +16,23 @@ export default class Monitoring extends PureComponent {
   renderApps = app => {
     return (
       <Col span={8} key={app.name}>
-        <Card title={app.name} bordered>
-          <DescriptionList size="small" col="2">
-            <Description term={<b>AMIs</b>}>
-              {app.amiCounts
-                .map(obj => {
-                  let value;
-                  for (const key in obj) {
-                    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                      value = `${key}  (${obj[key]})`;
-                    }
-                  }
-                  return value;
-                })
-                .join(',')}
-            </Description>
-            <Description term={<b>Availability Zones</b>}>
-              {app.zoneCounts
-                .map(obj => {
-                  let value;
-                  for (const key in obj) {
-                    if (Object.prototype.hasOwnProperty.call(obj, key)) {
-                      value = `${key}  (${obj[key]})`;
-                    }
-                  }
-                  return value;
-                })
-                .join(',')}
-            </Description>
-          </DescriptionList>
-          <Divider />
+        <Card title={app.name}>
           <List
             size="small"
-            header={app.instanceInfos.name}
-            dataSource={app.instanceInfos}
+            dataSource={app.instances}
             renderItem={item => (
               <List.Item
                 actions={[
-                  <a href={item.instances[0].url} target="_blank">
+                  <a href={item.statusPageUrl} target="_blank">
                     <Icon type="export" />
                   </a>,
                 ]}
               >
-                {<Tag color="#87d068">{item.status}</Tag>}
+                {
+                  <span>
+                    <Tag color="#87d068">{item.status}</Tag> {item.instanceId}
+                  </span>
+                }
               </List.Item>
             )}
           />

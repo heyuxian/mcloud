@@ -1,14 +1,23 @@
-package me.javaroad.mcloud.web.exception;
+package me.javaroad.mcloud.apigw.web.exception;
 
+import static org.zalando.problem.Status.INTERNAL_SERVER_ERROR;
+import static org.zalando.problem.Status.UNAUTHORIZED;
+
+import feign.FeignException;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 import javax.servlet.http.HttpServletRequest;
+import me.javaroad.mcloud.web.exception.ErrorConstants;
+import me.javaroad.mcloud.web.exception.FieldErrorVM;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.zalando.problem.DefaultProblem;
 import org.zalando.problem.Problem;
@@ -23,7 +32,7 @@ import org.zalando.problem.spring.web.advice.validation.ConstraintViolationProbl
 @ControllerAdvice
 public class ExceptionTranslator implements ProblemHandling {
 
-    /**
+   /**
      * Post-process Problem payload to add the message key for front-end if needed
      */
     @Override
@@ -60,9 +69,9 @@ public class ExceptionTranslator implements ProblemHandling {
     }
 
     @Override
-    public ResponseEntity<Problem> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+    public ResponseEntity<Problem> handleMethodArgumentNotValid(MethodArgumentNotValidException e,
         @Nonnull NativeWebRequest request) {
-        BindingResult result = ex.getBindingResult();
+        BindingResult result = e.getBindingResult();
         List<FieldErrorVM> fieldErrors = result.getFieldErrors().stream()
             .map(f -> new FieldErrorVM(f.getObjectName(), f.getField(), f.getCode()))
             .collect(Collectors.toList());
@@ -74,7 +83,45 @@ public class ExceptionTranslator implements ProblemHandling {
             .with("message", ErrorConstants.ERR_VALIDATION)
             .with("fieldErrors", fieldErrors)
             .build();
-        return create(ex, problem, request);
+        return create(e, problem, request);
     }
 
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<Problem> handleFeignException(FeignException e,
+        @Nonnull NativeWebRequest request) {
+        Problem problem;
+        if (e.status() == HttpStatus.UNAUTHORIZED.value()) {
+            problem = Problem.builder()
+                .withType(ErrorConstants.CONSTRAINT_VIOLATION_TYPE)
+                .withTitle("Unauthorized")
+                .withStatus(UNAUTHORIZED)
+                .with("message", ErrorConstants.UNAUTHORIZED)
+                .build();
+        } else {
+            problem = Problem.builder().build();
+        }
+        return create(e, problem, request);
+    }
+
+    @Override
+    public ResponseEntity<Problem> handleAuthentication(AuthenticationException e, NativeWebRequest request) {
+        Problem problem = Problem.builder()
+            .withType(ErrorConstants.CONSTRAINT_VIOLATION_TYPE)
+            .withTitle("Unauthorized")
+            .withStatus(UNAUTHORIZED)
+            .with("message", ErrorConstants.UNAUTHORIZED)
+            .build();
+        return create(e, problem, request);
+    }
+
+    @Override
+    public ResponseEntity<Problem> handleThrowable(Throwable throwable, NativeWebRequest request) {
+        Problem problem = Problem.builder()
+            .withType(ErrorConstants.CONSTRAINT_VIOLATION_TYPE)
+            .withTitle("Internal Server Error")
+            .withStatus(INTERNAL_SERVER_ERROR)
+            .with("message", ErrorConstants.INTERNAL_SERVER_ERROR)
+            .build();
+        return create(throwable, problem, request);
+    }
 }

@@ -22,7 +22,7 @@ dependencies {
     compile 'io.springfox:springfox-swagger2:2.7.0'
     compile 'io.springfox:springfox-swagger-ui:2.7.0'
 
-    compile 'org.zalando:problem-spring-web:0.22.2'
+    compile 'org.zalando:problem-spring-web:0.22.5'
 
     compile project(':mcloud-common')
 

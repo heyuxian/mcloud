@@ -54,7 +54,7 @@ class UserLayout extends React.PureComponent {
                   <span className={styles.title}>MCloud Console</span>
                 </Link>
               </div>
-              <div className={styles.desc}>Ant Design 是西湖区最具影响力的 Web 设计规范</div>
+              <div className={styles.desc}>基于 Spring CLoud 搭建的微服务平台</div>
             </div>
             <Switch>
               {getRoutes(match.path, routerData).map(item => (
