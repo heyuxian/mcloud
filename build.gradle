@@ -17,6 +17,7 @@ allprojects {
 subprojects {
     ext {
         springCloudVersion = 'Finchley.M7'
+        mapstructVersion = '1.2.0.Final'
     }
     repositories {
         maven {

@@ -9,8 +9,12 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
     compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
     compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
-    compileOnly('org.projectlombok:lombok')
     compile project(':mcloud-web')
+
+    compileOnly('org.projectlombok:lombok')
+
+    compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+    compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
 }

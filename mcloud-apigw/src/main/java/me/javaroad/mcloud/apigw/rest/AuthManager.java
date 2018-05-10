@@ -15,15 +15,11 @@ import org.springframework.web.client.RestTemplate;
 @Component
 public class AuthManager {
 
-    private final RestTemplate restTemplate;
-
     private final KeycloakProperties keycloakProperties;
 
     private final AuthClient authClient;
 
-    public AuthManager(RestTemplateBuilder restTemplateBuilder,
-        KeycloakProperties keycloakProperties, AuthClient authClient) {
-        this.restTemplate = restTemplateBuilder.build();
+    public AuthManager(KeycloakProperties keycloakProperties, AuthClient authClient) {
         this.keycloakProperties = keycloakProperties;
         this.authClient = authClient;
     }

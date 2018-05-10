@@ -20,8 +20,7 @@ public class AuthManagerTest extends BaseSpringTest {
     public void login() throws Exception {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("mcloud-user");
-        loginRequest.setPassword("1234567");
-        //todo
+        loginRequest.setPassword("123456");
         AuthDto authDto = authManager.login(loginRequest);
         assertThat(authDto).isNotNull();
     }

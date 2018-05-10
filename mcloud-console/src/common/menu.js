@@ -5,10 +5,12 @@ const menuData = [
     name: 'Dashboard',
     icon: 'dashboard',
     path: 'dashboard',
+    authority: 'ROLE_ADMIN',
     children: [
       {
         name: '监控页',
         path: 'monitoring',
+        authority: 'ROLE_ADMIN',
       },
     ],
   },

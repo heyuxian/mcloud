@@ -20,15 +20,10 @@ export default {
   publicPath: '/',
   hash: true,
   proxy: {
-    '/auth/': {
-      target: 'http://localhost/auth/',
+    '/api/v1/': {
+      target: 'http://localhost/',
       changeOrigin: true,
-      pathRewrite: { '^/auth/': '' },
-    },
-    '/registry/': {
-      target: 'http://localhost/registry/',
-      changeOrigin: true,
-      pathRewrite: { '^/registry/': '' },
+      pathRewrite: { '^/api/v1/': '' },
     },
   },
 };

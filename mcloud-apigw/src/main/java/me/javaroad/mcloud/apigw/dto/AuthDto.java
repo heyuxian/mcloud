@@ -1,7 +1,6 @@
 package me.javaroad.mcloud.apigw.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -35,8 +34,5 @@ public class AuthDto {
 
     @JsonProperty("session_state")
     private String sessionState;
-
-    private List<String> roles;
-
 
 }

@@ -1,6 +1,3 @@
-plugins {
-    id 'net.ltgt.apt' version '0.8'
-}
 dependencyManagement {
     imports {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
@@ -12,8 +9,8 @@ dependencies {
     compile project(':mcloud-web')
     compileOnly('org.projectlombok:lombok')
 
-    compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
-    apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+    compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
+    compileOnly "org.mapstruct:mapstruct-processor:${mapstructVersion}"
 
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 }

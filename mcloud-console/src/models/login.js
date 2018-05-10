@@ -36,7 +36,7 @@ export default {
           type: 'changeLoginStatus',
           payload: {
             status: false,
-            currentAuthority: 'guest',
+            authority: null,
           },
         });
         reloadAuthorized();
@@ -47,7 +47,7 @@ export default {
 
   reducers: {
     changeLoginStatus(state, { payload }) {
-      setAuthority(payload.currentAuthority);
+      setAuthority(payload.authority);
       return {
         ...state,
         status: payload.status,
