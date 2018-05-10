@@ -1,6 +1,9 @@
 package me.javaroad.mcloud.apigw.rest;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import me.javaroad.mcloud.apigw.BaseSpringTest;
+import me.javaroad.mcloud.apigw.dto.AuthDto;
 import me.javaroad.mcloud.apigw.web.request.LoginRequest;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +21,8 @@ public class AuthManagerTest extends BaseSpringTest {
         LoginRequest loginRequest = new LoginRequest();
         loginRequest.setUsername("mcloud-user");
         loginRequest.setPassword("123456");
-        //todo
-        //AuthDto authDto = authManager.login(loginRequest);
-        //assertThat(authDto).isNotNull();
+        AuthDto authDto = authManager.login(loginRequest);
+        assertThat(authDto).isNotNull();
     }
 
 }

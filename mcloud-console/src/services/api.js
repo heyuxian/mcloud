@@ -1,5 +1,6 @@
 import { stringify } from 'qs';
 import request from '../utils/request';
+import { httpPost, httpGet } from '../utils/http';
 
 export async function queryProjectNotice() {
   return request('/api/project/notice');
@@ -60,20 +61,22 @@ export async function queryFakeList(params) {
   return request(`/api/fake_list?${stringify(params)}`);
 }
 
-export async function fakeAccountLogin(params) {
-  return request('/api/login/account', {
-    method: 'POST',
-    body: params,
-  });
-}
-
 export async function fakeRegister(params) {
   return request('/api/register', {
     method: 'POST',
     body: params,
   });
 }
-
 export async function queryNotices() {
   return request('/api/notices');
+}
+
+const API_PREFIX = '/api/v1';
+
+export async function login(params) {
+  return httpPost(`${API_PREFIX}/auth/login`, params);
+}
+
+export async function queryApps() {
+  return httpGet(`${API_PREFIX}/registry/applications`);
 }

@@ -40,6 +40,7 @@ module.exports = {
     'jsx-a11y/click-events-have-key-events': [0],
     'jsx-a11y/anchor-is-valid': [0],
     'no-nested-ternary': [0],
+    'no-plusplus': [0],
     'arrow-body-style': [0],
     'import/extensions': [0],
     'no-bitwise': [0],

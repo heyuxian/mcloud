@@ -1,4 +1,4 @@
-import { queryApps } from '../services/dashboard';
+import { queryApps } from '../services/api';
 
 export default {
   namespace: 'monitoring',

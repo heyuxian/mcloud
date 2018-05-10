@@ -6,12 +6,14 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 /**
  * @author heyx
  */
-@EnableEurekaClient
 @EnableZuulProxy
+@EnableEurekaClient
+@EnableFeignClients
 @SpringBootApplication
 @EnableConfigurationProperties(KeycloakProperties.class)
 public class ApiGatewayServer {

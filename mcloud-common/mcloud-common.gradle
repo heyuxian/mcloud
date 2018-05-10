@@ -14,5 +14,6 @@ dependencies {
     compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml'
 
     compileOnly('org.projectlombok:lombok')
+
     testCompile('org.springframework.boot:spring-boot-starter-test')
 }

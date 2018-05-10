@@ -6,6 +6,7 @@ spring:
 eureka:
   instance:
     appname: mcloud-registry
+    hostname: mcloud-registry.example.com
     leaseRenewalIntervalInSeconds: 10
   client:
     registryFetchIntervalSeconds: 5
