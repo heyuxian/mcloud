@@ -1,16 +1,20 @@
 import { isUrl } from '../utils/utils';
+import { ROLE } from './constants';
 
 const menuData = [
   {
     name: 'Dashboard',
     icon: 'dashboard',
     path: 'dashboard',
-    authority: 'ROLE_ADMIN',
     children: [
+      {
+        name: '首页',
+        path: 'index',
+      },
       {
         name: '监控页',
         path: 'monitoring',
-        authority: 'ROLE_ADMIN',
+        authority: ROLE.admin,
       },
     ],
   },

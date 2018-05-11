@@ -6,6 +6,7 @@ import dynamic from 'dva/dynamic';
 import { getRouterData } from './common/router';
 import Authorized from './utils/Authorized';
 import styles from './index.less';
+import { ROLE } from './common/constants';
 
 const { ConnectedRouter } = routerRedux;
 const { AuthorizedRoute } = Authorized;
@@ -25,7 +26,7 @@ function RouterConfig({ history, app }) {
           <AuthorizedRoute
             path="/"
             render={props => <BasicLayout {...props} />}
-            authority={['ROLE_ADMIN', 'ROLE_USER']}
+            authority={[ROLE.admin, ROLE.user]}
             redirectPath="/user/login"
           />
         </Switch>
