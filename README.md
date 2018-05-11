@@ -129,10 +129,9 @@ API 也可通过 Swagger 进行调用，地址为: `http://mcloud-apigw.example.
 
 最后，还可以直接通过 `mcloud-console` 项目进入系统。运行并登陆 `mcloud-console` 后，将看到以下的画面：
 
-![image](https://user-images.githubusercontent.com/30259465/39928109-01808502-5567-11e8-9379-e42b031a7fc0.png)
+![image](https://user-images.githubusercontent.com/30259465/39933968-f97b5570-5576-11e8-857c-46340884fec3.png)
 
-![image](https://user-images.githubusercontent.com/30259465/39928133-1826e9d6-5567-11e8-8917-81bf55e534db.png)
-
+![image](https://user-images.githubusercontent.com/30259465/39934037-2de6d974-5577-11e8-8b80-34d76cca3cef.png)
 
 
 ## 问题及建议
