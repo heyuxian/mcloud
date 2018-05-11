@@ -11,7 +11,6 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 - [keycloak](http://www.keycloak.org/) 用户认证和管理
 - **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 。
 - **mcloud-config** 统一配置中心。
-- **mcloud-monitoring** 基于 Spring boot admin 实现系统监控。
 - **mcloud-logs** 基于`logstash`  `Kibana` 以及 `ElasticSearch` 实现的日志服务。
 - **mcloud-demo** Demo Project
 - **mcloud-console** 基于 ant-design-pro 搭建的系统控制台
@@ -95,7 +94,7 @@ cd mcloud
 ./gradlew bootRun -b ./mcloud-demo/mcloud-demo.gradle
 ```
 
-各个服务运行之后，首先通过 apigw 进行登陆：
+各个服务运行之后，首先通过 api gateway 进行登陆：
 
 ```shell
 curl --request POST \
@@ -128,7 +127,13 @@ API 也可通过 Swagger 进行调用，地址为: `http://mcloud-apigw.example.
 
 ![image](https://user-images.githubusercontent.com/30259465/39365862-f2d5f954-4a64-11e8-8acd-7eff6dd7847b.png)
 
-![image](https://user-images.githubusercontent.com/30259465/39664551-78ff40aa-50b7-11e8-9acd-15c38065cb98.png)
+最后，还可以直接通过 `mcloud-console` 项目进入系统。运行并登陆 `mcloud-console` 后，将看到以下的画面：
+
+![image](https://user-images.githubusercontent.com/30259465/39928109-01808502-5567-11e8-9379-e42b031a7fc0.png)
+
+![image](https://user-images.githubusercontent.com/30259465/39928133-1826e9d6-5567-11e8-8917-81bf55e534db.png)
+
+
 
 ## 问题及建议
 
