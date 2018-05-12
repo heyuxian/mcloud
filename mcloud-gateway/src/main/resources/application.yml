@@ -1,0 +1,42 @@
+server:
+  port: 80
+  servlet:
+    context-path: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  server:
+    port: 10080
+spring:
+  application:
+    name: mcloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+      - id: mcloud-registry
+        uri: lb://mcloud-registry
+        predicates:
+        - Path=/registry/**
+        filters:
+          - Hystrix=myCommandName
+          - RewritePath=/registry, /
+eureka:
+  instance:
+    appname: mcloud-gateway
+    hostname: mcloud-apigw.example.com
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    root: debug

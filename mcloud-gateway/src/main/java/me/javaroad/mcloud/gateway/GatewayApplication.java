@@ -1,19 +1,19 @@
-package me.javaroad.mcloud.registry;
+package me.javaroad.mcloud.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
-import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @author heyx
  */
-@EnableEurekaServer
 @EnableEurekaClient
+@EnableCircuitBreaker
 @SpringBootApplication
-public class RegistryApplication {
+public class GatewayApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(RegistryApplication.class, args);
+        SpringApplication.run(GatewayApplication.class, args);
     }
 }

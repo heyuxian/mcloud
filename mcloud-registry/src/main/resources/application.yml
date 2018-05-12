@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: mcloud-registry
+  jmx:
+    enabled: false
 eureka:
   instance:
     appname: mcloud-registry
