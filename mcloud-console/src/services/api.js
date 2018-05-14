@@ -1,4 +1,5 @@
 import { stringify } from 'qs';
+import _ from 'lodash';
 import request from '../utils/request';
 import { httpPost, httpGet } from '../utils/http';
 
@@ -79,4 +80,22 @@ export async function login(params) {
 
 export async function queryApps() {
   return httpGet(`${API_PREFIX}/registry/applications`);
+}
+
+export async function queryAppInfo(appId) {
+  return httpGet(`${API_PREFIX}/registry/instances/${appId}/actuator/info`);
+}
+
+export async function queryMetics({ instanceId, metric, tags }) {
+  const params = tags
+    ? {
+        tag: _.entries(tags)
+          .map(([name, value]) => `${name}:${value}`)
+          .join(','),
+      }
+    : {};
+  return httpGet(
+    `${API_PREFIX}/registry/instances/${instanceId}/actuator/metrics/${metric}`,
+    params
+  );
 }

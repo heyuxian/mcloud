@@ -3,16 +3,16 @@ import { ROLE } from './constants';
 
 const menuData = [
   {
-    name: 'Dashboard',
+    name: '管理控制台',
     icon: 'dashboard',
-    path: 'dashboard',
+    path: 'console',
     children: [
       {
-        name: '首页',
-        path: 'index',
+        name: 'Dashboard',
+        path: 'dashboard',
       },
       {
-        name: '监控页',
+        name: 'Monitoring',
         path: 'monitoring',
         authority: ROLE.admin,
       },

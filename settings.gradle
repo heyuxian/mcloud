@@ -8,6 +8,7 @@ include 'mcloud-gateway'
 include 'mcloud-web'
 include 'mcloud-demo'
 include 'mcloud-console'
+include 'monitoring'
 
 rootProject.children.each {project ->
     project.buildFileName = "${project.name}.gradle"

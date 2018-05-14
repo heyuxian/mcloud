@@ -7,8 +7,6 @@ management:
     web:
       exposure:
         include: "*"
-  server:
-    port: 10080
 spring:
   application:
     name: mcloud-gateway
@@ -23,8 +21,15 @@ spring:
         predicates:
         - Path=/registry/**
         filters:
-          - Hystrix=myCommandName
+          - Hystrix=registryCommand
           - RewritePath=/registry, /
+      - id: mcloud-demo
+        uri: lb://mcloud-demo
+        predicates:
+        - Path=/demo/**
+        filters:
+          - Hystrix=demoCommand
+          - RewritePath=/demo, /
 eureka:
   instance:
     appname: mcloud-gateway
@@ -33,10 +38,9 @@ eureka:
     healthCheckUrlPath: ${server.servlet.context-path}actuator/health
     metadata-map:
       management:
-        context-path: ${server.servlet.context-path}
+        server:
+          port: ${server.port}
+          context-path: ${server.servlet.context-path}
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
-logging:
-  level:
-    root: debug

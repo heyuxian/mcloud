@@ -39,5 +39,5 @@ subprojects {
     sourceCompatibility = 1.8
 }
 task wrapper(type: Wrapper) {
-    gradle.gradleVersion = '4.6'
+    gradleVersion = '4.6'
 }

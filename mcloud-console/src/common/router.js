@@ -72,12 +72,22 @@ export const getRouterData = app => {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
     },
-    '/dashboard/index': {
-      component: dynamicWrapper(app, ['list'], () => import('../routes/Dashboard/ProjectList')),
+    '/console/dashboard': {
+      component: dynamicWrapper(app, ['application'], () =>
+        import('../routes/Dashboard/Application')
+      ),
     },
-    '/dashboard/monitoring': {
-      component: dynamicWrapper(app, ['monitoring'], () =>
+    '/console/monitoring': {
+      component: dynamicWrapper(app, ['application'], () =>
         import('../routes/Dashboard/Monitoring')
+      ),
+    },
+    '/console/monitoring/:instanceId': {
+      component: dynamicWrapper(app, [], () => import('../routes/Dashboard/Monitoring/Tabs')),
+    },
+    '/console/monitoring/:instanceId/details': {
+      component: dynamicWrapper(app, ['details'], () =>
+        import('../routes/Dashboard/Monitoring/Details')
       ),
     },
     '/result/success': {

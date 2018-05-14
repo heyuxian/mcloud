@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /demo
+    context-path: /
 logging:
   level:
     org.springframework.security: DEBUG
@@ -51,3 +51,20 @@ spring:
   profiles: peer2
 server:
   port: 8082
+---
+spring:
+  profiles: peer3
+server:
+  port: 8083
+eureka:
+  instance:
+    appname: mcloud-demo1
+    hostname: mcloud-demo.example.com
+    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
+    metadata-map:
+      management:
+        context-path: ${server.servlet.context-path}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
