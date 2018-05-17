@@ -1,5 +1,5 @@
 import { stringify } from 'qs';
-import _ from 'lodash';
+import lodash from 'lodash';
 import request from '../utils/request';
 import { httpPost, httpGet } from '../utils/http';
 
@@ -89,7 +89,8 @@ export async function queryAppInfo(appId) {
 export async function queryMetics({ instanceId, metric, tags }) {
   const params = tags
     ? {
-        tag: _.entries(tags)
+        tag: lodash
+          .entries(tags)
           .map(([name, value]) => `${name}:${value}`)
           .join(','),
       }

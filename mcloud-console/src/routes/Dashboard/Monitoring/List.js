@@ -5,7 +5,7 @@ import { Card, List, Icon, Tag } from 'antd';
 
 import PageHeaderLayout from '../../../layouts/PageHeaderLayout';
 
-import styles from './List.less';
+import styles from './Monitoring.less';
 
 @connect(({ application, loading }) => ({
   application,
