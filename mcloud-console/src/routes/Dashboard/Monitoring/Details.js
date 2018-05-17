@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Menu, Dropdown, Icon } from 'antd';
+import { Card, Row, Col, Menu, Dropdown, Icon, Divider } from 'antd';
 import { connect } from 'dva';
 import prettyBytes from 'pretty-bytes';
 import DescriptionList from 'components/DescriptionList';
@@ -28,8 +28,14 @@ export default class Details extends React.Component {
         instanceId,
       },
     });
+    this.props.dispatch({
+      type: 'details/fetchMaxMemory',
+      payload: {
+        instanceId,
+      },
+    });
     this.fetchMetrics(instanceId);
-    this.state.timer = setInterval(() => this.fetchMetrics(instanceId), 2500);
+    this.state.timer = setInterval(() => this.fetchMetrics(instanceId), 10000);
   }
 
   componentWillUnmount() {
@@ -40,7 +46,7 @@ export default class Details extends React.Component {
 
   fetchMetrics = instanceId => {
     this.props.dispatch({
-      type: 'details/fetchMemory',
+      type: 'details/fetchUsedMemory',
       payload: {
         instanceId,
       },
@@ -49,8 +55,8 @@ export default class Details extends React.Component {
 
   render() {
     const { details: { build, memory } } = this.props;
-    const loaded = memory.heap && memory.nonheap;
-
+    const memoryLoaded = memory.max && memory.max.heap && memory.max.heap.value;
+    const buildLoaded = build && build.name;
     const menu = (
       <Menu>
         <Menu.Item>Heapdump</Menu.Item>
@@ -68,34 +74,68 @@ export default class Details extends React.Component {
     return (
       <Row gutter={24}>
         <Col xl={12} lg={12} md={24} sm={24} xs={24}>
-          <Card title="Application" extra={iconGroup}>
-            <DescriptionList size="small" col="2">
-              <Description term="Name">{build.name}</Description>
-              <Description term="Group">{build.group}</Description>
-              <Description term="Artifact">{build.artifact}</Description>
-              <Description term="Build time">{build.time}</Description>
-              <Description term="Version">{build.version}</Description>
-            </DescriptionList>
+          <Card title="Application" extra={iconGroup} loading={!buildLoaded}>
+            {buildLoaded ? (
+              <DescriptionList size="small" col="2">
+                <Description term="Name">{build.name}</Description>
+                <Description term="Group">{build.group}</Description>
+                <Description term="Artifact">{build.artifact}</Description>
+                <Description term="Build time">{build.time}</Description>
+                <Description term="Version">{build.version}</Description>
+              </DescriptionList>
+            ) : null}
           </Card>
         </Col>
         <Col xl={12} lg={12} md={24} sm={24} xs={24}>
-          <Card title="Memory" loading={!loaded} bodyStyle={{ textAlign: 'center' }}>
-            {loaded ? (
+          <Card title="Memory" loading={!memoryLoaded} bodyStyle={{ textAlign: 'center' }}>
+            {memoryLoaded ? (
               <Row>
-                <Col md={8} sm={12} xs={24}>
+                <Col md={12} sm={12} xs={24}>
                   <DescriptionList size="small" col="1">
                     <Description term="Heap Memory">
-                      {prettyBytes(memory.heap.used)}/{prettyBytes(memory.heap.max)}
+                      {prettyBytes(memory.used.heap.value)}
+                      /
+                      {prettyBytes(memory.max.heap.value)}
                     </Description>
+                    <Description term="Eden Space">
+                      {prettyBytes(memory.used.heap.edenSpace)}
+                      /
+                      {prettyBytes(memory.max.heap.edenSpace)}
+                    </Description>
+                    <Description term="Survivor Space">
+                      {prettyBytes(memory.used.heap.survivorSpace)}
+                      /
+                      {prettyBytes(memory.max.heap.survivorSpace)}
+                    </Description>
+                    <Description term="Old Gen">
+                      {prettyBytes(memory.used.heap.oldGen)}
+                      /
+                      {prettyBytes(memory.max.heap.oldGen)}
+                    </Description>
+                    <Divider />
                     <Description term="Non-Heap Memory">
-                      {prettyBytes(memory.nonheap.used)}/{prettyBytes(memory.nonheap.max)}
+                      {prettyBytes(memory.used.nonheap.value)}
+                      /
+                      {prettyBytes(memory.max.nonheap.value)}
                     </Description>
                     <Description term="Metaspace">
-                      {prettyBytes(memory.nonheap.metaspace)}
+                      {prettyBytes(memory.used.nonheap.metaspace)}
+                      /
+                      {prettyBytes(memory.max.nonheap.metaspace)}
+                    </Description>
+                    <Description term="Compressed Class Space">
+                      {prettyBytes(memory.used.nonheap.compressedClassSpace)}
+                      /
+                      {prettyBytes(memory.max.nonheap.compressedClassSpace)}
+                    </Description>
+                    <Description term="Code Cache">
+                      {prettyBytes(memory.used.nonheap.codeCache)}
+                      /
+                      {prettyBytes(memory.max.nonheap.codeCache)}
                     </Description>
                   </DescriptionList>
                 </Col>
-                <Col md={8} sm={12} xs={24}>
+                <Col md={6} sm={12} xs={24}>
                   <WaterWave
                     height={161}
                     title={
@@ -103,14 +143,14 @@ export default class Details extends React.Component {
                         <b>Heap</b>
                         <br />
                         <span>
-                          {prettyBytes(memory.heap.used)}/{prettyBytes(memory.heap.max)}
+                          {prettyBytes(memory.used.heap.value)}/{prettyBytes(memory.max.heap.value)}
                         </span>
                       </span>
                     }
-                    percent={(memory.heap.used / memory.heap.max).toFixed(2)}
+                    percent={(memory.used.heap.value / memory.max.heap.value).toFixed(2)}
                   />
                 </Col>
-                <Col md={8} sm={12} xs={24}>
+                <Col md={6} sm={12} xs={24}>
                   <WaterWave
                     height={161}
                     title={
@@ -118,11 +158,13 @@ export default class Details extends React.Component {
                         <b>Non Heap</b>
                         <br />
                         <span>
-                          {prettyBytes(memory.nonheap.used)}/{prettyBytes(memory.nonheap.max)}
+                          {prettyBytes(memory.used.nonheap.value)}/{prettyBytes(
+                            memory.max.nonheap.value
+                          )}
                         </span>
                       </span>
                     }
-                    percent={(memory.nonheap.used / memory.nonheap.max).toFixed(2)}
+                    percent={(memory.used.nonheap.value / memory.max.nonheap.value).toFixed(2)}
                   />
                 </Col>
               </Row>

@@ -4,7 +4,10 @@ export default {
   namespace: 'details',
   state: {
     build: {},
-    memory: {},
+    memory: {
+      max: {},
+      used: {},
+    },
   },
 
   effects: {
@@ -15,56 +18,169 @@ export default {
         payload: response.build,
       });
     },
-    *fetchMemory({ payload }, { call, put }) {
+    *fetchMaxMemory({ payload }, { call, put }) {
+      const MAX_MEMORY = 'jvm.memory.max';
       const heapMax = yield call(queryMetics, {
         instanceId: payload.instanceId,
-        metric: 'jvm.memory.max',
+        metric: MAX_MEMORY,
         tags: {
           area: 'heap',
         },
       });
-      const heapUsed = yield call(queryMetics, {
+      const heapEdenSpace = yield call(queryMetics, {
         instanceId: payload.instanceId,
-        metric: 'jvm.memory.used',
+        metric: MAX_MEMORY,
         tags: {
           area: 'heap',
+          id: 'PS Eden Space',
+        },
+      });
+      const heapSurvivorSpace = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: MAX_MEMORY,
+        tags: {
+          area: 'heap',
+          id: 'PS Survivor Space',
+        },
+      });
+      const heapOldGen = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: MAX_MEMORY,
+        tags: {
+          area: 'heap',
+          id: 'PS Old Gen',
         },
       });
       const nonheapMax = yield call(queryMetics, {
         instanceId: payload.instanceId,
-        metric: 'jvm.memory.max',
+        metric: MAX_MEMORY,
         tags: {
           area: 'nonheap',
         },
       });
-      const nonheapUsed = yield call(queryMetics, {
+      const nonheapMetaspaceMax = yield call(queryMetics, {
         instanceId: payload.instanceId,
-        metric: 'jvm.memory.used',
-        tags: {
-          area: 'nonheap',
-        },
-      });
-      const nonheapMetaspace = yield call(queryMetics, {
-        instanceId: payload.instanceId,
-        metric: 'jvm.memory.used',
+        metric: MAX_MEMORY,
         tags: {
           area: 'nonheap',
           id: 'Metaspace',
         },
       });
+      const nonheapCompressedClassSpaceMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: MAX_MEMORY,
+        tags: {
+          area: 'nonheap',
+          id: 'Compressed Class Space',
+        },
+      });
+      const nonheapCodeCacheMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: MAX_MEMORY,
+        tags: {
+          area: 'nonheap',
+          id: 'Code Cache',
+        },
+      });
       const memory = {
         heap: {
-          max: heapMax.measurements[0].value,
-          used: heapUsed.measurements[0].value,
+          value: heapMax.measurements[0].value,
+          edenSpace: heapEdenSpace.measurements[0].value,
+          survivorSpace: heapSurvivorSpace.measurements[0].value,
+          oldGen: heapOldGen.measurements[0].value,
         },
         nonheap: {
-          max: nonheapMax.measurements[0].value,
-          used: nonheapUsed.measurements[0].value,
-          metaspace: nonheapMetaspace.measurements[0].value,
+          value: nonheapMax.measurements[0].value,
+          metaspace: nonheapMetaspaceMax.measurements[0].value,
+          compressedClassSpace: nonheapCompressedClassSpaceMax.measurements[0].value,
+          codeCache: nonheapCodeCacheMax.measurements[0].value,
         },
       };
       yield put({
-        type: 'saveMetrics',
+        type: 'saveMaxMemory',
+        payload: memory,
+      });
+    },
+    *fetchUsedMemory({ payload }, { call, put }) {
+      const USED_MEMORY = 'jvm.memory.used';
+      const heapMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'heap',
+        },
+      });
+      const heapEdenSpace = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'heap',
+          id: 'PS Eden Space',
+        },
+      });
+      const heapSurvivorSpace = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'heap',
+          id: 'PS Survivor Space',
+        },
+      });
+      const heapOldGen = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'heap',
+          id: 'PS Old Gen',
+        },
+      });
+      const nonheapMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'nonheap',
+        },
+      });
+      const nonheapMetaspaceMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'nonheap',
+          id: 'Metaspace',
+        },
+      });
+      const nonheapCompressedClassSpaceMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'nonheap',
+          id: 'Compressed Class Space',
+        },
+      });
+      const nonheapCodeCacheMax = yield call(queryMetics, {
+        instanceId: payload.instanceId,
+        metric: USED_MEMORY,
+        tags: {
+          area: 'nonheap',
+          id: 'Code Cache',
+        },
+      });
+      const memory = {
+        heap: {
+          value: heapMax.measurements[0].value,
+          edenSpace: heapEdenSpace.measurements[0].value,
+          survivorSpace: heapSurvivorSpace.measurements[0].value,
+          oldGen: heapOldGen.measurements[0].value,
+        },
+        nonheap: {
+          value: nonheapMax.measurements[0].value,
+          metaspace: nonheapMetaspaceMax.measurements[0].value,
+          compressedClassSpace: nonheapCompressedClassSpaceMax.measurements[0].value,
+          codeCache: nonheapCodeCacheMax.measurements[0].value,
+        },
+      };
+      yield put({
+        type: 'saveUsedMemory',
         payload: memory,
       });
     },
@@ -77,14 +193,22 @@ export default {
         build: action.payload,
       };
     },
-    saveMetrics(state, action) {
-      /* let memory = [...state.memory, ...action.payload];
-      if (memory.length > 10) {
-        memory = memory.slice(memory.length - 20, memory.length);
-      } */
+    saveMaxMemory(state, action) {
       return {
         ...state,
-        memory: action.payload,
+        memory: {
+          used: state.memory.used,
+          max: action.payload,
+        },
+      };
+    },
+    saveUsedMemory(state, action) {
+      return {
+        ...state,
+        memory: {
+          max: state.memory.max,
+          used: action.payload,
+        },
       };
     },
   },
