@@ -54,12 +54,21 @@ export default class Details extends React.Component {
   };
 
   render() {
+    const { instanceId } = this.props.match.params;
     const { details: { build, memory } } = this.props;
-    const memoryLoaded = memory.max && memory.max.heap && memory.max.heap.value;
+    const memoryLoaded =
+      memory.max &&
+      memory.max.heap &&
+      memory.max.heap.value &&
+      memory.used &&
+      memory.used.heap &&
+      memory.used.heap.value;
     const buildLoaded = build && build.name;
     const menu = (
       <Menu>
-        <Menu.Item>Heapdump</Menu.Item>
+        <Menu.Item key="Heapdump">
+          <a href={`/api/v1/registry/instances/${instanceId}/actuator/heapdump`}>Heapdump</a>
+        </Menu.Item>
       </Menu>
     );
 
@@ -74,7 +83,7 @@ export default class Details extends React.Component {
     return (
       <Row gutter={24}>
         <Col xl={12} lg={12} md={24} sm={24} xs={24}>
-          <Card title="Application" extra={iconGroup} loading={!buildLoaded}>
+          <Card title="Application" loading={!buildLoaded}>
             {buildLoaded ? (
               <DescriptionList size="small" col="2">
                 <Description term="Name">{build.name}</Description>
@@ -87,7 +96,12 @@ export default class Details extends React.Component {
           </Card>
         </Col>
         <Col xl={12} lg={12} md={24} sm={24} xs={24}>
-          <Card title="Memory" loading={!memoryLoaded} bodyStyle={{ textAlign: 'center' }}>
+          <Card
+            title="Memory"
+            loading={!memoryLoaded}
+            bodyStyle={{ textAlign: 'center' }}
+            extra={iconGroup}
+          >
             {memoryLoaded ? (
               <Row>
                 <Col md={12} sm={12} xs={24}>
