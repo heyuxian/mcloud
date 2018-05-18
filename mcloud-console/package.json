@@ -17,8 +17,7 @@
     "lint-staged:js": "eslint --ext .js",
     "test": "roadhog test",
     "test:component": "roadhog test ./src/components",
-    "test:all": "node ./tests/run-tests.js",
-    "prettier": "prettier --write ./src/**/**/**/*"
+    "test:all": "node ./tests/run-tests.js"
   },
   "dependencies": {
     "@antv/data-set": "^0.8.0",
@@ -86,7 +85,6 @@
   },
   "lint-staged": {
     "**/*.{js,jsx,less}": [
-      "prettier --wirter",
       "git add"
     ],
     "**/*.{js,jsx}": "lint-staged:js",

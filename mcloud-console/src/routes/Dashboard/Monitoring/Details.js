@@ -44,7 +44,7 @@ export default class Details extends React.Component {
     }
   }
 
-  fetchMetrics = instanceId => {
+  fetchMetrics = (instanceId) => {
     this.props.dispatch({
       type: 'details/fetchUsedMemory',
       payload: {
