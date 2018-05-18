@@ -87,14 +87,7 @@ export async function queryAppInfo(appId) {
 }
 
 export async function queryMetics({ instanceId, metric, tags }) {
-  const params = tags
-    ? {
-        tag: lodash
-          .entries(tags)
-          .map(([name, value]) => `${name}:${value}`)
-          .join(','),
-      }
-    : {};
+  const params = tags ? { tag: lodash.entries(tags).map(([name, value]) => `${name}:${value}`).join(',') } : {};
   return httpGet(
     `${API_PREFIX}/registry/instances/${instanceId}/actuator/metrics/${metric}`,
     params
