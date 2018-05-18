@@ -1,7 +1,7 @@
 {
-  "name": "ant-design-pro",
+  "name": "mcloud-console",
   "version": "1.3.0",
-  "description": "An out-of-box UI solution for enterprise applications",
+  "description": "",
   "private": true,
   "scripts": {
     "precommit": "npm run lint-staged",
