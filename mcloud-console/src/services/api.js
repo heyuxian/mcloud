@@ -86,10 +86,15 @@ export async function queryAppInfo(appId) {
   return httpGet(`${API_PREFIX}/registry/instances/${appId}/actuator/info`);
 }
 
-export async function queryMetics({ instanceId, metric, tags }) {
-  const params = tags ? { tag: lodash.entries(tags).map(([name, value]) => `${name}:${value}`).join(',') } : {};
+export async function queryMetrics({ instanceId, metric, tags }) {
+  let params;
+  if (Array.isArray(tags)) {
+    params = tags ? { tag: tags.map(item => `${item.name}:${item.value}`).join(',') } : {};
+  } else {
+    params = tags ? { tag: lodash.entries(tags).map(([name, value]) => `${name}:${value}`).join(',') } : {};
+  }
   return httpGet(
-    `${API_PREFIX}/registry/instances/${instanceId}/actuator/metrics/${metric}`,
-    params
+    `${API_PREFIX}/registry/instances/${instanceId}/actuator/metrics/${metric || ''}`,
+    params,
   );
 }

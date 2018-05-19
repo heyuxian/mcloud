@@ -16,13 +16,13 @@ const dynamicWrapper = (app, models, component) => {
   // () => require('module')
   // transformed by babel-plugin-dynamic-import-node-sync
   if (component.toString().indexOf('.then(') < 0) {
-    models.forEach(model => {
+    models.forEach((model) => {
       if (modelNotExisted(app, model)) {
         // eslint-disable-next-line
         app.model(require(`../models/${model}`).default);
       }
     });
-    return props => {
+    return (props) => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
@@ -42,7 +42,7 @@ const dynamicWrapper = (app, models, component) => {
       if (!routerDataCache) {
         routerDataCache = getRouterData(app);
       }
-      return component().then(raw => {
+      return component().then((raw) => {
         const Component = raw.default || raw;
         return props =>
           createElement(Component, {
@@ -56,7 +56,7 @@ const dynamicWrapper = (app, models, component) => {
 
 function getFlatMenuData(menus) {
   let keys = {};
-  menus.forEach(item => {
+  menus.forEach((item) => {
     if (item.children) {
       keys[item.path] = { ...item };
       keys = { ...keys, ...getFlatMenuData(item.children) };
@@ -67,7 +67,7 @@ function getFlatMenuData(menus) {
   return keys;
 }
 
-export const getRouterData = app => {
+export const getRouterData = (app) => {
   const routerConfig = {
     '/': {
       component: dynamicWrapper(app, ['user', 'login'], () => import('../layouts/BasicLayout')),
@@ -88,6 +88,11 @@ export const getRouterData = app => {
     '/console/monitoring/:instanceId/details': {
       component: dynamicWrapper(app, ['details'], () =>
         import('../routes/Dashboard/Monitoring/Details')
+      ),
+    },
+    '/console/monitoring/:instanceId/metrics': {
+      component: dynamicWrapper(app, ['metrics'], () =>
+          import('../routes/Dashboard/Monitoring/Metrics')
       ),
     },
     '/result/success': {
@@ -133,7 +138,7 @@ export const getRouterData = app => {
   // eg. {name,authority ...routerConfig }
   const routerData = {};
   // The route matches the menu
-  Object.keys(routerConfig).forEach(path => {
+  Object.keys(routerConfig).forEach((path) => {
     // Regular match item name
     // eg.  router /user/:id === /user/chen
     const pathRegexp = pathToRegexp(path);

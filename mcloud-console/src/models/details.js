@@ -1,4 +1,4 @@
-import { queryAppInfo, queryMetics } from '../services/api';
+import { queryAppInfo, queryMetrics } from '../services/api';
 
 export default {
   namespace: 'details',
@@ -20,14 +20,14 @@ export default {
     },
     *fetchMaxMemory({ payload }, { call, put }) {
       const MAX_MEMORY = 'jvm.memory.max';
-      const heapMax = yield call(queryMetics, {
+      const heapMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
           area: 'heap',
         },
       });
-      const heapEdenSpace = yield call(queryMetics, {
+      const heapEdenSpace = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -35,7 +35,7 @@ export default {
           id: 'PS Eden Space',
         },
       });
-      const heapSurvivorSpace = yield call(queryMetics, {
+      const heapSurvivorSpace = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -43,7 +43,7 @@ export default {
           id: 'PS Survivor Space',
         },
       });
-      const heapOldGen = yield call(queryMetics, {
+      const heapOldGen = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -51,14 +51,14 @@ export default {
           id: 'PS Old Gen',
         },
       });
-      const nonheapMax = yield call(queryMetics, {
+      const nonheapMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
           area: 'nonheap',
         },
       });
-      const nonheapMetaspaceMax = yield call(queryMetics, {
+      const nonheapMetaspaceMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -66,7 +66,7 @@ export default {
           id: 'Metaspace',
         },
       });
-      const nonheapCompressedClassSpaceMax = yield call(queryMetics, {
+      const nonheapCompressedClassSpaceMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -74,7 +74,7 @@ export default {
           id: 'Compressed Class Space',
         },
       });
-      const nonheapCodeCacheMax = yield call(queryMetics, {
+      const nonheapCodeCacheMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: MAX_MEMORY,
         tags: {
@@ -103,14 +103,14 @@ export default {
     },
     *fetchUsedMemory({ payload }, { call, put }) {
       const USED_MEMORY = 'jvm.memory.used';
-      const heapMax = yield call(queryMetics, {
+      const heapMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
           area: 'heap',
         },
       });
-      const heapEdenSpace = yield call(queryMetics, {
+      const heapEdenSpace = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
@@ -118,7 +118,7 @@ export default {
           id: 'PS Eden Space',
         },
       });
-      const heapSurvivorSpace = yield call(queryMetics, {
+      const heapSurvivorSpace = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
@@ -126,7 +126,7 @@ export default {
           id: 'PS Survivor Space',
         },
       });
-      const heapOldGen = yield call(queryMetics, {
+      const heapOldGen = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
@@ -134,14 +134,14 @@ export default {
           id: 'PS Old Gen',
         },
       });
-      const nonheapMax = yield call(queryMetics, {
+      const nonheapMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
           area: 'nonheap',
         },
       });
-      const nonheapMetaspaceMax = yield call(queryMetics, {
+      const nonheapMetaspaceMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
@@ -149,7 +149,7 @@ export default {
           id: 'Metaspace',
         },
       });
-      const nonheapCompressedClassSpaceMax = yield call(queryMetics, {
+      const nonheapCompressedClassSpaceMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
@@ -157,7 +157,7 @@ export default {
           id: 'Compressed Class Space',
         },
       });
-      const nonheapCodeCacheMax = yield call(queryMetics, {
+      const nonheapCodeCacheMax = yield call(queryMetrics, {
         instanceId: payload.instanceId,
         metric: USED_MEMORY,
         tags: {
