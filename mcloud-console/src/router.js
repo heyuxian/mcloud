@@ -17,11 +17,13 @@ dynamic.setDefaultLoadingComponent(() => {
 function RouterConfig({ history, app }) {
   const routerData = getRouterData(app);
   const UserLayout = routerData['/user'].component;
+  const FrontLayout = routerData['/front'].component;
   const BasicLayout = routerData['/'].component;
   return (
     <LocaleProvider locale={zhCN}>
       <ConnectedRouter history={history}>
         <Switch>
+          <Route path="/front" component={FrontLayout} />
           <Route path="/user" component={UserLayout} />
           <AuthorizedRoute
             path="/"
