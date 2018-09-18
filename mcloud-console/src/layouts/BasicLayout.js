@@ -23,14 +23,14 @@ const { AuthorizedRoute, check } = Authorized;
  * 根据菜单取得重定向地址.
  */
 const redirectData = [];
-const getRedirect = item => {
+const getRedirect = (item) => {
   if (item && item.children) {
     if (item.children[0] && item.children[0].path) {
       redirectData.push({
         from: `${item.path}`,
         to: `${item.children[0].path}`,
       });
-      item.children.forEach(children => {
+      item.children.forEach((children) => {
         getRedirect(children);
       });
     }
@@ -79,7 +79,7 @@ const query = {
 };
 
 let isMobile;
-enquireScreen(b => {
+enquireScreen((b) => {
   isMobile = b;
 });
 
@@ -99,7 +99,7 @@ class BasicLayout extends React.PureComponent {
     };
   }
   componentDidMount() {
-    this.enquireHandler = enquireScreen(mobile => {
+    this.enquireHandler = enquireScreen((mobile) => {
       this.setState({
         isMobile: mobile,
       });
@@ -117,7 +117,7 @@ class BasicLayout extends React.PureComponent {
     let title = 'MCloud Console';
     let currRouterData = null;
     // match params path
-    Object.keys(routerData).forEach(key => {
+    Object.keys(routerData).forEach((key) => {
       if (pathToRegexp(key).test(pathname)) {
         currRouterData = routerData[key];
       }
@@ -147,13 +147,13 @@ class BasicLayout extends React.PureComponent {
     }
     return redirect;
   };
-  handleMenuCollapse = collapsed => {
+  handleMenuCollapse = (collapsed) => {
     this.props.dispatch({
       type: 'global/changeLayoutCollapsed',
       payload: collapsed,
     });
   };
-  handleNoticeClear = type => {
+  handleNoticeClear = (type) => {
     message.success(`清空了${type}`);
     this.props.dispatch({
       type: 'global/clearNotices',
@@ -171,7 +171,7 @@ class BasicLayout extends React.PureComponent {
       });
     }
   };
-  handleNoticeVisibleChange = visible => {
+  handleNoticeVisibleChange = (visible) => {
     if (visible) {
       this.props.dispatch({
         type: 'global/fetchNotices',

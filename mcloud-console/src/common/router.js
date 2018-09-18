@@ -115,6 +115,12 @@ export const getRouterData = (app) => {
         import('../routes/Exception/triggerException')
       ),
     },
+    '/front': {
+      component: dynamicWrapper(app, [], () => import('../layouts/FrontLayout')),
+    },
+    '/front/index': {
+      component: dynamicWrapper(app, [], () => import('../routes/Front/Index')),
+    },
     '/user': {
       component: dynamicWrapper(app, [], () => import('../layouts/UserLayout')),
     },

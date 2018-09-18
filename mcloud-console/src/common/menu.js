@@ -41,7 +41,7 @@ const menuData = [
 ];
 
 function formatter(data, parentPath = '/', parentAuthority) {
-  return data.map(item => {
+  return data.map((item) => {
     let { path } = item;
     if (!isUrl(path)) {
       path = parentPath + item.path;
