@@ -136,6 +136,7 @@ API 也可通过 Swagger 进行调用，地址为: `http://mcloud-apigw.example.
 
 ![image](https://user-images.githubusercontent.com/30259465/39934037-2de6d974-5577-11e8-8b80-34d76cca3cef.png)
 
+![image](https://user-images.githubusercontent.com/30259465/40123939-f44e2de8-5959-11e8-8d64-a27f6c801c8b.png)
 
 ## 问题及建议
 

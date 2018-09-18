@@ -1,0 +1,25 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+spring:
+  application:
+    name: mcloud-monitoring
+eureka:
+  instance:
+    appname: mcloud-monitoring
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
+    metadata-map:
+      management:
+        server:
+          port: ${server.port}
+          context-path: ${server.servlet.context-path}
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/

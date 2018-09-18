@@ -3,9 +3,22 @@ dependencyManagement {
         mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
     }
 }
+repositories {
+    maven {
+        name 'Sonatype Nexus Snapshots'
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+springBoot {
+    buildInfo()
+}
 dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
+
+    compile 'de.codecentric:spring-boot-admin-server:2.0.0-SNAPSHOT'
+    compile 'de.codecentric:spring-boot-admin-server-cloud:2.0.0-SNAPSHOT'
+
     compile project(':mcloud-web')
     compileOnly('org.projectlombok:lombok')
 

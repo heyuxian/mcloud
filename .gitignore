@@ -4,3 +4,4 @@ out/
 .idea/
 target/
 *.iml
+node_modules/

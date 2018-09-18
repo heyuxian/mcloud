@@ -1,0 +1,16 @@
+repositories {
+    maven {
+        name 'Sonatype Nexus Snapshots'
+        url 'https://oss.sonatype.org/content/repositories/snapshots/'
+    }
+}
+dependencyManagement {
+    imports {
+        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    }
+}
+dependencies {
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile 'de.codecentric:spring-boot-admin-starter-server:2.0.0-SNAPSHOT'
+    compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
+}

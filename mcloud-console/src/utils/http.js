@@ -47,7 +47,7 @@ export async function httpGet(url, params) {
   if (params) {
     urlOfParams = `${url}?${stringify(params)}`;
   }
-  return request(urlOfParams, options, null);
+  return request(urlOfParams, options);
 }
 
 export async function httpPost(url, params) {

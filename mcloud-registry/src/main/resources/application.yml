@@ -1,13 +1,19 @@
 server:
   port: 8761
+  servlet:
+    context-path: /
 spring:
   application:
     name: mcloud-registry
+  jmx:
+    enabled: false
 eureka:
   instance:
     appname: mcloud-registry
     hostname: mcloud-registry.example.com
     leaseRenewalIntervalInSeconds: 10
+    statusPageUrlPath: ${server.servlet.context-path}actuator/info
+    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
   client:
     registryFetchIntervalSeconds: 5
     registerWithEureka: true
