@@ -24,10 +24,6 @@ subprojects {
             name 'ali maven'
             url 'http://maven.aliyun.com/nexus/content/groups/public/'
         }
-        maven {
-            name 'spring milestone'
-            url "https://repo.spring.io/libs-milestone"
-        }
         mavenCentral()
     }
     apply plugin: 'java'
