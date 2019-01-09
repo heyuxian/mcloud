@@ -23,3 +23,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+
+app:
+  swagger:
+    enabled: true
+    base-package: me.javaroad.mcloud.monitoring.controller
+    api-info:
+      title: "swagger ui"

@@ -50,9 +50,6 @@ public class GatewaySwaggerResourcesProvider implements SwaggerResourcesProvider
         return swaggerResource;
     }
 
-    /**
-     * @author heyx
-     */
     @ConfigurationProperties(prefix = "oauth2.keycloak")
     public static class KeycloakProperties {
 
