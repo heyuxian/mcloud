@@ -1,13 +1,7 @@
 package me.javaroad.mcloud.gateway.config;
 
-import org.springframework.cloud.client.discovery.DiscoveryClient;
-import org.springframework.cloud.gateway.discovery.DiscoveryClientRouteDefinitionLocator;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-/**
- * @author heyx
- */
 @Configuration
 public class DiscoveryConfig {
 
@@ -20,10 +14,10 @@ public class DiscoveryConfig {
             .build();
     }*/
 
-    @Bean
+   /* @Bean
     public DiscoveryClientRouteDefinitionLocator discoveryClientRouteDefinitionLocator(
         DiscoveryClient discoveryClient) {
 
         return new DiscoveryClientRouteDefinitionLocator(discoveryClient);
-    }
+    }*/
 }
