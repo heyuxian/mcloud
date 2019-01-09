@@ -6,9 +6,6 @@ import java.io.IOException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-/**
- * @author heyx
- */
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class JsonUtils {
     private static final ObjectMapper MAPPER = new ObjectMapper();

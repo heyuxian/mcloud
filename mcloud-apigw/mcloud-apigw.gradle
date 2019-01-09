@@ -4,13 +4,19 @@ dependencyManagement {
     }
 }
 dependencies {
+    compile project(":mcloud-common")
+
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.zalando:problem-spring-web:0.22.5'
+
+    compileOnly 'io.springfox:springfox-swagger2:2.7.0'
+    compileOnly 'io.springfox:springfox-swagger-ui:2.7.0'
+
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-zuul'
     compile 'org.springframework.cloud:spring-cloud-starter-openfeign'
     compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
-
-    compile project(':mcloud-web')
 
     compileOnly('org.projectlombok:lombok')
 

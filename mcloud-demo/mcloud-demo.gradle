@@ -10,8 +10,10 @@ dependencies {
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-client'
 
-    compile project(':mcloud-web')
     compile project(':mcloud-common')
+
+    compileOnly 'io.springfox:springfox-swagger2:2.7.0'
+    compileOnly 'io.springfox:springfox-swagger-ui:2.7.0'
 
     compile 'org.springframework.cloud:spring-cloud-starter-oauth2'
     compileOnly('org.projectlombok:lombok')

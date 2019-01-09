@@ -13,13 +13,14 @@ springBoot {
     buildInfo()
 }
 dependencies {
+    compile project(":mcloud-common")
+    
     compile 'org.springframework.cloud:spring-cloud-starter-config'
     compile 'org.springframework.cloud:spring-cloud-starter-netflix-eureka-server'
 
     compile 'de.codecentric:spring-boot-admin-server:2.0.0-SNAPSHOT'
     compile 'de.codecentric:spring-boot-admin-server-cloud:2.0.0-SNAPSHOT'
 
-    compile project(':mcloud-web')
     compileOnly('org.projectlombok:lombok')
 
     compile "org.mapstruct:mapstruct-jdk8:${mapstructVersion}"
