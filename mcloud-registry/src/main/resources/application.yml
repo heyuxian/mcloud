@@ -1,27 +1,32 @@
-server:
-  port: 8761
-  servlet:
-    context-path: /
 spring:
   application:
     name: mcloud-registry
-  jmx:
-    enabled: false
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://peer1:8761/eureka/,http://peer2:8762/eureka/,http://peer3:8763/eureka/
+
+---
+server:
+  port: 8761
+spring:
+  profiles: peer1
 eureka:
   instance:
-    appname: mcloud-registry
-    hostname: mcloud-registry.example.com
-    leaseRenewalIntervalInSeconds: 10
-    statusPageUrlPath: ${server.servlet.context-path}actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
-  client:
-    registryFetchIntervalSeconds: 5
-    registerWithEureka: true
-    fetchRegistry: true
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
+    hostname: peer1
+---
+server:
+  port: 8762
+spring:
+  profiles: peer2
+eureka:
+  instance:
+    hostname: peer2
+---
+server:
+  port: 8763
+spring:
+  profiles: peer3
+eureka:
+  instance:
+    hostname: peer3

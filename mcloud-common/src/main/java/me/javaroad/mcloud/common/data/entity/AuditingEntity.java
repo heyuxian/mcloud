@@ -26,9 +26,9 @@ public abstract class AuditingEntity extends BaseEntity {
     private String modifiedBy;
 
     @CreatedDate
-    @Column(name = "created_date")
-    private LocalDateTime createdDate;
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
     @LastModifiedDate
-    @Column(name = "modified_date")
-    private LocalDateTime modifiedDate;
+    @Column(name = "modified_at")
+    private LocalDateTime modifiedAt;
 }

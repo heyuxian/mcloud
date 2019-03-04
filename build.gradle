@@ -27,7 +27,7 @@ subprojects {
         mavenCentral()
     }
     apply plugin: 'java'
-    apply plugin: 'eclipse'
+    apply plugin: 'idea'
     apply plugin: 'jacoco'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'

@@ -13,6 +13,7 @@ spring:
 eureka:
   instance:
     appname: mcloud-monitoring
+    hostname: monitoring.example.com
     statusPageUrlPath: ${server.servlet.context-path}actuator/info
     healthCheckUrlPath: ${server.servlet.context-path}actuator/health
     metadata-map:
@@ -23,6 +24,8 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    healthcheck:
+      enabled: true
 
 app:
   swagger:
