@@ -8,4 +8,3 @@ spring:
       server:
         git:
           uri: https://github.com/heyuxian/config-repo
-          basedir: target/config
