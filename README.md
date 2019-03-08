@@ -5,12 +5,12 @@
 
 ## 项目简介
 
-MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施：
+MCloud 基于 Spring Cloud 进行开发，提供了项目中常用的基础设施：
 
 - **mcloud-registry** 服务注册与发现中心。
 - [keycloak](http://www.keycloak.org/) 用户认证和管理
-- **mcloud-apigw** 基于Spring cloud zuul 实现的api网关 。
-- **mcloud-config** 统一配置中心。
+- **mcloud-apigw** 基于Spring cloud gateway 实现的 API 网关 。
+- **mcloud-config** 基于 GitHub 的统一配置中心。
 - **mcloud-logs** 基于`logstash`  `Kibana` 以及 `ElasticSearch` 实现的日志服务。
 - **mcloud-demo** Demo Project
 - **mcloud-console** 基于 ant-design-pro 搭建的系统控制台
@@ -21,46 +21,19 @@ MCloud 基于Spring Cloud进行开发，提供了项目中常用的基础设施�
 
 ## Dependencies
 
-- Spring Boot 2.0.0.RELEASE
-- Spring Cloud Finchley.M7
-- Gradle 4.6
+- Spring Boot 2.1.3.RELEASE
+- Spring Cloud Greenwich.RELEASE
+- Maven
 - ......
 
 
 ## 环境依赖
 
 - **JDK** 1.8 以上
-- **IDE** 请安装对应IDE的**lombok**插件
-- **数据库** Mysql 5.5 及以上
+- **IDE** 请安装对应IDE的 **lombok** 插件
 
 
 ## Quick Start
-
-**修改 hosts**
-```
-127.0.0.1	mcloud-registry.example.com
-127.0.0.1	mcloud-demo.example.com
-127.0.0.1	mcloud-config.example.com
-127.0.0.1	mcloud-apigw.example.com
-```
-
-**安装 keycloak**
-
-下载 [keycloak](https://www.keycloak.org/archive/downloads-3.4.3.html) 并解压到本地文件夹，在 keycloak bin 目录下运行以下命令启动 keycloak:
-
- **Windows**
-```
-standalone.bat -Djboss.http.port=8443
-```
-**Linux/MacOs**
-```
-./standalone.sh -Djboss.http.port=8443
-```
-
-启动后登陆到 keycloak 并导入 `data` 目录下的 `mcloud-realm.json` 和 `mcloud-users-0.json`，默认用户为：
-
-- 管理员：mcloud-admin/123456
-- 普通用户：mcloud-user/123456
 
 **克隆项目到本地**
 
@@ -68,72 +41,48 @@ standalone.bat -Djboss.http.port=8443
 git clone https://github.com/heyuxian/mcloud.git
 ```
 
-**构建并运行**
+**构建及运行**
 
-**Windows**
+因为项目使用统一配置，所以需要先启动 `mcloud-config` 模块，然后依次启动 `mcloud-registry` 、`mcloud-apigw`，`mcloud-demo`。
 
-```shell
-cd mcloud
-#执行构建
-gradlew.bat build
-# 分别在三个不同的终端运行以下命令
-gradlew.bat bootRun -b ./mcloud-registry/mcloud-registry.gradle
-gradlew.bat bootRun -b ./mcloud-apigw/mcloud-apigw.gradle
-gradlew.bat bootRun -b ./mcloud-demo/mcloud-demo.gradle
-```
-
-**Linux/MacOs**
-
-```sh
-cd mcloud
-#执行构建
-./gradlew build
-# 分别在三个不同的终端运行以下命令
-./gradlew bootRun -b ./mcloud-registry/mcloud-registry.gradle
-./gradlew bootRun -b ./mcloud-apigw/mcloud-apigw.gradle
-./gradlew bootRun -b ./mcloud-demo/mcloud-demo.gradle
-```
-
-各个服务运行之后，首先通过 api gateway 进行登陆：
+启动配置中心：
 
 ```shell
-curl --request POST \
-  --url http://mcloud-apigw.example.com/auth/login \
-  --header 'cache-control: no-cache' \
-  --header 'content-type: application/json' \
-  --data '{"username": "mcloud-user","password": "123456"}'
+cd mcloud-config
+mvn clean install spring-boot:run
 ```
 
-如果一切正常，将获取 AccessToken：
+启动注册中心：
+```shell
+cd mcloud-config
+#分别在三个终端运行以下命令，用于启动多个注册节点
+mvn clean install spring-boot:run -Dspring.profiles.active=peer1
+mvn clean install spring-boot:run -Dspring.profiles.active=peer2
+mvn clean install spring-boot:run -Dspring.profiles.active=peer3
+```
+
+启动 API 网关：
 
 ```shell
-  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
-                                 Dload  Upload   Total   Spent    Left  Speed
-100  1500    0  1452  100    48  11616    384 --:--:-- --:--:-- --:--:-- 11616{"access_token":"${access_token}","expires_in":36000,"refresh_expires_in":1800,"token_type":"bearer","id_token":null,"not-before-policy":0,"session_state":"8c808f01-86fd-45fd-bb69-d3edf7218be8"}
+cd mcloud-apigw
+mvn clean install spring-boot:run
 ```
 
-此时，使用上面获取的 AccessToken ，即可访问受保护的 api ：`http://mcloud-apigw.example.com/demo/info`
+启动实例项目：
 
 ```shell
-curl --request GET \
-  --url http://mcloud-apigw.example.com/demo/info \
-  --header 'authorization: Bearer ${access_token}' \
-  --header 'cache-control: no-cache' \
-  --header 'content-type: application/json' \
-  --data '{\n	"grant_type":"password"\n}'
+cd mcloud-demo
+mvn clean install
+#分别在两个终端运行以下命令，用于启动两个节点
+mvn spring-boot:run -Dspring.profiles.active=peer1
+mvn spring-boot:run -Dspring.profiles.active=peer2
 ```
 
-API 也可通过 Swagger 进行调用，地址为: `http://mcloud-apigw.example.com/swagger-ui.html`
+所有节点都启动完成后，就可以通过 API 网关访问我们的示例项目了：
 
-![image](https://user-images.githubusercontent.com/30259465/39365862-f2d5f954-4a64-11e8-8acd-7eff6dd7847b.png)
-
-最后，还可以直接通过 `mcloud-console` 项目进入系统。运行并登陆 `mcloud-console` 后，将看到以下的画面：
-
-![image](https://user-images.githubusercontent.com/30259465/39933968-f97b5570-5576-11e8-857c-46340884fec3.png)
-
-![image](https://user-images.githubusercontent.com/30259465/39934037-2de6d974-5577-11e8-8b80-34d76cca3cef.png)
-
-![image](https://user-images.githubusercontent.com/30259465/40123939-f44e2de8-5959-11e8-8d64-a27f6c801c8b.png)
+```
+curl http://localhost:8443/demo/hello
+```
 
 ## 问题及建议
 

@@ -1,11 +1,6 @@
 spring:
   application:
     name: mcloud-registry
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://mcloud-registry-peer1:8761/eureka/,http://peer2:8762/eureka/,http://peer3:8763/eureka/
-
 ---
 server:
   port: 8761
