@@ -49,7 +49,7 @@ git clone https://github.com/heyuxian/mcloud.git
 
 ```shell
 cd mcloud-config
-mvn clean install spring-boot:run
+./mvnw clean install spring-boot:run
 ```
 
 启动注册中心：
