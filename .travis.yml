@@ -4,12 +4,12 @@ jdk:
 - oraclejdk8
 
 install:
-- ./mvnw install -Dmaven.test.skip=true
+- mvn install -Dmaven.test.skip=true
 
 script:
-- ./mvnw test -DactiveProfile=test
+- mvn test -DactiveProfile=test
 after_success:
-- ./mvnw clean test -DactiveProfile=test jacoco:report coveralls:report
+- mvn clean test -DactiveProfile=test jacoco:report coveralls:report
 notifications:
   email:
   - heyuxian.me@gmail.com
