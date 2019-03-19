@@ -10,3 +10,6 @@ spring:
         - Path=/demo/**
         filters:
         - RewritePath=/demo/(?<segment>.*), /$\{segment}
+  zipkin:
+    sender:
+      type: web

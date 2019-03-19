@@ -26,10 +26,6 @@ MCloud 基于 Spring Cloud 进行开发，提供了项目中常用的基础设�
 - Maven
 - ......
 
-## 系统结构图
-![1](https://user-images.githubusercontent.com/30259465/40269082-9c746462-5bab-11e8-8ff8-5c74d2882c61.png)
-
-
 ## 环境依赖
 
 - **JDK** 1.8 以上
@@ -57,7 +53,7 @@ cd mcloud-config
 
 启动注册中心：
 ```shell
-cd mcloud-config
+cd mcloud-registry
 #分别在三个终端运行以下命令，用于启动多个注册节点
 mvn clean install spring-boot:run -Dspring.profiles.active=peer1
 mvn clean install spring-boot:run -Dspring.profiles.active=peer2
