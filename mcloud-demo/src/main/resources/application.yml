@@ -1,70 +1,22 @@
-server:
-  servlet:
-    context-path: /
-logging:
-  level:
-    org.springframework.security: DEBUG
-security:
-  oauth2:
-    resource:
-      id: mcloud-demo
-      user-info-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/userinfo
-      token-info-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token/introspect
-      prefer-token-info: false
-      jwt:
-        key-uri: http://localhost:8443/auth/realms/mcloud
 spring:
-  application:
-    name: mcloud-demo
   messages:
     basename: i18n/messages
-eureka:
-  instance:
-    appname: mcloud-demo
-    hostname: mcloud-demo.example.com
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
-    metadata-map:
-      management:
-        context-path: ${server.servlet.context-path}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-oauth2:
-  keycloak:
+security:
+  oauth2:
     client:
-      client-id: mcloud-demo
-      client-secret: 123456
-      user-authorization-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/auth
-      access-token-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token
-swagger:
-  title: MCloud Demo
-  description: http://javaroad.me
-
+      clientId: mcloud
+      # FIXME 将 ${access_token} 替换为你自己的 clientSecret
+      clientSecret: ${clientSecret}
+    resource:
+      userInfoUri: http://127.0.0.1:8080/auth/realms/mcloud/protocol/openid-connect/userinfo
+      preferTokenInfo: false
 ---
-spring:
-  profiles: peer1
 server:
   port: 8081
----
 spring:
-  profiles: peer2
+  profiles: peer1
+---
 server:
   port: 8082
----
 spring:
-  profiles: peer3
-server:
-  port: 8083
-eureka:
-  instance:
-    appname: mcloud-demo1
-    hostname: mcloud-demo.example.com
-    statusPageUrlPath: ${server.servlet.context-path}/actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}/actuator/health
-    metadata-map:
-      management:
-        context-path: ${server.servlet.context-path}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
+  profiles: peer2

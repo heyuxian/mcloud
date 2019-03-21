@@ -1,45 +1,23 @@
 server:
   port: 80
-  servlet:
-    context-path: /
 spring:
-  application:
-    name: mcloud-apigw
-eureka:
-  instance:
-    appname: mcloud-apigw
-    hostname: mcloud-apigw.example.com
-    statusPageUrlPath: ${server.servlet.context-path}actuator/info
-    healthCheckUrlPath: ${server.servlet.context-path}actuator/health
-    metadata-map:
-      management:
-        context-path: ${server.servlet.context-path}
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka/
-security:
-  oauth2:
-    resource:
-      id: mcloud-demo
-      user-info-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/userinfo
-      token-info-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token/introspect
-      prefer-token-info: false
-      jwt:
-        key-uri: http://localhost:8443/auth/realms/mcloud
-oauth2:
-  keycloak:
-    client:
-      client-id: mcloud-demo
-      client-secret: 123456
-      user-authorization-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/auth
-      access-token-uri: http://localhost:8443/auth/realms/mcloud/protocol/openid-connect/token
-zuul:
-  routes:
-    mcloud-demo:
-      sensitiveHeaders: Cookie,Set-Cookie
-      path: /demo/**
-      stripPrefix: false
-    mcloud-registry:
-      sensitiveHeaders: Cookie,Set-Cookie
-      path: /registry/**
-      stripPrefix: true
+  cloud:
+    gateway:
+      routes:
+      - id: mcloud-demo
+        uri: lb://mcloud-demo
+        predicates:
+        - Path=/mcloud-demo/**
+        filters:
+        - RewritePath=/mcloud-demo/(?<segment>.*), /$\{segment}
+  zipkin:
+    sender:
+      type: web
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+logging:
+  level:
+    root: debug

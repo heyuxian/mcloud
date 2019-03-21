@@ -16,9 +16,8 @@ public class SpringUtils implements BeanFactoryPostProcessor {
         beanFactory = configurableListableBeanFactory;
     }
 
-    @SuppressWarnings("unchecked")
-    public static <T> T getBean(String name) throws BeansException {
-        return (T) beanFactory.getBean(name);
+    public static <T> T getBean(String name, Class<T> clazz) throws BeansException {
+        return beanFactory.getBean(name, clazz);
     }
 
 }
