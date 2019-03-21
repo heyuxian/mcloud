@@ -1,8 +1,15 @@
 spring:
-  application:
-    name: mcloud-demo
   messages:
     basename: i18n/messages
+security:
+  oauth2:
+    client:
+      clientId: mcloud
+      # FIXME 将 ${access_token} 替换为你自己的 clientSecret
+      clientSecret: ${clientSecret}
+    resource:
+      userInfoUri: http://127.0.0.1:8080/auth/realms/mcloud/protocol/openid-connect/userinfo
+      preferTokenInfo: false
 ---
 server:
   port: 8081

@@ -1,5 +1,5 @@
 server:
-  port: 8443
+  port: 80
 spring:
   cloud:
     gateway:
@@ -7,9 +7,17 @@ spring:
       - id: mcloud-demo
         uri: lb://mcloud-demo
         predicates:
-        - Path=/demo/**
+        - Path=/mcloud-demo/**
         filters:
-        - RewritePath=/demo/(?<segment>.*), /$\{segment}
+        - RewritePath=/mcloud-demo/(?<segment>.*), /$\{segment}
   zipkin:
     sender:
       type: web
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+logging:
+  level:
+    root: debug
