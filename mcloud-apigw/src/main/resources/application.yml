@@ -18,6 +18,3 @@ management:
     web:
       exposure:
         include: gateway
-logging:
-  level:
-    root: debug

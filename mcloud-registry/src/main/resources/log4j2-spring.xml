@@ -2,7 +2,7 @@
 <Configuration status="WARN">
 
   <Properties>
-    <Property name="appName" value="mcloud-demo"/>
+    <Property name="appName" value="mcloud-registry"/>
     <Property name="baseLogDir" value="/data/logs/${appName}"/>
     <Property name="pattern" value="%d{HH:mm:ss.SSS} [%t] %-5level %c{1.} - %msg%n"/>
   </Properties>
